@@ -22,4 +22,8 @@
     <color name="colorGreen_1">#4DA84D</color>
     <color name="colorGreen_2">#499F49</color>
     <color name="colorGreen_3">#4B8645</color>
+
+    <color name="colorUsualPrice">#4B8645</color>
+    <color name="colorFreePrice">#607D8B</color>
+    <color name="colorDiscountPrice">#464646</color>
 </resources>
