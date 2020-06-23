@@ -104,9 +104,9 @@ public class ShopAdapter extends RecyclerView.Adapter {
             h.discount_layout.setVisibility(View.GONE);
         } else {
             h.discount_layout.setVisibility(View.VISIBLE);
-            h.price.setText(String.valueOf(Integer.parseInt(item.getPriceBook().getPrice()) * item.getPriceBook().getDiscount()));
+            h.price.setText(String.valueOf(Integer.parseInt(item.getPriceBook().getPrice()) * item.getPriceBook().getDiscount()) + "$");
             h.price.setTextColor(res.getColor(R.color.colorGreen_5));
-            h.discount.setText(item.getPriceBook().getPrice());
+            h.discount.setText(item.getPriceBook().getPrice() + "$");
         }
 
         if(item.getPriceBook().getType().equals("TYPE_FREE")){

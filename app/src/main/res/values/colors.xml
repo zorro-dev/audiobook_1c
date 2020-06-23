@@ -29,4 +29,15 @@
     <color name="colorUsualPrice">#4B8645</color>
     <color name="colorFreePrice">#607D8B</color>
     <color name="colorDiscountPrice">#464646</color>
+
+
+    <color name="colorCategory1">#BBFFBB</color>
+    <color name="colorCategory2">#A9FFFF</color>
+    <color name="colorCategory3">#FFDCA7</color>
+    <color name="colorCategory4">#E2B8FF</color>
+    <color name="colorCategory5">#9999FF</color>
+    <color name="colorCategory6">#FFA2A2</color>
+    <color name="colorCategory7">#FF9CB8</color>
+    <color name="colorCategory8">#FFFF9F</color>
+
 </resources>
