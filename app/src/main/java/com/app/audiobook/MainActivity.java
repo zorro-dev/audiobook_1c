@@ -5,16 +5,19 @@ import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
+import com.app.audiobook.fragment.BuyBookFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -107,5 +110,13 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setCurrentItem(2);
 
+    }
+
+    public void initFragment(){
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        BuyBookFragment fragment = new BuyBookFragment();
+
+        fragmentTransaction.addToBackStack("BuyBookFragment");
+        fragmentTransaction.add(R.id.frame_layout, fragment).commit();
     }
 }
