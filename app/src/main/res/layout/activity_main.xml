@@ -13,39 +13,7 @@
         android:scrollbarSize="30dp"
         android:layout_height="wrap_content"
         android:background="@color/colorGray_3"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <com.google.android.material.tabs.TabItem
-            android:icon="@drawable/ic_nav_shop"
-            android:text="@string/tab_text_1"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"/>
-
-        <com.google.android.material.tabs.TabItem
-            android:icon="@drawable/ic_nav_audioteka"
-            android:text="@string/tab_text_2"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"/>
-
-        <com.google.android.material.tabs.TabItem
-            android:icon="@drawable/ic_nav_player"
-            android:text="@string/tab_text_3"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"/>
-
-        <com.google.android.material.tabs.TabItem
-            android:icon="@drawable/ic_nav_category"
-            android:text="@string/tab_text_4"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"/>
-
-        <com.google.android.material.tabs.TabItem
-            android:icon="@drawable/ic_nav_setting"
-            android:text="@string/tab_text_5"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"/>
-
-    </com.google.android.material.tabs.TabLayout>
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
