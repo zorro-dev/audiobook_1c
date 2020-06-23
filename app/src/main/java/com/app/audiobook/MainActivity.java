@@ -30,17 +30,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     ViewPager viewPager;
+    SectionsPagerAdapter sectionsPagerAdapter;
 
     private void initViewPager(){
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+        sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
         viewPager.setCurrentItem(2);
-
     }
 
     private void initTabs(){
-        TabLayout tabs = findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
+        TabLayout tabLayout = findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+        // Iterate over all tabs and set the custom view
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            tab.setCustomView(sectionsPagerAdapter.getTabView(i));
+        }
     }
 }
