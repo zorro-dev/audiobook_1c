@@ -8,9 +8,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.audiobook.BaseFragment;
 import com.app.audiobook.R;
+import com.app.audiobook.adapter.AudioLibraryAdapter;
+import com.app.audiobook.component.AudioLibraryManager;
 
 public class AudioLibraryFragment extends BaseFragment {
 
@@ -27,9 +30,16 @@ public class AudioLibraryFragment extends BaseFragment {
     }
 
     private void initInterface(){
-        TextView text = v.findViewById(R.id.text);
+        initRecyclerView();
+    }
 
-        text.setText("Аудиотека");
+    private void initRecyclerView(){
+        RecyclerView recyclerView = v.findViewById(R.id.recyclerView);
+        AudioLibraryAdapter adapter = new AudioLibraryAdapter();
+
+        adapter.setAudioBooks(AudioLibraryManager.getBookList(getContext()));
+
+        recyclerView.setAdapter(adapter);
     }
 
 }
