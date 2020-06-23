@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AudioBook</string>
+    <string name="tab_text_1">Магазин</string>
+    <string name="tab_text_2">Аудиотека</string>
+    <string name="tab_text_3">Плеер</string>
+    <string name="tab_text_4">Категории</string>
+    <string name="tab_text_5">Настройки</string>
+</resources>
