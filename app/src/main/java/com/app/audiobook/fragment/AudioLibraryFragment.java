@@ -34,7 +34,7 @@ public class AudioLibraryFragment extends BaseFragment {
     }
 
     private void initRecyclerView(){
-        RecyclerView recyclerView = v.findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = v.findViewById(R.id.recyclerViewBook);
         AudioLibraryAdapter adapter = new AudioLibraryAdapter();
 
         adapter.setAudioBooks(AudioLibraryManager.getBookList(getContext()));
