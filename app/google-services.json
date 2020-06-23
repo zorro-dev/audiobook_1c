@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "52500117940",
+    "firebase_url": "https://bookaudio-66877.firebaseio.com",
+    "project_id": "bookaudio-66877",
+    "storage_bucket": "bookaudio-66877.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52500117940:android:613148ec3302df16bddae1",
+        "android_client_info": {
+          "package_name": "com.app.audiobook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "52500117940-jck3d1tkecntc8s5ohvifru124m180e8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7I9f_wbv3tWbibIF3XB9gQbneVlz5vts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "52500117940-jck3d1tkecntc8s5ohvifru124m180e8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52500117940:android:bf8d526988c68ed0bddae1",
+        "android_client_info": {
+          "package_name": "com.ttf_freelance.audiobook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "52500117940-jck3d1tkecntc8s5ohvifru124m180e8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7I9f_wbv3tWbibIF3XB9gQbneVlz5vts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "52500117940-jck3d1tkecntc8s5ohvifru124m180e8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

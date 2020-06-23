@@ -27,4 +27,5 @@
     <color name="colorUsualPrice">#4B8645</color>
     <color name="colorFreePrice">#607D8B</color>
     <color name="colorDiscountPrice">#464646</color>
+    <color name="black_alpha">#80000000</color>
 </resources>

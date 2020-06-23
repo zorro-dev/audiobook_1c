@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.app.audiobook.BaseFragment;
 import com.app.audiobook.R;
 import com.app.audiobook.adapter.AudioLibraryAdapter;
-import com.app.audiobook.component.AudioLibraryManager;
+import com.app.audiobook.audio.AudioLibraryManager;
 
 public class AudioLibraryFragment extends BaseFragment {
 

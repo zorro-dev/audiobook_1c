@@ -8,13 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.audiobook.R;
-import com.app.audiobook.component.AudioBook;
+import com.app.audiobook.audio.AudioBook;
 import com.app.audiobook.interfaces.ClickListener;
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
