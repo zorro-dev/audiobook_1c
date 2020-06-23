@@ -2,6 +2,7 @@ package com.app.audiobook;
 
 import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -60,8 +61,10 @@ public class MainActivity extends AppCompatActivity {
 
                     if (i != position) {
                         alpha = 0.3f;
+                        text.setTypeface(Typeface.DEFAULT);
                     } else {
                         alpha = 1f;
+                        text.setTypeface(Typeface.DEFAULT_BOLD);
                     }
 
                     text.setAlpha(alpha);
