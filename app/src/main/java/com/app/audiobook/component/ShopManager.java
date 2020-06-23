@@ -24,14 +24,14 @@ public class ShopManager {
     private static AudioBook getAudioBook1(){
         AudioBook audioBook1 = new AudioBook();
         audioBook1.setId("1");
-        audioBook1.setTitle("Сказки барда Бидля");
+        audioBook1.setTitle("Похищенная картина");
         audioBook1.setDescription("Краткое описание");
         audioBook1.setCover(R.drawable.ic_audio_book);
         audioBook1.setParts("3 части");
 
         Author authorAudioBook1 = new Author();
         authorAudioBook1.setId("1");
-        authorAudioBook1.setName("Роулинг Джоан Кэтлин");
+        authorAudioBook1.setName("Эдгар Уоллес");
         audioBook1.setAuthor(authorAudioBook1);
 
         PriceBook priceBook1 = new PriceBook();
