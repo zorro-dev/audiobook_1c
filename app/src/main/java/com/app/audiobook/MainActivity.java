@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.app.audiobook.ui.main.SectionsPagerAdapter;
 
@@ -37,6 +39,42 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
         viewPager.setCurrentItem(2);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                TabLayout tabLayout = findViewById(R.id.tabs);
+
+                for (int i = 0; i < tabLayout.getTabCount(); i++) {
+                    TabLayout.Tab tab = tabLayout.getTabAt(i);
+                    View v = tab.getCustomView();
+
+                    TextView text = v.findViewById(R.id.text);
+                    ImageView image = v.findViewById(R.id.image);
+
+                    float alpha = 1f;
+
+                    if (i != position) {
+                        alpha = 0.3f;
+                    } else {
+                        alpha = 1f;
+                    }
+
+                    text.setAlpha(alpha);
+                    image.setAlpha(alpha);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private void initTabs(){
@@ -47,5 +85,23 @@ public class MainActivity extends AppCompatActivity {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
             tab.setCustomView(sectionsPagerAdapter.getTabView(i));
         }
+
+        final int[] tabLayoutIds = new int[] {
+                R.id.tab_1,
+                R.id.tab_2,
+                R.id.tab_3,
+                R.id.tab_4,
+                R.id.tab_5,
+        };
+
+        for (int i = 0; i < tabLayoutIds.length; i ++) {
+            View view = findViewById(tabLayoutIds[i]);
+
+            int finalI = i;
+            view.setOnClickListener(v1 -> {
+                viewPager.setCurrentItem(finalI);
+            });
+        }
+
     }
 }
