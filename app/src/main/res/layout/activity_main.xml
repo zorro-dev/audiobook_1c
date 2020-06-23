@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorGray_2"
     tools:context=".MainActivity">
 
     <com.google.android.material.tabs.TabLayout
@@ -11,6 +12,7 @@
         android:layout_width="match_parent"
         app:tabTextColor="@color/colorWhite"
         android:scrollbarSize="30dp"
+        app:tabIndicator="@drawable/ic_navbar_bulge"
         android:layout_height="wrap_content"
         android:background="@color/colorGray_3"
         app:layout_constraintBottom_toBottomOf="parent"/>
