@@ -6,7 +6,7 @@ import com.app.audiobook.R;
 
 import java.util.ArrayList;
 
-public class AudioLibraryManager {
+public class ShopManager {
 
     public static ArrayList<AudioBook> getBookList(Context context){
 
@@ -34,6 +34,12 @@ public class AudioLibraryManager {
         authorAudioBook1.setName("Роулинг Джоан Кэтлин");
         audioBook1.setAuthor(authorAudioBook1);
 
+        PriceBook priceBook1 = new PriceBook();
+        priceBook1.setPrice("2");
+        priceBook1.setDiscount(0);
+        priceBook1.setType(PriceBook.TYPE_USUAL_PRICE);
+        audioBook1.setPriceBook(priceBook1);
+
         return audioBook1;
     }
 
@@ -49,6 +55,12 @@ public class AudioLibraryManager {
         authorAudioBook1.setId("2");
         authorAudioBook1.setName("J. K. Rowling");
         audioBook1.setAuthor(authorAudioBook1);
+
+        PriceBook priceBook1 = new PriceBook();
+        priceBook1.setPrice("2");
+        priceBook1.setDiscount(0.3f);
+        priceBook1.setType(PriceBook.TYPE_DISCOUNT_PRICE);
+        audioBook1.setPriceBook(priceBook1);
 
         return audioBook1;
     }
@@ -66,6 +78,12 @@ public class AudioLibraryManager {
         authorAudioBook1.setName("Джоан Роулинг");
         audioBook1.setAuthor(authorAudioBook1);
 
+        PriceBook priceBook1 = new PriceBook();
+        priceBook1.setPrice("Бесплатно");
+        priceBook1.setDiscount(0);
+        priceBook1.setType(PriceBook.TYPE_FREE);
+        audioBook1.setPriceBook(priceBook1);
+
         return audioBook1;
     }
 
@@ -81,6 +99,12 @@ public class AudioLibraryManager {
         authorAudioBook1.setId("4");
         authorAudioBook1.setName("Джеймс Роллинс");
         audioBook1.setAuthor(authorAudioBook1);
+
+        PriceBook priceBook1 = new PriceBook();
+        priceBook1.setPrice("5");
+        priceBook1.setDiscount(0.7f);
+        priceBook1.setType(PriceBook.TYPE_DISCOUNT_PRICE);
+        audioBook1.setPriceBook(priceBook1);
 
         return audioBook1;
     }
@@ -98,6 +122,13 @@ public class AudioLibraryManager {
         authorAudioBook1.setName("Роулинг Джоан Кэтлин");
         audioBook1.setAuthor(authorAudioBook1);
 
+        PriceBook priceBook1 = new PriceBook();
+        priceBook1.setPrice("Бесплатно");
+        priceBook1.setDiscount(0);
+        priceBook1.setType(PriceBook.TYPE_FREE);
+        audioBook1.setPriceBook(priceBook1);
+
         return audioBook1;
     }
+
 }
