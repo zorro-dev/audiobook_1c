@@ -14,6 +14,7 @@
     <color name="colorGray_4">#464646</color>
     <color name="colorGray_5">#868686</color>
     <color name="colorGray_6">#606060</color>
+    <color name="colorGray_7">#2F2F2F</color>
 
     <color name="colorBlue_1">#607D8B</color>
 
@@ -23,9 +24,22 @@
     <color name="colorGreen_1">#4DA84D</color>
     <color name="colorGreen_2">#499F49</color>
     <color name="colorGreen_3">#4B8645</color>
+    <color name="colorGreen_4">#4B8645</color>
+    <color name="colorGreen_5">#30D530</color>
 
     <color name="colorUsualPrice">#4B8645</color>
     <color name="colorFreePrice">#607D8B</color>
     <color name="colorDiscountPrice">#464646</color>
     <color name="black_alpha">#80000000</color>
+
+
+    <color name="colorCategory1">#BBFFBB</color>
+    <color name="colorCategory2">#A9FFFF</color>
+    <color name="colorCategory3">#FFDCA7</color>
+    <color name="colorCategory4">#E2B8FF</color>
+    <color name="colorCategory5">#9999FF</color>
+    <color name="colorCategory6">#FFA2A2</color>
+    <color name="colorCategory7">#FF9CB8</color>
+    <color name="colorCategory8">#FFFF9F</color>
+
 </resources>
