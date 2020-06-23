@@ -17,7 +17,7 @@ import com.app.audiobook.BookActivity;
 import com.app.audiobook.R;
 import com.app.audiobook.adapter.AudioLibraryAdapter;
 import com.app.audiobook.adapter.AudioLibraryFilterAdapter;
-import com.app.audiobook.component.AudioLibraryManager;
+import com.app.audiobook.audio.AudioLibraryManager;
 import com.app.audiobook.component.FilterParameter;
 
 public class AudioLibraryFragment extends BaseFragment {

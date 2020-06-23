@@ -1,5 +1,7 @@
 package com.app.audiobook.audio;
 
+import com.app.audiobook.component.PriceBook;
+
 public class AudioBook {
 
     private String id;

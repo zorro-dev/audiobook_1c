@@ -13,14 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.audiobook.BaseFragment;
 import com.app.audiobook.BookActivity;
-import com.app.audiobook.MainActivity;
 import com.app.audiobook.R;
 import com.app.audiobook.adapter.AudioLibraryAdapter;
 import com.app.audiobook.adapter.AudioLibraryFilterAdapter;
 import com.app.audiobook.adapter.ShopAdapter;
-import com.app.audiobook.component.AudioLibraryManager;
 import com.app.audiobook.component.FilterParameter;
 import com.app.audiobook.component.ShopManager;
+import com.app.audiobook.ux.MainActivity;
 
 public class ShopFragment extends BaseFragment {
 

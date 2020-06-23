@@ -1,4 +1,4 @@
-package com.app.audiobook;
+package com.app.audiobook.ux;
 
 import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.app.audiobook.fragment.BuyBookFragment;
 import com.app.audiobook.R;
+import com.app.audiobook.ux.BaseActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;

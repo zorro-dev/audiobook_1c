@@ -13,7 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.audiobook.R;
-import com.app.audiobook.component.AudioBook;
+import com.app.audiobook.audio.AudioBook;
 import com.app.audiobook.interfaces.ClickListener;
 
 import java.util.ArrayList;
