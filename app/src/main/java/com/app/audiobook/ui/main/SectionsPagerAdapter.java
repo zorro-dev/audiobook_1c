@@ -1,6 +1,10 @@
 package com.app.audiobook.ui.main;
 
 import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -22,7 +26,8 @@ import com.app.audiobook.fragment.ShopFragment;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3, R.string.tab_text_4, R.string.tab_text_5};
-    //private static final int[] TAB_ICON = new int[]{R.drawable.ic_nav_shop, R.drawable.ic_nav_audio_library, R.drawable.ic_nav_player, R.drawable.ic_nav_category, R.drawable.ic_nav_setting};
+    private static final int[] TAB_ICON = new int[]{R.drawable.ic_nav_shop, R.drawable.ic_nav_audio_library, R.drawable.ic_nav_player, R.drawable.ic_nav_category, R.drawable.ic_nav_setting};
+
     private final Context mContext;
 
     private ShopFragment shopFragment;
@@ -55,6 +60,18 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
         return fragments[position];
+    }
+
+    public View getTabView(int position) {
+        // Given you have a custom layout in `res/layout/custom_tab.xml` with a TextView and ImageView
+        View v = LayoutInflater.from(mContext).inflate(R.layout.custom_tab, null);
+
+        TextView text = v.findViewById(R.id.text);
+        text.setText(TAB_TITLES[position]);
+        ImageView image = v.findViewById(R.id.image);
+        image.setImageResource(TAB_ICON[position]);
+
+        return v;
     }
 
     @Nullable
