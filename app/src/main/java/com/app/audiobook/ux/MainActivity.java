@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 
 import com.app.audiobook.fragment.BuyBookFragment;
+import com.app.audiobook.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -23,7 +24,7 @@ import android.widget.TextView;
 
 import com.app.audiobook.ui.main.SectionsPagerAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @SuppressLint("ResourceType")
     @Override

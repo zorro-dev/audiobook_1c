@@ -1,4 +1,4 @@
-package com.app.audiobook.component;
+package com.app.audiobook.audio;
 
 public class Author {
 
