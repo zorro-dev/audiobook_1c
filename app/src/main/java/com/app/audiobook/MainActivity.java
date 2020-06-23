@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
-        viewPager.setCurrentItem(2);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -102,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
                 viewPager.setCurrentItem(finalI);
             });
         }
+
+        viewPager.setCurrentItem(2);
 
     }
 }
