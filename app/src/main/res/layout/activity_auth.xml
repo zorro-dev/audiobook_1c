@@ -4,8 +4,130 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorGray_3"
+    android:background="@color/colorGray_2"
     tools:context=".ux.auth.AuthActivity">
+
+    <LinearLayout
+        android:id="@+id/lr1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/latter1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jua"
+            android:text="A"
+            android:textColor="@android:color/transparent"
+            android:textSize="50dp" />
+
+        <TextView
+            android:id="@+id/latter2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jua"
+            android:text="u"
+            android:textColor="@android:color/transparent"
+            android:textSize="50dp" />
+
+        <TextView
+            android:id="@+id/latter3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jua"
+            android:text="d"
+            android:textColor="@android:color/transparent"
+            android:textSize="50dp" />
+
+        <TextView
+            android:id="@+id/latter4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jua"
+            android:text="i"
+            android:textColor="@android:color/transparent"
+            android:textSize="50dp" />
+
+        <TextView
+            android:id="@+id/latter5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jua"
+            android:text="o"
+            android:textColor="@android:color/transparent"
+            android:textSize="50dp" />
+
+        <TextView
+            android:id="@+id/latter6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jua"
+            android:text="B"
+            android:textColor="@android:color/transparent"
+            android:textSize="50dp" />
+
+        <TextView
+            android:id="@+id/latter7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jua"
+            android:text="o"
+            android:textColor="@android:color/transparent"
+            android:textSize="50dp" />
+
+        <TextView
+            android:id="@+id/latter8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jua"
+            android:text="o"
+            android:textColor="@android:color/transparent"
+            android:textSize="50dp" />
+
+        <TextView
+            android:id="@+id/latter9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jua"
+            android:text="k"
+            android:textColor="@android:color/transparent"
+            android:textSize="50dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/jua"
+        android:gravity="center"
+        android:text="AudioBook"
+        android:textColor="@color/colorOrangeBackground"
+        android:textSize="50dp"
+        app:layout_constraintBottom_toTopOf="@id/text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="Войдите с помощью Вашего Google аккаунта.\n\n Это поможет Вам не потерять купленные Вами книги, сделанные Вами закладки и т.д.\n\nТак же это обезопасит Ваш аккаунт от взлома."
+        android:textColor="@color/colorOrangeText"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@id/buttonAuth"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/buttonAuth"
@@ -20,7 +142,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/corner_radius_30dp"
-            android:tint="#434343"
+            android:tint="@color/colorGray_1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -51,7 +173,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
-            android:text="Вход через гугл"
+            android:text="Вход через Google"
             android:textColor="@color/colorWhite"
             android:textSize="20dp"
             android:textStyle="bold"
@@ -62,9 +184,45 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ButtonUserAgreement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/corner_radius_30dp"
+            android:tint="@color/colorGray_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="Пользовательское соглашение"
+            android:textColor="@color/colorOrange"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <include
         android:id="@+id/progress_layout"
-        android:visibility="gone"
-        layout="@layout/progress_layout"/>
+        layout="@layout/progress_layout"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
