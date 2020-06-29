@@ -9,7 +9,6 @@ public class AudioBook {
     private String description;
     private Author author;
     private PriceBook priceBook;
-    private int cover;
     private String coverUrl;
     private ArrayList<Chapter> chapters = new ArrayList<>();
 
@@ -77,14 +76,6 @@ public class AudioBook {
 
     public void setCoverUrl(String coverUrl) {
         this.coverUrl = coverUrl;
-    }
-
-    public int getCover() {
-        return cover;
-    }
-
-    public void setCover(int cover) {
-        this.cover = cover;
     }
 
     public PriceBook getPriceBook() {
