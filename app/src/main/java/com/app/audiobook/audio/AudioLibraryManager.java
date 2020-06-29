@@ -27,7 +27,7 @@ public class AudioLibraryManager {
         audioBook1.setTitle("Похищенная картина");
         audioBook1.setDescription("Краткое описание");
         audioBook1.setCover(R.drawable.ic_audio_book);
-        audioBook1.setParts("3 части");
+
 
         Author authorAudioBook1 = new Author();
         authorAudioBook1.setId("1");
@@ -43,7 +43,6 @@ public class AudioLibraryManager {
         audioBook1.setTitle("Harry Potter and the Goblet of Fire");
         audioBook1.setDescription("Краткое описание");
         audioBook1.setCover(R.drawable.ic_audio_book_2);
-        audioBook1.setParts("5 частей");
 
         Author authorAudioBook1 = new Author();
         authorAudioBook1.setId("2");
@@ -59,7 +58,6 @@ public class AudioLibraryManager {
         audioBook1.setTitle("Гарри Поттер 'Рождение легенды'");
         audioBook1.setDescription("Краткое описание");
         audioBook1.setCover(R.drawable.ic_audio_book_3);
-        audioBook1.setParts("1 часть");
 
         Author authorAudioBook1 = new Author();
         authorAudioBook1.setId("3");
@@ -75,7 +73,6 @@ public class AudioLibraryManager {
         audioBook1.setTitle("Глаз бога");
         audioBook1.setDescription("Краткое описание");
         audioBook1.setCover(R.drawable.ic_audio_book_4);
-        audioBook1.setParts("7 частей");
 
         Author authorAudioBook1 = new Author();
         authorAudioBook1.setId("4");
@@ -91,7 +88,6 @@ public class AudioLibraryManager {
         audioBook1.setTitle("Сказки барда Бидля");
         audioBook1.setDescription("Краткое описание");
         audioBook1.setCover(R.drawable.ic_audio_book);
-        audioBook1.setParts("3 части");
 
         Author authorAudioBook1 = new Author();
         authorAudioBook1.setId("1");

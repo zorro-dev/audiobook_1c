@@ -3,16 +3,11 @@ package com.app.audiobook;
 import android.os.Bundle;
 
 import com.app.audiobook.adapter.ChapterAdapter;
-import com.app.audiobook.component.Chapter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.app.audiobook.audio.Chapter;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.View;
 
 public class BookActivity extends AppCompatActivity {
 

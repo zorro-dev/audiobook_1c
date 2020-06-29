@@ -1,6 +1,6 @@
 package com.app.audiobook.audio;
 
-import com.app.audiobook.component.PriceBook;
+import java.util.ArrayList;
 
 public class AudioBook {
 
@@ -8,11 +8,10 @@ public class AudioBook {
     private String title;
     private String description;
     private Author author;
-    private String parts;
     private PriceBook priceBook;
     private int cover;
-    //private String coverUrl;
-    //private ArrayList<Chapter> chapters = new ArrayList<>();
+    private String coverUrl;
+    private ArrayList<Chapter> chapters = new ArrayList<>();
 
     public AudioBook() {
     }
@@ -49,15 +48,18 @@ public class AudioBook {
         this.description = description;
     }
 
-    public String getParts() {
-        return parts;
+    public int getChapterSize() {
+        return chapters.size();
     }
 
-    public void setParts(String parts) {
-        this.parts = parts;
+    public ArrayList<Chapter> getChapters() {
+        return chapters;
     }
 
-    /*
+    public void setChapters(ArrayList<Chapter> chapters) {
+        this.chapters = chapters;
+    }
+
     public int getDurationInSeconds() {
         int duration = 0;
 
@@ -76,8 +78,6 @@ public class AudioBook {
     public void setCoverUrl(String coverUrl) {
         this.coverUrl = coverUrl;
     }
-
-    */
 
     public int getCover() {
         return cover;
