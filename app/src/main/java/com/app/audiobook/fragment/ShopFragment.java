@@ -1,17 +1,12 @@
 package com.app.audiobook.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,16 +14,13 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.audiobook.BaseFragment;
-import com.app.audiobook.BookActivity;
 import com.app.audiobook.R;
-import com.app.audiobook.adapter.AudioLibraryAdapter;
 import com.app.audiobook.adapter.AudioLibraryFilterAdapter;
 import com.app.audiobook.adapter.ShopAdapter;
 import com.app.audiobook.audio.AudioBook;
 import com.app.audiobook.audio.BookPrice;
 import com.app.audiobook.audio.catalog.ShopCatalog;
 import com.app.audiobook.component.FilterParameter;
-import com.app.audiobook.component.ShopManager;
 import com.app.audiobook.interfaces.ClickListener;
 import com.app.audiobook.ux.MainActivity;
 
@@ -68,7 +60,7 @@ public class ShopFragment extends BaseFragment {
         adapter.setAudioBooks(audioBooks);
 
         adapter.setClickListener((v1, pos) -> {
-            ((MainActivity) getActivity()).initFragment();
+            ((MainActivity) getActivity()).initPurchaseFragment(audioBooks.get(pos));
         });
 
         recyclerView.setAdapter(adapter);
