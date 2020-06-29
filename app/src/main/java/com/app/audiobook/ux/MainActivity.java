@@ -4,10 +4,12 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 
 import com.app.audiobook.audio.AudioBook;
+import com.app.audiobook.audio.AudioLibraryManager;
 import com.app.audiobook.audio.catalog.ShopCatalog;
 import com.app.audiobook.audio.catalog.UserCatalog;
 import com.app.audiobook.audio.loader.UserCatalogLoader;
 import com.app.audiobook.auth.User;
+import com.app.audiobook.component.JSONManager;
 import com.app.audiobook.database.Loader;
 import com.app.audiobook.fragment.BuyBookFragment;
 import com.app.audiobook.R;
@@ -22,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app.audiobook.ui.main.SectionsPagerAdapter;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -43,6 +46,8 @@ public class MainActivity extends BaseActivity {
 
         shopCatalog = new ShopCatalog();
         shopCatalog.load();
+
+        loadToDatabase();
     }
 
     ViewPager viewPager;
@@ -130,5 +135,17 @@ public class MainActivity extends BaseActivity {
         fragmentTransaction.add(R.id.frame_layout, fragment).commit();
     }
 
+    private void loadToDatabase() {
+        ArrayList<AudioBook> audioBooks = new ArrayList<>(AudioLibraryManager.getBookList(this));
+
+        // использовалось для загрузки на серв
+        for (int i = 0; i < audioBooks.size(); i ++) {
+            AudioBook audioBook = audioBooks.get(i);
+
+            String json = JSONManager.exportToJSON(audioBook);
+            FirebaseDatabase.getInstance().getReference("BookCatalog")
+                    .child("Book").child(audioBook.getId()).setValue(json);
+        }
+    }
 
 }

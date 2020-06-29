@@ -62,7 +62,7 @@ public class AudioLibraryFragment extends BaseFragment {
         RecyclerView recyclerView = v.findViewById(R.id.recyclerViewBook);
         AudioLibraryAdapter adapter = new AudioLibraryAdapter();
 
-        adapter.setAudioBooks(AudioLibraryManager.getBookList(getContext()));
+        adapter.setAudioBooks(audioBooks);
 
         adapter.setClickListener((v1, pos) -> {
             Intent intent = new Intent(getContext(), BookActivity.class);
