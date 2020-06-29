@@ -2,6 +2,13 @@ package com.app.audiobook.database;
 
 public abstract class Loader<T> {
 
+    private T t;
+
+    public T getResult() {
+        return t;
+    }
+
+
     public interface OnLoadListener<T> {
         void onLoaded(T t);
     }
@@ -17,6 +24,7 @@ public abstract class Loader<T> {
     }
 
     protected void deliverResult(T t) {
+        this.t = t;
         if (loadListener != null) {
             loadListener.onLoaded(t);
         }

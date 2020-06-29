@@ -4,7 +4,10 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 
 import com.app.audiobook.audio.AudioBook;
+import com.app.audiobook.audio.catalog.ShopCatalog;
+import com.app.audiobook.audio.catalog.UserCatalog;
 import com.app.audiobook.audio.loader.UserCatalogLoader;
+import com.app.audiobook.auth.User;
 import com.app.audiobook.database.Loader;
 import com.app.audiobook.fragment.BuyBookFragment;
 import com.app.audiobook.R;
@@ -24,7 +27,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity {
 
-
+    public UserCatalog userCatalog;
+    public ShopCatalog shopCatalog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,12 @@ public class MainActivity extends BaseActivity {
 
         initViewPager();
         initTabs();
+
+        userCatalog = new UserCatalog(getAuthManager().getUser().getId());
+        userCatalog.load();
+
+        shopCatalog = new ShopCatalog(getAuthManager().getUser().getId());
+        userCatalog.load();
     }
 
     ViewPager viewPager;

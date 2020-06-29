@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.app.audiobook.audio.AudioBook;
 import com.app.audiobook.component.JSONManager;
+import com.app.audiobook.database.Loader;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -11,54 +12,35 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class BookCatalogLoader {
+public class BookCatalogLoader extends Loader<ArrayList<AudioBook>> {
 
-    private ArrayList<AudioBook> audioBooks = new ArrayList<>();
 
-    public ArrayList<AudioBook> getAudioBooks() {
-        return audioBooks;
-    }
-
-    public interface OnLoadListener {
-        void onCatalogLoaded(ArrayList<AudioBook> audioBooks);
-    }
-
-    private OnLoadListener loadListener;
-
-    public OnLoadListener getLoadListener() {
-        return loadListener;
-    }
-
-    public void setLoadListener(OnLoadListener loadListener) {
-        this.loadListener = loadListener;
-    }
-
+    @Override
     public void load() {
         FirebaseDatabase.getInstance().getReference("BookCatalog")
-                .child("Book").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                audioBooks = new ArrayList<>();
+                .child("Book")
+                .addListenerForSingleValueEvent(
+                        new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                ArrayList<AudioBook> list = new ArrayList<>();
 
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    String json = data.getValue(String.class);
+                                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                                    String json = data.getValue(String.class);
 
-                    AudioBook audioBook = JSONManager.importFromJSON(json, AudioBook.class);
+                                    AudioBook audioBook = JSONManager.importFromJSON(json, AudioBook.class);
 
-                    audioBooks.add(audioBook);
-                }
+                                    list.add(audioBook);
+                                }
 
-                if (loadListener != null)
-                    loadListener.onCatalogLoaded(audioBooks);
+                                deliverResult(list);
+                            }
 
-            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+                            }
+                        }
+                );
     }
-
-
 }
