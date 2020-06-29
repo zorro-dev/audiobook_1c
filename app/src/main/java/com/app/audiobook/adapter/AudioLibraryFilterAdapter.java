@@ -50,6 +50,24 @@ public class AudioLibraryFilterAdapter extends RecyclerView.Adapter {
         this.clickListener = clickListener;
     }
 
+    public void selectAll() {
+        for (int i = 0; i < filterParameters.size(); i ++) {
+            selectedFilterParameters.add(i);
+        }
+    }
+
+    public ArrayList<FilterParameter> getSelectedParams() {
+        ArrayList<FilterParameter> selectedParams = new ArrayList<>();
+
+        for (int i = 0; i < filterParameters.size(); i ++) {
+            if (selectedFilterParameters.contains(i)) {
+                selectedParams.add(filterParameters.get(i));
+            }
+        }
+
+        return selectedParams;
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView title;
@@ -62,14 +80,14 @@ public class AudioLibraryFilterAdapter extends RecyclerView.Adapter {
             colorSelected = v.findViewById(R.id.colorSelected);
 
             itemView.setOnClickListener(v1 -> {
-                if (clickListener != null)
-                    clickListener.onClick(v1, getAdapterPosition());
-
                 if(selectedFilterParameters.contains(getAdapterPosition())){
                     selectedFilterParameters.remove((Integer) getAdapterPosition());
                 } else {
                     selectedFilterParameters.add(getAdapterPosition());
                 }
+
+                if (clickListener != null)
+                    clickListener.onClick(v1, getAdapterPosition());
 
                 notifyItemChanged(getAdapterPosition());
             });

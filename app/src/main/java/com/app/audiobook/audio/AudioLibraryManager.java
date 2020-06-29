@@ -2,8 +2,6 @@ package com.app.audiobook.audio;
 
 import android.content.Context;
 
-import com.app.audiobook.R;
-
 import java.util.ArrayList;
 
 import static com.app.audiobook.audio.Chapter.STATE_NOT_READ;
@@ -29,10 +27,10 @@ public class AudioLibraryManager {
         audioBook1.setDescription("Краткое описание");
         audioBook1.setCoverUrl("https://firebasestorage.googleapis.com/v0/b/bookaudio-66877.appspot.com/o/Похищенная%20картина%2Fic_audio_book_2.jpg?alt=media&token=e031e56e-b5f6-4ae5-aff8-fce944330b9b");
 
-        PriceBook priceBook1 = new PriceBook();
-        priceBook1.setType(PriceBook.TYPE_FREE);
+        BookPrice bookPrice1 = new BookPrice();
+        bookPrice1.setType(BookPrice.TYPE_FREE);
 
-        audioBook1.setPriceBook(priceBook1);
+        audioBook1.setBookPrice(bookPrice1);
 
         Author authorAudioBook1 = new Author();
         authorAudioBook1.setId("1");
@@ -80,12 +78,12 @@ public class AudioLibraryManager {
         audioBook2.setDescription("Краткое описание");
         audioBook2.setCoverUrl("https://firebasestorage.googleapis.com/v0/b/bookaudio-66877.appspot.com/o/Роулинг%20Джоан%20Кэтлин%20-%20Сказки%20барда%20Бидля%2Fic_audio_book_1.jpg?alt=media&token=a19a472b-2e17-44f7-bb05-964e3d5c785f");
 
-        PriceBook priceBook2 = new PriceBook();
-        priceBook2.setType(PriceBook.TYPE_USUAL_PRICE);
-        priceBook2.setPrice("5");
-        priceBook2.setDiscount(0);
+        BookPrice bookPrice2 = new BookPrice();
+        bookPrice2.setType(BookPrice.TYPE_USUAL_PRICE);
+        bookPrice2.setPrice("5");
+        bookPrice2.setDiscount(0);
 
-        audioBook2.setPriceBook(priceBook2);
+        audioBook2.setBookPrice(bookPrice2);
 
         Author authorAudioBook2 = new Author();
         authorAudioBook2.setId("2");
@@ -133,12 +131,12 @@ public class AudioLibraryManager {
         audioBook3.setDescription("Краткое описание");
         audioBook3.setCoverUrl("https://firebasestorage.googleapis.com/v0/b/bookaudio-66877.appspot.com/o/Рядовой%20Велиев%20-%20Виталий%20Сергеев%2Fic_audio_book_3.jpg?alt=media&token=c23ee603-7589-4a1d-9c0e-97eb844de782");
 
-        PriceBook priceBook3 = new PriceBook();
-        priceBook3.setType(PriceBook.TYPE_DISCOUNT_PRICE);
-        priceBook3.setPrice("10");
-        priceBook3.setDiscount(0.3f);
+        BookPrice bookPrice3 = new BookPrice();
+        bookPrice3.setType(BookPrice.TYPE_DISCOUNT_PRICE);
+        bookPrice3.setPrice("10");
+        bookPrice3.setDiscount(0.3f);
 
-        audioBook3.setPriceBook(priceBook3);
+        audioBook3.setBookPrice(bookPrice3);
 
         Author authorAudioBook3 = new Author();
         authorAudioBook3.setId("3");
@@ -186,10 +184,10 @@ public class AudioLibraryManager {
         audioBook4.setDescription("Краткое описание");
         audioBook4.setCoverUrl("https://firebasestorage.googleapis.com/v0/b/bookaudio-66877.appspot.com/o/Сотник%20Юрий%20-%20На%20тебя%20вся%20надежда%2Fic_audio_book_4.jpg?alt=media&token=7fbcbc95-64d7-4367-8bb2-ae0b5dd044f9");
 
-        PriceBook priceBook4 = new PriceBook();
-        priceBook4.setType(PriceBook.TYPE_FREE);
+        BookPrice bookPrice4 = new BookPrice();
+        bookPrice4.setType(BookPrice.TYPE_FREE);
 
-        audioBook4.setPriceBook(priceBook4);
+        audioBook4.setBookPrice(bookPrice4);
 
         Author authorAudioBook4 = new Author();
         authorAudioBook4.setId("4");

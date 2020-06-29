@@ -33,11 +33,18 @@ public abstract class Catalog<T> {
         this.catalogLiveData = catalogLiveData;
     }
 
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
+    }
+
     public abstract void load();
 
     void deliverResult(ArrayList<T> t) {
         catalogList = new ArrayList<>(t);
-        Log.v("lol", "catalogList.size = " + String.valueOf(catalogList.size()));
         getCatalogLiveData().postValue(t);
     }
 
@@ -45,11 +52,9 @@ public abstract class Catalog<T> {
         this.query = query;
 
         if (isQueryEmpty()) {
-            Log.v("lol", "isQueryEmpty == true");
             updateListToDefault();
         } else {
-            Log.v("lol", "isQueryEmpty == false");
-            getCatalogLiveData().postValue(getFilteredListByQuery(query));
+            getCatalogLiveData().setValue(getFilteredListByQuery(query));
         }
     }
 
@@ -76,7 +81,7 @@ public abstract class Catalog<T> {
     public abstract boolean isValidByQuery(T t, String query);
 
     public void updateListToDefault() {
-        getCatalogLiveData().postValue(catalogList);
+        getCatalogLiveData().setValue(catalogList);
     }
 
     public void addToCatalog(T t) {

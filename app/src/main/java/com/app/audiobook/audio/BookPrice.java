@@ -1,6 +1,6 @@
 package com.app.audiobook.audio;
 
-public class PriceBook {
+public class BookPrice {
 
     public static final String TYPE_FREE = "TYPE_FREE";
     public static final String TYPE_USUAL_PRICE = "TYPE_USUAL_PRICE";
