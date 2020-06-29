@@ -1,5 +1,6 @@
 package com.app.audiobook.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,13 +12,14 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.audiobook.BaseFragment;
+import com.app.audiobook.BookActivity;
 import com.app.audiobook.R;
 import com.app.audiobook.adapter.AudioLibraryAdapter;
 import com.app.audiobook.adapter.AudioLibraryFilterAdapter;
 import com.app.audiobook.adapter.ShopAdapter;
-import com.app.audiobook.component.AudioLibraryManager;
 import com.app.audiobook.component.FilterParameter;
 import com.app.audiobook.component.ShopManager;
+import com.app.audiobook.ux.MainActivity;
 
 public class ShopFragment extends BaseFragment {
 
@@ -43,6 +45,10 @@ public class ShopFragment extends BaseFragment {
         ShopAdapter adapter = new ShopAdapter();
 
         adapter.setAudioBooks(ShopManager.getBookList(getContext()));
+
+        adapter.setClickListener((v1, pos) -> {
+            ((MainActivity) getActivity()).initFragment();
+        });
 
         recyclerView.setAdapter(adapter);
     }

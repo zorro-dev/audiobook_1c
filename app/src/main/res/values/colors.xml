@@ -31,6 +31,7 @@
     <color name="colorFreePrice">#607D8B</color>
     <color name="colorDiscountPrice">#464646</color>
     <color name="black_alpha">#80000000</color>
+    <color name="black_alpha2">#33000000</color>
 
 
     <color name="colorCategory1">#BBFFBB</color>
@@ -41,5 +42,9 @@
     <color name="colorCategory6">#FFA2A2</color>
     <color name="colorCategory7">#FF9CB8</color>
     <color name="colorCategory8">#FFFF9F</color>
+
+    <color name="colorOrange">#FF9800</color>
+    <color name="colorOrangeText">#B3FF9800</color>
+    <color name="colorOrangeBackground">#51FF9800</color>
 
 </resources>

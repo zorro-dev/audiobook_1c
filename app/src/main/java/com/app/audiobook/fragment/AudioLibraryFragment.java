@@ -1,20 +1,23 @@
 package com.app.audiobook.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.audiobook.BaseFragment;
+import com.app.audiobook.BookActivity;
 import com.app.audiobook.R;
 import com.app.audiobook.adapter.AudioLibraryAdapter;
 import com.app.audiobook.adapter.AudioLibraryFilterAdapter;
-import com.app.audiobook.component.AudioLibraryManager;
+import com.app.audiobook.audio.AudioLibraryManager;
 import com.app.audiobook.component.FilterParameter;
 
 public class AudioLibraryFragment extends BaseFragment {
@@ -42,6 +45,11 @@ public class AudioLibraryFragment extends BaseFragment {
 
         adapter.setAudioBooks(AudioLibraryManager.getBookList(getContext()));
 
+        adapter.setClickListener((v1, pos) -> {
+            Intent intent = new Intent(getContext(), BookActivity.class);
+            startActivity(intent);
+        });
+
         recyclerView.setAdapter(adapter);
     }
 
@@ -63,6 +71,7 @@ public class AudioLibraryFragment extends BaseFragment {
         adapter.getFilterParameters().add(filterParameter3);
 
         recyclerView.setAdapter(adapter);
+
     }
 
 }
