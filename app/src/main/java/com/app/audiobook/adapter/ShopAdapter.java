@@ -91,8 +91,8 @@ public class ShopAdapter extends RecyclerView.Adapter {
         AudioBook item = audioBooks.get(position);
 
         h.title.setText(item.getTitle());
-        h.author.setText(item.getAuthor().getName());
-        h.count_parts.setText(String.valueOf(item.getChapterSize()));
+        h.author.setText(String.valueOf("Автор: " + item.getAuthor().getName()));
+        h.count_parts.setText(String.valueOf("Частей: " + item.getChapterSize()));
         Glide.with(h.itemView)
                 .load(item.getCoverUrl())
                 .placeholder(R.drawable.ic_black_square)

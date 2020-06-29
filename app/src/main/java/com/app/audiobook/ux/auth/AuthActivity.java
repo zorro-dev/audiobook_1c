@@ -21,6 +21,17 @@ import com.app.audiobook.ux.MainActivity;
 
 public class AuthActivity extends BaseActivity implements IAuthEvents {
 
+    private int[] colors = new int[] {
+            R.color.colorCategory1,
+            R.color.colorCategory2,
+            R.color.colorCategory3,
+            R.color.colorCategory4,
+            R.color.colorCategory5,
+            R.color.colorCategory6,
+            R.color.colorCategory7,
+            R.color.colorCategory8,
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,7 +133,8 @@ public class AuthActivity extends BaseActivity implements IAuthEvents {
             public void run() {
                 if (i < n) {
                     runTextAnim(latters[i]);
-                    latters[i].setTextColor(getResources().getColor(R.color.colorOrange));
+                    //latters[i].setTextColor(getResources().getColor(R.color.colorOrange));
+                    latters[i].setTextColor(getResources().getColor(colors[i -  (i / colors.length) * colors.length ]));
                     doSomething(i + 1, n);
                 }
             }
