@@ -3,6 +3,7 @@ package com.app.audiobook.audio.loader;
 import androidx.annotation.NonNull;
 
 import com.app.audiobook.audio.AudioBook;
+import com.app.audiobook.component.JSONManager;
 import com.app.audiobook.database.Loader;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,7 +28,17 @@ public class UserCatalogLoader extends Loader<ArrayList<AudioBook>> {
                         new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                ArrayList<AudioBook> list = new ArrayList<>();
 
+                                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                                    String json = data.getValue(String.class);
+
+                                    AudioBook audioBook = JSONManager.importFromJSON(json, AudioBook.class);
+
+                                    list.add(audioBook);
+                                }
+
+                                deliverResult(list);
                             }
 
                             @Override

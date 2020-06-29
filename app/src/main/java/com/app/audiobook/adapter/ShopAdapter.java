@@ -92,7 +92,7 @@ public class ShopAdapter extends RecyclerView.Adapter {
 
         h.title.setText(item.getTitle());
         h.author.setText(item.getAuthor().getName());
-        h.count_parts.setText(item.getChapterSize());
+        h.count_parts.setText(String.valueOf(item.getChapterSize()));
         Glide.with(h.itemView)
                 .load(item.getCoverUrl())
                 .placeholder(R.drawable.ic_black_square)

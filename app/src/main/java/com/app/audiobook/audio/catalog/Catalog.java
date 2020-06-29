@@ -52,7 +52,7 @@ public abstract class Catalog<T> {
         return query == null || query.isEmpty();
     }
 
-    public ArrayList<T> getFilteredListByQuery(String query) {
+    private ArrayList<T> getFilteredListByQuery(String query) {
         ArrayList<T> filteredAudioBooks = new ArrayList<>();
 
         for (int i = 0; i < getCatalogList().size(); i ++) {

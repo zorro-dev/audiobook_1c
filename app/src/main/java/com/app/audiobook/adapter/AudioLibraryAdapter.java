@@ -79,7 +79,7 @@ public class AudioLibraryAdapter extends RecyclerView.Adapter {
 
         h.title.setText(item.getTitle());
         h.author.setText(item.getAuthor().getName());
-        h.count_parts.setText(item.getChapterSize());
+        h.count_parts.setText(String.valueOf(item.getChapterSize()));
         //h.cover.setImageResource(item.getCover());
         Glide.with(h.itemView)
                 .load(item.getCoverUrl())
