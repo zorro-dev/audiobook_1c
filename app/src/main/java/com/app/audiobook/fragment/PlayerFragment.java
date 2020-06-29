@@ -13,6 +13,7 @@ import com.app.audiobook.BaseFragment;
 import com.app.audiobook.R;
 import com.app.audiobook.adapter.ChapterAdapter;
 import com.app.audiobook.audio.Chapter;
+import com.app.audiobook.audio.loader.BookLoader;
 
 public class PlayerFragment extends BaseFragment {
 
@@ -37,22 +38,22 @@ public class PlayerFragment extends BaseFragment {
         ChapterAdapter adapter = new ChapterAdapter();
 
         Chapter chapter1 = new Chapter();
-        chapter1.setTitle("Предисловие");
-        chapter1.setTime("5:59");
-        chapter1.setListen(true);
-        chapter1.setDownload(true);
+        chapter1.setName("Предисловие");
+        chapter1.setDurationInSeconds(174);
+        chapter1.setState(Chapter.STATE_READ);
+        chapter1.setCached(true);
 
         Chapter chapter2 = new Chapter();
-        chapter2.setTitle("Колдун и прыгливый горшок");
-        chapter2.setTime("14:51");
-        chapter2.setListen(false);
-        chapter2.setDownload(true);
+        chapter2.setName("Колдун и прыгливый горшок");
+        chapter2.setDurationInSeconds(574);
+        chapter2.setState(Chapter.STATE_NOT_READ);
+        chapter2.setCached(true);
 
         Chapter chapter3 = new Chapter();
-        chapter3.setTitle("Фонтан феи Фортуны");
-        chapter3.setTime("16:24");
-        chapter3.setListen(false);
-        chapter3.setDownload(false);
+        chapter3.setName("Фонтан феи Фортуны");
+        chapter3.setDurationInSeconds(604);
+        chapter3.setState(Chapter.STATE_NOT_READ);
+        chapter3.setCached(false);
 
         adapter.getChapters().add(chapter1);
         adapter.getChapters().add(chapter2);

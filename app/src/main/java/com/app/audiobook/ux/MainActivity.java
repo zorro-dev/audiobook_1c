@@ -1,33 +1,31 @@
 package com.app.audiobook.ux;
 
-import android.annotation.SuppressLint;
-import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
+import com.app.audiobook.audio.AudioBook;
+import com.app.audiobook.audio.loader.UserCatalogLoader;
+import com.app.audiobook.database.Loader;
 import com.app.audiobook.fragment.BuyBookFragment;
 import com.app.audiobook.R;
-import com.app.audiobook.ux.BaseActivity;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.MutableLiveData;
 import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app.audiobook.ui.main.SectionsPagerAdapter;
 
+import java.util.ArrayList;
+
 public class MainActivity extends BaseActivity {
 
-    @SuppressLint("ResourceType")
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,4 +119,6 @@ public class MainActivity extends BaseActivity {
         fragmentTransaction.addToBackStack("BuyBookFragment");
         fragmentTransaction.add(R.id.frame_layout, fragment).commit();
     }
+
+
 }
