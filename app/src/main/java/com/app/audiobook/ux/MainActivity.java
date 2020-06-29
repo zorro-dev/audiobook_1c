@@ -41,8 +41,8 @@ public class MainActivity extends BaseActivity {
         userCatalog = new UserCatalog(getAuthManager().getUser().getId());
         userCatalog.load();
 
-        shopCatalog = new ShopCatalog(getAuthManager().getUser().getId());
-        userCatalog.load();
+        shopCatalog = new ShopCatalog();
+        shopCatalog.load();
     }
 
     ViewPager viewPager;

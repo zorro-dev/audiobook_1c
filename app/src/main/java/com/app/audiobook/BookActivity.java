@@ -32,7 +32,7 @@ public class BookActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerViewBookActivity);
         ChapterAdapter adapter = new ChapterAdapter();
 
-        Chapter chapter1 = new Chapter();
+        /*Chapter chapter1 = new Chapter();
         chapter1.setTitle("Предисловие");
         chapter1.setTime("5:59");
         chapter1.setListen(true);
@@ -54,7 +54,7 @@ public class BookActivity extends AppCompatActivity {
         adapter.getChapters().add(chapter2);
         adapter.getChapters().add(chapter3);
 
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);*/
     }
 
     @Override

@@ -91,7 +91,7 @@ public class ShopAdapter extends RecyclerView.Adapter {
 
         h.title.setText(item.getTitle());
         h.author.setText(item.getAuthor().getName());
-        h.count_parts.setText(item.getChapterSize());
+        h.count_parts.setText(String.valueOf(item.getChapterSize()));
         h.cover.setImageResource(item.getCover());
 
         if(item.getPriceBook().getType().equals("TYPE_FREE")){
