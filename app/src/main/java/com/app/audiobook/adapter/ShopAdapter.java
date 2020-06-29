@@ -91,14 +91,14 @@ public class ShopAdapter extends RecyclerView.Adapter {
 
         h.title.setText(item.getTitle());
         h.author.setText(item.getAuthor().getName());
-        h.count_parts.setText(item.getParts());
+        h.count_parts.setText(item.getChapterSize());
         h.cover.setImageResource(item.getCover());
-        if(item.getPriceBook().getPrice().equals("Бесплатно")){
-            h.price.setText(item.getPriceBook().getPrice());
+
+        if(item.getPriceBook().getType().equals("TYPE_FREE")){
+            h.price.setText("Бесплатно");
         } else {
             h.price.setText(item.getPriceBook().getPrice() + "$");
         }
-
 
         if(item.getPriceBook().getDiscount() == 0){
             h.discount_layout.setVisibility(View.GONE);

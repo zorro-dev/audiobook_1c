@@ -15,14 +15,16 @@ public class ShopManager {
 
         ArrayList<AudioBook> audioBooks = new ArrayList<>();
 
-        audioBooks.add(getAudioBook1());
-        audioBooks.add(getAudioBook2());
-        audioBooks.add(getAudioBook3());
-        audioBooks.add(getAudioBook4());
-        audioBooks.add(getAudioBook5());
+        //audioBooks.add(getAudioBook1());
+        //audioBooks.add(getAudioBook2());
+        //audioBooks.add(getAudioBook3());
+        //audioBooks.add(getAudioBook4());
+        //audioBooks.add(getAudioBook5());
 
         return audioBooks;
     }
+
+    /*
 
     private static AudioBook getAudioBook1(){
         AudioBook audioBook1 = new AudioBook();
@@ -134,4 +136,5 @@ public class ShopManager {
         return audioBook1;
     }
 
+     */
 }
