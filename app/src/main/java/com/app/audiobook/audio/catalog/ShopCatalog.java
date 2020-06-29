@@ -1,5 +1,7 @@
 package com.app.audiobook.audio.catalog;
 
+import android.util.Log;
+
 import com.app.audiobook.audio.AudioBook;
 import com.app.audiobook.audio.loader.BookCatalogLoader;
 import com.app.audiobook.database.Loader;
@@ -14,6 +16,7 @@ public class ShopCatalog extends Catalog<AudioBook> {
         loader.load(new Loader.OnLoadListener<ArrayList<AudioBook>>() {
             @Override
             public void onLoaded(ArrayList<AudioBook> audioBooks) {
+                Log.v("lol", "audioBooks size = " + String.valueOf(audioBooks.size()));
                 deliverResult(audioBooks);
             }
         });

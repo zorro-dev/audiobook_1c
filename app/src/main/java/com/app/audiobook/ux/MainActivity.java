@@ -47,7 +47,7 @@ public class MainActivity extends BaseActivity {
         shopCatalog = new ShopCatalog();
         shopCatalog.load();
 
-        loadToDatabase();
+        //loadToDatabase();
     }
 
     ViewPager viewPager;

@@ -1,5 +1,7 @@
 package com.app.audiobook.audio.catalog;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.app.audiobook.audio.AudioBook;
@@ -33,17 +35,20 @@ public abstract class Catalog<T> {
 
     public abstract void load();
 
-    public void deliverResult(ArrayList<T> t) {
-        catalogList = t;
-        getCatalogLiveData().postValue(catalogList);
+    void deliverResult(ArrayList<T> t) {
+        catalogList = new ArrayList<>(t);
+        Log.v("lol", "catalogList.size = " + String.valueOf(catalogList.size()));
+        getCatalogLiveData().postValue(t);
     }
 
     public void updateListByQuery(String query) {
         this.query = query;
 
         if (isQueryEmpty()) {
+            Log.v("lol", "isQueryEmpty == true");
             updateListToDefault();
         } else {
+            Log.v("lol", "isQueryEmpty == false");
             getCatalogLiveData().postValue(getFilteredListByQuery(query));
         }
     }
@@ -55,8 +60,12 @@ public abstract class Catalog<T> {
     private ArrayList<T> getFilteredListByQuery(String query) {
         ArrayList<T> filteredAudioBooks = new ArrayList<>();
 
+        Log.v("lol", "size = " + String.valueOf(getCatalogList().size()));
+
         for (int i = 0; i < getCatalogList().size(); i ++) {
+            Log.v("lol", "i = " + String.valueOf(i));
             if (isValidByQuery(getCatalogList().get(i), query)) {
+                Log.v("lol", "isValidByQuery = true");
                 filteredAudioBooks.add(getCatalogList().get(i));
             }
         }

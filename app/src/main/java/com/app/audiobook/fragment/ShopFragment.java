@@ -2,6 +2,9 @@ package com.app.audiobook.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +25,7 @@ import com.app.audiobook.adapter.AudioLibraryAdapter;
 import com.app.audiobook.adapter.AudioLibraryFilterAdapter;
 import com.app.audiobook.adapter.ShopAdapter;
 import com.app.audiobook.audio.AudioBook;
+import com.app.audiobook.audio.catalog.ShopCatalog;
 import com.app.audiobook.component.FilterParameter;
 import com.app.audiobook.component.ShopManager;
 import com.app.audiobook.ux.MainActivity;
@@ -39,9 +43,10 @@ public class ShopFragment extends BaseFragment {
 
         initInterface();
 
-        getParent().shopCatalog.getCatalogLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<AudioBook>>() {
+        getCatalog().getCatalogLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<AudioBook>>() {
             @Override
             public void onChanged(ArrayList<AudioBook> audioBooks) {
+                Log.v("lol", "on data changed");
                 initRecyclerViewBooks(audioBooks);
             }
         });
@@ -91,18 +96,42 @@ public class ShopFragment extends BaseFragment {
     private void initSearchView() {
         EditText searchEdit = v.findViewById(R.id.edit_text);
 
-        searchEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        searchEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String query = searchEdit.getText().toString();
+
+                getCatalog().updateListByQuery(query);
+            }
+        });
+
+        /*searchEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    getParent().userCatalog.updateListByQuery(searchEdit.getText().toString());
+                    Log.v("lol", "IME_ACTION_SEARCH");
+                    getCatalog().updateListByQuery(searchEdit.getText().toString());
 
                     return true;
                 }
                 return false;
             }
-        });
+        });*/
 
+    }
+
+    private ShopCatalog getCatalog() {
+        return getParent().shopCatalog;
     }
 
     private MainActivity getParent() {
