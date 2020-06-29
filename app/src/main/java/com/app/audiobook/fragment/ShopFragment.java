@@ -25,9 +25,11 @@ import com.app.audiobook.adapter.AudioLibraryAdapter;
 import com.app.audiobook.adapter.AudioLibraryFilterAdapter;
 import com.app.audiobook.adapter.ShopAdapter;
 import com.app.audiobook.audio.AudioBook;
+import com.app.audiobook.audio.BookPrice;
 import com.app.audiobook.audio.catalog.ShopCatalog;
 import com.app.audiobook.component.FilterParameter;
 import com.app.audiobook.component.ShopManager;
+import com.app.audiobook.interfaces.ClickListener;
 import com.app.audiobook.ux.MainActivity;
 
 import java.util.ArrayList;
@@ -46,7 +48,6 @@ public class ShopFragment extends BaseFragment {
         getCatalog().getCatalogLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<AudioBook>>() {
             @Override
             public void onChanged(ArrayList<AudioBook> audioBooks) {
-                Log.v("lol", "on data changed");
                 initRecyclerViewBooks(audioBooks);
             }
         });
@@ -77,18 +78,23 @@ public class ShopFragment extends BaseFragment {
         RecyclerView recyclerView = v.findViewById(R.id.recyclerViewFilter);
         AudioLibraryFilterAdapter adapter = new AudioLibraryFilterAdapter();
 
-        FilterParameter filterParameter1 = new FilterParameter();
-        filterParameter1.setTitle("Бесплатные");
-
-        FilterParameter filterParameter2 = new FilterParameter();
-        filterParameter2.setTitle("Платные");
-
-        FilterParameter filterParameter3 = new FilterParameter();
-        filterParameter3.setTitle("Выгодные покупки");
+        FilterParameter filterParameter1 = new FilterParameter(BookPrice.TYPE_FREE, "Бесплатные");
+        FilterParameter filterParameter2 = new FilterParameter(BookPrice.TYPE_USUAL_PRICE, "Платные");
+        FilterParameter filterParameter3 = new FilterParameter(BookPrice.TYPE_DISCOUNT_PRICE, "Выгодные покупки");
 
         adapter.getFilterParameters().add(filterParameter1);
         adapter.getFilterParameters().add(filterParameter2);
         adapter.getFilterParameters().add(filterParameter3);
+
+        adapter.selectAll();
+
+        adapter.setClickListener(new ClickListener() {
+            @Override
+            public void onClick(View v, int pos) {
+                getCatalog().updateListByFilter(
+                        adapter.getSelectedParams());
+            }
+        });
 
         recyclerView.setAdapter(adapter);
     }

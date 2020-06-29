@@ -1,6 +1,5 @@
 package com.app.audiobook.adapter;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -98,27 +97,29 @@ public class ShopAdapter extends RecyclerView.Adapter {
                 .placeholder(R.drawable.ic_black_square)
                 .into(h.cover);
 
-        if(item.getPriceBook().getType().equals("TYPE_FREE")){
-            h.price.setText("Бесплатно");
-        } else {
-            h.price.setText(item.getPriceBook().getPrice() + "$");
-        }
+        if (item.getBookPrice() != null) {
+            if (item.getBookPrice().getType().equals("TYPE_FREE")) {
+                h.price.setText("Бесплатно");
+            } else {
+                h.price.setText(item.getBookPrice().getPrice() + "$");
+            }
 
-        if(item.getPriceBook().getDiscount() == 0){
-            h.discount_layout.setVisibility(View.GONE);
-        } else {
-            h.discount_layout.setVisibility(View.VISIBLE);
-            h.price.setText(String.valueOf(Integer.parseInt(item.getPriceBook().getPrice()) * item.getPriceBook().getDiscount()) + "$");
-            h.price.setTextColor(res.getColor(R.color.colorGreen_5));
-            h.discount.setText(item.getPriceBook().getPrice() + "$");
-        }
+            if (item.getBookPrice().getDiscount() == 0) {
+                h.discount_layout.setVisibility(View.GONE);
+            } else {
+                h.discount_layout.setVisibility(View.VISIBLE);
+                h.price.setText(String.valueOf(Integer.parseInt(item.getBookPrice().getPrice()) * item.getBookPrice().getDiscount()) + "$");
+                h.price.setTextColor(res.getColor(R.color.colorGreen_5));
+                h.discount.setText(item.getBookPrice().getPrice() + "$");
+            }
 
-        if(item.getPriceBook().getType().equals("TYPE_FREE")){
-            h.layout_color.setColorFilter(res.getColor(R.color.colorFreePrice));
-        } else if(item.getPriceBook().getType().equals("TYPE_USUAL_PRICE")){
-            h.layout_color.setColorFilter(res.getColor(R.color.colorUsualPrice));
-        } else if(item.getPriceBook().getType().equals("TYPE_DISCOUNT_PRICE")){
-            h.layout_color.setColorFilter(res.getColor(R.color.colorDiscountPrice));
+            if (item.getBookPrice().getType().equals("TYPE_FREE")) {
+                h.layout_color.setColorFilter(res.getColor(R.color.colorFreePrice));
+            } else if (item.getBookPrice().getType().equals("TYPE_USUAL_PRICE")) {
+                h.layout_color.setColorFilter(res.getColor(R.color.colorUsualPrice));
+            } else if (item.getBookPrice().getType().equals("TYPE_DISCOUNT_PRICE")) {
+                h.layout_color.setColorFilter(res.getColor(R.color.colorDiscountPrice));
+            }
         }
     }
 

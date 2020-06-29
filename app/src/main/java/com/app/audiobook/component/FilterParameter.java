@@ -5,8 +5,9 @@ public class FilterParameter {
     String id;
     String title;
 
-    public FilterParameter() {
-
+    public FilterParameter(String id, String title) {
+        this.id = id;
+        this.title = title;
     }
 
     public String getId() {

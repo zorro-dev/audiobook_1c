@@ -93,14 +93,9 @@ public class AudioLibraryFragment extends BaseFragment {
         RecyclerView recyclerView = v.findViewById(R.id.recyclerViewFilter);
         AudioLibraryFilterAdapter adapter = new AudioLibraryFilterAdapter();
 
-        FilterParameter filterParameter1 = new FilterParameter();
-        filterParameter1.setTitle("Мои аудиокниги");
-
-        FilterParameter filterParameter2 = new FilterParameter();
-        filterParameter2.setTitle("Купленные книги");
-
-        FilterParameter filterParameter3 = new FilterParameter();
-        filterParameter3.setTitle("Подаренные книги");
+        FilterParameter filterParameter1 = new FilterParameter("", "Мои аудиокниги");
+        FilterParameter filterParameter2 = new FilterParameter("", "Купленные книги");
+        FilterParameter filterParameter3 = new FilterParameter("", "Подаренные книги");
 
         adapter.getFilterParameters().add(filterParameter1);
         adapter.getFilterParameters().add(filterParameter2);
