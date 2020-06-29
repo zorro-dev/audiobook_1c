@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.app.audiobook.R;
 import com.app.audiobook.audio.AudioBook;
 import com.app.audiobook.interfaces.ClickListener;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -92,7 +93,10 @@ public class ShopAdapter extends RecyclerView.Adapter {
         h.title.setText(item.getTitle());
         h.author.setText(item.getAuthor().getName());
         h.count_parts.setText(String.valueOf(item.getChapterSize()));
-        h.cover.setImageResource(item.getCover());
+        Glide.with(h.itemView)
+                .load(item.getCoverUrl())
+                .placeholder(R.drawable.ic_black_square)
+                .into(h.cover);
 
         if(item.getPriceBook().getType().equals("TYPE_FREE")){
             h.price.setText("Бесплатно");
