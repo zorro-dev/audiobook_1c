@@ -2,7 +2,6 @@ package com.app.audiobook.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,7 @@ import com.app.audiobook.BaseFragment;
 import com.app.audiobook.R;
 import com.app.audiobook.adapter.TimerAdapter;
 import com.app.audiobook.component.TimerLabel;
-import com.app.audiobook.interfaces.ClickListener;
+import com.app.audiobook.ux.MainActivity;
 
 public class SettingFragment extends BaseFragment {
 
@@ -42,20 +41,39 @@ public class SettingFragment extends BaseFragment {
 
     private void initInterface() {
         initUserValues();
+        initTimerLayout();
+    }
+
+    private void initTimerLayout(){
         initRecyclerViewTimerLabels();
 
         ConstraintLayout start = v.findViewById(R.id.start);
         start_background = v.findViewById(R.id.start_background);
         start_text = v.findViewById(R.id.start_text);
 
+        if(getParent().stopPlayerTimer.isStarted()){
+            start_text.setText("Остановить таймер");
+            start_background.setColorFilter(getResources().getColor(R.color.colorGreen_2));
+        } else {
+            start_text.setText("Включить таймер");
+            start_background.setColorFilter(getResources().getColor(R.color.colorGray_1));
+        }
+
         start.setOnClickListener(v1 -> {
-            if(sec == 0){
-                Toast.makeText(getContext(), "Выберите время", Toast.LENGTH_SHORT).show();
+            if(getParent().stopPlayerTimer.isStarted()){
+                getParent().stopPlayerTimer.stopTimer();
+                start_text.setText("Включить таймер");
+                start_background.setColorFilter(getResources().getColor(R.color.colorGray_1));
             } else {
-                startTimer();
-                start_text.setText("Таймер запущен");
-                start_background.setColorFilter(getResources().getColor(R.color.colorGreen_2));
+                if(sec == 0){
+                    Toast.makeText(getContext(), "Выберите время", Toast.LENGTH_SHORT).show();
+                } else {
+                    getParent().stopPlayerTimer.startTimer(sec);
+                    start_text.setText("Остановить таймер");
+                    start_background.setColorFilter(getResources().getColor(R.color.colorGreen_2));
+                }
             }
+
         });
     }
 
@@ -88,6 +106,8 @@ public class SettingFragment extends BaseFragment {
                 lastSelectedPos = -1;
                 sec = 0;
             }
+
+            getParent().stopPlayerTimer.setSelectedTimeIndex(lastSelectedPos);
         });
 
         adapter.getTimerLabels().add(timerLabel1);
@@ -97,19 +117,28 @@ public class SettingFragment extends BaseFragment {
         adapter.getTimerLabels().add(timerLabel5);
         adapter.getTimerLabels().add(timerLabel6);
 
+        adapter.setSelectedTimerLabel(getParent().stopPlayerTimer.getSelectedTimeIndex());
+
         recyclerView.setAdapter(adapter);
     }
 
-    private void startTimer(){
-        new Handler().postDelayed(() -> {
-            //TODO Закрытие ...
-            Toast.makeText(getContext(), "Таймер выкл", Toast.LENGTH_SHORT).show();
-            finishTimer();
-        }, sec * 1000);
+    public void onTimerFinished(){
+        if(v != null){
+            ImageView start_background = v.findViewById(R.id.start_background);
+            TextView start_text = v.findViewById(R.id.start_text);
+            start_text.setText("Включить таймер");
+            start_background.setColorFilter(getResources().getColor(R.color.colorGray_1));
+
+            RecyclerView recyclerView = v.findViewById(R.id.recyclerViewTimer);
+            TimerAdapter adapter = (TimerAdapter) recyclerView.getAdapter();
+            if(adapter != null){
+                adapter.setSelectedTimerLabel(getParent().stopPlayerTimer.getSelectedTimeIndex());
+                adapter.notifyDataSetChanged();
+            }
+        }
     }
 
-    private void finishTimer(){
-        start_text.setText("Включить таймер");
-        start_background.setColorFilter(getResources().getColor(R.color.colorGray_1));
+    private MainActivity getParent(){
+        return (MainActivity) getActivity();
     }
 }
