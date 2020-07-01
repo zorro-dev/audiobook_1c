@@ -101,7 +101,7 @@ public class SettingFragment extends BaseFragment {
 
     private void startTimer(){
         new Handler().postDelayed(() -> {
-            //TODO Закрытие ...л
+            //TODO Закрытие ...
 
             finishTimer();
         }, sec * 1000);
