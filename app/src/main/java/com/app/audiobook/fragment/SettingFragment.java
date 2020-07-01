@@ -89,12 +89,12 @@ public class SettingFragment extends BaseFragment {
         RecyclerView recyclerView = v.findViewById(R.id.recyclerViewTimer);
         TimerAdapter adapter = new TimerAdapter();
 
-        TimerLabel timerLabel1 = new TimerLabel("", 10);
-        TimerLabel timerLabel2 = new TimerLabel("", 120);
-        TimerLabel timerLabel3 = new TimerLabel("", 360);
-        TimerLabel timerLabel4 = new TimerLabel("", 660);
-        TimerLabel timerLabel5 = new TimerLabel("", 1200);
-        TimerLabel timerLabel6 = new TimerLabel("", 4600);
+        TimerLabel timerLabel1 = new TimerLabel("", 600);
+        TimerLabel timerLabel2 = new TimerLabel("", 1200);
+        TimerLabel timerLabel3 = new TimerLabel("", 1800);
+        TimerLabel timerLabel4 = new TimerLabel("", 2400);
+        TimerLabel timerLabel5 = new TimerLabel("", 3000);
+        TimerLabel timerLabel6 = new TimerLabel("", 3600);
 
         adapter.setClickListener((v, pos) -> {
             if(adapter.getSelectedTimerLabel() == -1){
