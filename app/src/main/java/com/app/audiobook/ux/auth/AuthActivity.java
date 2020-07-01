@@ -133,8 +133,8 @@ public class AuthActivity extends BaseActivity implements IAuthEvents {
             public void run() {
                 if (i < n) {
                     runTextAnim(latters[i]);
-                    //latters[i].setTextColor(getResources().getColor(R.color.colorOrange));
-                    latters[i].setTextColor(getResources().getColor(colors[i -  (i / colors.length) * colors.length ]));
+                    latters[i].setTextColor(getResources().getColor(R.color.colorOrange));
+                    //latters[i].setTextColor(getResources().getColor(colors[i -  (i / colors.length) * colors.length ]));
                     doSomething(i + 1, n);
                 }
             }
