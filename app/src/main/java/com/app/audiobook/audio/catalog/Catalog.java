@@ -4,12 +4,7 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.app.audiobook.audio.AudioBook;
-import com.app.audiobook.database.Loader;
-import com.google.firebase.database.Query;
-
 import java.util.ArrayList;
-import java.util.Queue;
 
 public abstract class Catalog<T> {
 

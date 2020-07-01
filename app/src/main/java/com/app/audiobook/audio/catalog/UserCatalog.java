@@ -1,6 +1,6 @@
 package com.app.audiobook.audio.catalog;
 
-import com.app.audiobook.audio.AudioBook;
+import com.app.audiobook.audio.service.book.AudioBook;
 import com.app.audiobook.audio.loader.UserCatalogLoader;
 import com.app.audiobook.database.Loader;
 

@@ -2,7 +2,7 @@ package com.app.audiobook.audio.loader;
 
 import androidx.annotation.NonNull;
 
-import com.app.audiobook.audio.AudioBook;
+import com.app.audiobook.audio.service.book.AudioBook;
 import com.app.audiobook.component.JSONManager;
 import com.app.audiobook.database.Loader;
 import com.google.firebase.database.DataSnapshot;
