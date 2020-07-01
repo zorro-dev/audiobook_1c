@@ -1,31 +1,24 @@
 package com.app.audiobook.ux;
 
-import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
-
-import com.app.audiobook.audio.service.book.AudioBook;
-import com.app.audiobook.audio.AudioLibraryManager;
-import com.app.audiobook.audio.catalog.ShopCatalog;
-import com.app.audiobook.audio.catalog.UserCatalog;
-import com.app.audiobook.audio.service.BackgroundSoundService;
-import com.app.audiobook.audio.service.IntentBuilder;
-import com.app.audiobook.audio.service.player.PlayerAdapter;
-import com.app.audiobook.component.JSONManager;
-import com.app.audiobook.fragment.BuyBookFragment;
-import com.app.audiobook.fragment.PurchaseFragment;
-import com.app.audiobook.R;
-import com.google.android.material.tabs.TabLayout;
-
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
-
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
+
+import com.app.audiobook.R;
+import com.app.audiobook.audio.AudioLibraryManager;
+import com.app.audiobook.audio.catalog.ShopCatalog;
+import com.app.audiobook.audio.catalog.UserCatalog;
+import com.app.audiobook.audio.service.book.AudioBook;
+import com.app.audiobook.audio.service.player.PlayerAdapter;
+import com.app.audiobook.component.JSONManager;
+import com.app.audiobook.fragment.PurchaseFragment;
 import com.app.audiobook.ui.main.SectionsPagerAdapter;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
@@ -54,8 +47,8 @@ public class MainActivity extends BaseActivity {
         //loadToDatabase();
 
         playerAdapter = new PlayerAdapter(this);
-        playerAdapter.init();
-        playerAdapter.setAudio(URL);
+        //playerAdapter.init();
+        //playerAdapter.setAudio(URL);
     }
 
     ViewPager viewPager;
