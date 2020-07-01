@@ -85,6 +85,7 @@ public class SettingFragment extends BaseFragment {
                 sec = adapter.getTimerLabels().get(pos).getTime();
                 lastSelectedPos = pos;
             } else {
+                lastSelectedPos = -1;
                 sec = 0;
             }
         });
@@ -102,7 +103,7 @@ public class SettingFragment extends BaseFragment {
     private void startTimer(){
         new Handler().postDelayed(() -> {
             //TODO Закрытие ...
-
+            Toast.makeText(getContext(), "Таймер выкл", Toast.LENGTH_SHORT).show();
             finishTimer();
         }, sec * 1000);
     }
