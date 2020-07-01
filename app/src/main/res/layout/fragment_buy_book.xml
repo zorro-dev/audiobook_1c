@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:focusable="true"
-    android:clickable="true"
     android:layout_height="match_parent"
-    android:background="#73000000">
+    android:background="#73000000"
+    android:clickable="true"
+    android:focusable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint"
@@ -35,6 +35,7 @@
             android:paddingLeft="10dp"
             android:paddingTop="13dp"
             android:paddingBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@id/view"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -275,20 +276,22 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/colorGray_5"
+            app:layout_constraintBottom_toTopOf="@id/constraint2"
             app:layout_constraintTop_toBottomOf="@id/book_info_layout" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:id="@+id/constraint2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view">
 
             <LinearLayout
                 android:id="@+id/lr1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_marginLeft="5dp">
 
                 <ImageView
                     android:layout_width="35dp"
@@ -315,29 +318,33 @@
             <ScrollView
                 android:id="@+id/scrollview"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                app:layout_constraintTop_toBottomOf="@id/lr1">
+                android:layout_height="150dp">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:text="«Главный следователь Скотленд-Ярда Питер Дауэс был для своей должности сравнительно молод. Еще ни разу не потерял он найденный след, хотя сам Питер не любил говорить о своих подвигах.Если его что-то и увлекало, так это преступления с какой-нибудь запутанной загадкой. Все необычное, странное и таинственное вызывало в нем живейший интерес, и больше всего на свете он сожалел, что ему не пришлось заниматься ни одним из множества дел Джейн Четыре Квадрата…»"
-                    android:textColor="@color/colorWhite" />
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:text="«Главный следователь Скотленд-Ярда Питер Дауэс был для своей должности сравнительно молод. Еще ни разу не потерял он найденный след, хотя сам Питер не любил говорить о своих подвигах.Если его что-то и увлекало, так это преступления с какой-нибудь запутанной загадкой. Все необычное, странное и таинственное вызывало в нем живейший интерес, и больше всего на свете он сожалел, что ему не пришлось заниматься ни одним из множества дел Джейн Четыре Квадрата…»"
+                        android:textColor="@color/colorWhite" />
+
+                </LinearLayout>
 
             </ScrollView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:padding="6dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/scrollview">
+                android:padding="6dp">
 
                 <ImageView
+                    android:id="@+id/color_button"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/corner_radius_15dp"
@@ -360,13 +367,14 @@
                         android:src="@drawable/ic_buy_book" />
 
                     <TextView
+                        android:id="@+id/text_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="6dp"
+                        android:text="Купить книгу"
+                        android:textColor="@color/colorWhite"
                         android:textSize="20dp"
                         android:textStyle="bold"
-                        android:textColor="@color/colorWhite"
-                        android:text="Купить книгу"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -376,31 +384,31 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/back"
-        app:layout_constraintTop_toTopOf="@id/constraint"
-        app:layout_constraintBottom_toTopOf="@id/constraint"
-        app:layout_constraintRight_toRightOf="@id/constraint"
-        app:layout_constraintLeft_toRightOf="@id/constraint"
         android:layout_width="30dp"
-        android:layout_height="30dp">
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toTopOf="@id/constraint"
+        app:layout_constraintLeft_toRightOf="@id/constraint"
+        app:layout_constraintRight_toRightOf="@id/constraint"
+        app:layout_constraintTop_toTopOf="@id/constraint">
 
         <ImageView
-            android:tint="@color/colorRed_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:src="@drawable/ic_round"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:tint="@color/colorRed_2" />
 
         <ImageView
-            android:padding="8dp"
-            android:tint="@color/colorWhite"
-            android:src="@drawable/ic_close"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:src="@drawable/ic_close"
+            android:tint="@color/colorWhite" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

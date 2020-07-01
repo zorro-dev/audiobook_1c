@@ -60,7 +60,7 @@ public class ShopFragment extends BaseFragment {
         adapter.setAudioBooks(audioBooks);
 
         adapter.setClickListener((v1, pos) -> {
-            ((MainActivity) getActivity()).initFragment();
+            ((MainActivity) getActivity()).initPurchaseFragment(audioBooks.get(pos));
         });
 
         recyclerView.setAdapter(adapter);

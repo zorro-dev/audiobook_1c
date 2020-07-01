@@ -47,4 +47,6 @@
     <color name="colorOrangeText">#B3FF9800</color>
     <color name="colorOrangeBackground">#51FF9800</color>
 
+    <color name="colorAuthText">#34CDCDCD</color>
+
 </resources>

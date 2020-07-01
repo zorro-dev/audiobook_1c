@@ -29,7 +29,9 @@ public class AudioLibraryManager {
         AudioBook audioBook1 = new AudioBook();
         audioBook1.setId("1");
         audioBook1.setTitle("Похищенная картина");
-        audioBook1.setDescription("Краткое описание");
+        audioBook1.setDescription("«Главный следователь Скотленд-Ярда Питер Дауэс был для своей должности сравнительно молод. Еще ни разу не потерял он найденный след, хотя сам Питер не любил говорить о своих подвигах.\n" +
+                "\n" +
+                "Если его что-то и увлекало, так это преступления с какой-нибудь запутанной загадкой. Все необычное, странное и таинственное вызывало в нем живейший интерес, и больше всего на свете он сожалел, что ему не пришлось заниматься ни одним из множества дел Джейн Четыре Квадрата…»");
         audioBook1.setCoverUrl("https://firebasestorage.googleapis.com/v0/b/bookaudio-66877.appspot.com/o/Похищенная%20картина%2Fic_audio_book_2.jpg?alt=media&token=e031e56e-b5f6-4ae5-aff8-fce944330b9b");
 
         BookPrice bookPrice1 = new BookPrice();
@@ -80,7 +82,12 @@ public class AudioLibraryManager {
         AudioBook audioBook2 = new AudioBook();
         audioBook2.setId("2");
         audioBook2.setTitle("Сказки барда Бидля");
-        audioBook2.setDescription("Краткое описание");
+        audioBook2.setDescription("«Сказки барда Бидля» — вымышленная книга из сеттинга «Гарри Поттера». Наряду с «Фантастическими животными» и «Квиддичем скозь века», она фигурирует в текстах романов, а в 2007 году была реально написана Джоан Роулинг.\n" +
+                "\n" +
+                "\n" +
+                "«Бидль…» издан в качестве рекламно-благотворительной акции вскоре после выхода последнего романа серии, «Даров смерти». Отпечатанная всего в количестве семи экземпляров книга не поступала в продажу. Шесть авторских экземпляров Роулинг подарила своим друзьям. Седьмая книга была выставлена на аукционе «Сотбис», где максимальная цена одного экземпляра достигла 4 миллионов долларов. Все деньги поступили на благотворительные нужды в организацию помощи детям-сиротам.\n" +
+                "\n" +
+                "В 2008 году книга была издана в бумажном виде, с благотворительными целями. В нашей стране она вышла в конце 2008 года.");
         audioBook2.setCoverUrl("https://firebasestorage.googleapis.com/v0/b/bookaudio-66877.appspot.com/o/Роулинг%20Джоан%20Кэтлин%20-%20Сказки%20барда%20Бидля%2Fic_audio_book_1.jpg?alt=media&token=a19a472b-2e17-44f7-bb05-964e3d5c785f");
 
         BookPrice bookPrice2 = new BookPrice();
@@ -133,7 +140,7 @@ public class AudioLibraryManager {
         AudioBook audioBook3 = new AudioBook();
         audioBook3.setId("3");
         audioBook3.setTitle("Рядовой Велиев");
-        audioBook3.setDescription("Краткое описание");
+        audioBook3.setDescription("Великолепный психологический экшн в застойных реалиях СА. Дитя Апшерона и рабоче-рыбацкой семьи беспечно ищет обрыв телефонного провода в снежных сумерках Забайкалья. Солдата бодрят лёгкий 30-градусный мороз и дежурный по узлу связи, читающий ему в трубку письмо из дома.");
         audioBook3.setCoverUrl("https://firebasestorage.googleapis.com/v0/b/bookaudio-66877.appspot.com/o/Рядовой%20Велиев%20-%20Виталий%20Сергеев%2Fic_audio_book_3.jpg?alt=media&token=c23ee603-7589-4a1d-9c0e-97eb844de782");
 
         BookPrice bookPrice3 = new BookPrice();
@@ -186,7 +193,7 @@ public class AudioLibraryManager {
         AudioBook audioBook4 = new AudioBook();
         audioBook4.setId("4");
         audioBook4.setTitle("На тебя вся надежда");
-        audioBook4.setDescription("Краткое описание");
+        audioBook4.setDescription("Предлагаем к чтению аннотацию, описание, краткое содержание или предисловие (зависит от того, что написал сам автор книги ««На тебя вся надежда…»»). Если вы не нашли необходимую информацию о книге — напишите в комментариях, мы постараемся отыскать её.");
         audioBook4.setCoverUrl("https://firebasestorage.googleapis.com/v0/b/bookaudio-66877.appspot.com/o/Сотник%20Юрий%20-%20На%20тебя%20вся%20надежда%2Fic_audio_book_4.jpg?alt=media&token=7fbcbc95-64d7-4367-8bb2-ae0b5dd044f9");
 
         BookPrice bookPrice4 = new BookPrice();

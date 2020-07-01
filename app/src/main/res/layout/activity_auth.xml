@@ -107,7 +107,7 @@
         android:fontFamily="@font/jua"
         android:gravity="center"
         android:text="AudioBook"
-        android:textColor="@color/colorOrangeBackground"
+        android:textColor="@color/colorAuthText"
         android:textSize="50dp"
         app:layout_constraintBottom_toTopOf="@id/text"
         app:layout_constraintLeft_toLeftOf="parent"
