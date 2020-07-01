@@ -24,7 +24,6 @@ public class SettingFragment extends BaseFragment {
 
     View v;
     private int sec = 0;
-    private int lastSelectedPos = -1;
 
     @Nullable
     @Override
@@ -62,8 +61,7 @@ public class SettingFragment extends BaseFragment {
         start.setOnClickListener(v1 -> {
             if(getParent().stopPlayerTimer.isStarted()){
                 getParent().stopPlayerTimer.stopTimer();
-                start_text.setText("Включить таймер");
-                start_background.setColorFilter(getResources().getColor(R.color.colorGray_1));
+                onTimerFinished();
             } else {
                 if(sec == 0){
                     Toast.makeText(getContext(), "Выберите время", Toast.LENGTH_SHORT).show();
@@ -99,15 +97,13 @@ public class SettingFragment extends BaseFragment {
         TimerLabel timerLabel6 = new TimerLabel("", 4600);
 
         adapter.setClickListener((v, pos) -> {
-            if(lastSelectedPos != pos){
-                sec = adapter.getTimerLabels().get(pos).getTime();
-                lastSelectedPos = pos;
-            } else {
-                lastSelectedPos = -1;
+            if(adapter.getSelectedTimerLabel() == -1){
                 sec = 0;
+            } else {
+                sec = adapter.getTimerLabels().get(pos).getTime();
             }
 
-            getParent().stopPlayerTimer.setSelectedTimeIndex(lastSelectedPos);
+            getParent().stopPlayerTimer.setSelectedTimeIndex(adapter.getSelectedTimerLabel());
         });
 
         adapter.getTimerLabels().add(timerLabel1);
