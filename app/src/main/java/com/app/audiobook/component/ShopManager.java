@@ -2,7 +2,7 @@ package com.app.audiobook.component;
 
 import android.content.Context;
 
-import com.app.audiobook.audio.AudioBook;
+import com.app.audiobook.audio.service.book.AudioBook;
 
 import java.util.ArrayList;
 

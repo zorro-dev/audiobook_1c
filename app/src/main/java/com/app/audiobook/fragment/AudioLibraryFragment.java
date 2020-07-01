@@ -2,8 +2,6 @@ package com.app.audiobook.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +9,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,9 +20,7 @@ import com.app.audiobook.BookActivity;
 import com.app.audiobook.R;
 import com.app.audiobook.adapter.AudioLibraryAdapter;
 import com.app.audiobook.adapter.AudioLibraryFilterAdapter;
-import com.app.audiobook.audio.AudioBook;
-import com.app.audiobook.audio.AudioLibraryManager;
-import com.app.audiobook.audio.catalog.UserCatalog;
+import com.app.audiobook.audio.service.book.AudioBook;
 import com.app.audiobook.component.FilterParameter;
 import com.app.audiobook.ux.MainActivity;
 

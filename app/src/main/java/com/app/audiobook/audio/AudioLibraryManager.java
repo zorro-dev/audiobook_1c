@@ -2,9 +2,14 @@ package com.app.audiobook.audio;
 
 import android.content.Context;
 
+import com.app.audiobook.audio.service.book.AudioBook;
+import com.app.audiobook.audio.service.book.Author;
+import com.app.audiobook.audio.service.book.BookPrice;
+import com.app.audiobook.audio.service.book.Chapter;
+
 import java.util.ArrayList;
 
-import static com.app.audiobook.audio.Chapter.STATE_NOT_READ;
+import static com.app.audiobook.audio.service.book.Chapter.STATE_NOT_READ;
 
 public class AudioLibraryManager {
 

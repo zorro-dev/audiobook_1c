@@ -1,22 +1,23 @@
 package com.app.audiobook.ux;
 
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 
-import com.app.audiobook.audio.AudioBook;
+import com.app.audiobook.audio.service.book.AudioBook;
 import com.app.audiobook.audio.AudioLibraryManager;
 import com.app.audiobook.audio.catalog.ShopCatalog;
 import com.app.audiobook.audio.catalog.UserCatalog;
-import com.app.audiobook.audio.loader.UserCatalogLoader;
-import com.app.audiobook.auth.User;
+import com.app.audiobook.audio.service.BackgroundSoundService;
+import com.app.audiobook.audio.service.IntentBuilder;
+import com.app.audiobook.audio.service.player.PlayerAdapter;
 import com.app.audiobook.component.JSONManager;
-import com.app.audiobook.database.Loader;
 import com.app.audiobook.fragment.BuyBookFragment;
 import com.app.audiobook.R;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.MutableLiveData;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.View;
@@ -30,8 +31,10 @@ import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity {
 
+    public static final String URL = "https://firebasestorage.googleapis.com/v0/b/bookaudio-66877.appspot.com/o/Роулинг%20Джоан%20Кэтлин%20-%20Сказки%20барда%20Бидля%2FПредисловие.mp3?alt=media&token=e9778a39-a0d7-4e3d-820e-24744444c1f7";
     public UserCatalog userCatalog;
     public ShopCatalog shopCatalog;
+    public PlayerAdapter playerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,10 @@ public class MainActivity extends BaseActivity {
         shopCatalog.load();
 
         //loadToDatabase();
+
+        playerAdapter = new PlayerAdapter(this);
+        playerAdapter.init();
+        playerAdapter.setAudio(URL);
     }
 
     ViewPager viewPager;

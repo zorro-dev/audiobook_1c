@@ -1,4 +1,4 @@
-package com.app.audiobook.audio;
+package com.app.audiobook.audio.service.book;
 
 public class BookPrice {
 

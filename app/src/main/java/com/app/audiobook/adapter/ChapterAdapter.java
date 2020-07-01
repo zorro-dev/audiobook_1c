@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.audiobook.R;
-import com.app.audiobook.audio.Chapter;
+import com.app.audiobook.audio.service.book.Chapter;
 
 import java.util.ArrayList;
 

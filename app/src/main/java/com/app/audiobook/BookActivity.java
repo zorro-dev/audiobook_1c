@@ -3,7 +3,6 @@ package com.app.audiobook;
 import android.os.Bundle;
 
 import com.app.audiobook.adapter.ChapterAdapter;
-import com.app.audiobook.audio.Chapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
