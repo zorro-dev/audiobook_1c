@@ -12,18 +12,18 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class UserCatalogLoader extends Loader<ArrayList<AudioBook>> {
+public class CategoryListLoader extends Loader<ArrayList<AudioBook>> {
 
-    private String userId;
+    private String categoryId;
 
-    public UserCatalogLoader(String userId) {
-        this.userId = userId;
+    public CategoryListLoader(String categoryId) {
+        this.categoryId = categoryId;
     }
 
     @Override
     public void load() {
         FirebaseDatabase.getInstance().getReference("BookCatalog")
-                .child("UserBooks").child(userId)
+                .child("ByCategory").child(categoryId)
                 .addListenerForSingleValueEvent(
                         new ValueEventListener() {
                             @Override

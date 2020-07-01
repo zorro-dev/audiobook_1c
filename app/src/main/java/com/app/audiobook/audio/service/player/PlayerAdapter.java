@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Build;
 
 import com.app.audiobook.audio.service.IntentBuilder;
-import com.app.audiobook.audio.service.book.Chapter;
 
 public class PlayerAdapter {
 

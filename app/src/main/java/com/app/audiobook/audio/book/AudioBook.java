@@ -1,4 +1,4 @@
-package com.app.audiobook.audio.service.book;
+package com.app.audiobook.audio.book;
 
 import java.util.ArrayList;
 

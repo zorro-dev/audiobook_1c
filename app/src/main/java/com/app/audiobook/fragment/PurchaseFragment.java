@@ -14,13 +14,13 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.app.audiobook.BaseFragment;
 import com.app.audiobook.R;
-import com.app.audiobook.audio.service.book.AudioBook;
+import com.app.audiobook.audio.book.AudioBook;
 import com.bumptech.glide.Glide;
 import com.joooonho.SelectableRoundedImageView;
 
-import static com.app.audiobook.audio.service.book.BookPrice.TYPE_DISCOUNT_PRICE;
-import static com.app.audiobook.audio.service.book.BookPrice.TYPE_FREE;
-import static com.app.audiobook.audio.service.book.BookPrice.TYPE_USUAL_PRICE;
+import static com.app.audiobook.audio.book.BookPrice.TYPE_DISCOUNT_PRICE;
+import static com.app.audiobook.audio.book.BookPrice.TYPE_FREE;
+import static com.app.audiobook.audio.book.BookPrice.TYPE_USUAL_PRICE;
 
 public class PurchaseFragment extends BaseFragment {
 

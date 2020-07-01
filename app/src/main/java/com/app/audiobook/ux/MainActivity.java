@@ -15,7 +15,7 @@ import com.app.audiobook.audio.AudioLibraryManager;
 import com.app.audiobook.audio.catalog.ShopCatalog;
 import com.app.audiobook.audio.catalog.UserCatalog;
 import com.app.audiobook.audio.service.BackgroundSoundService;
-import com.app.audiobook.audio.service.book.AudioBook;
+import com.app.audiobook.audio.book.AudioBook;
 import com.app.audiobook.audio.service.player.PlayerAdapter;
 import com.app.audiobook.audio.timer.StopPlayerTimer;
 import com.app.audiobook.component.JSONManager;

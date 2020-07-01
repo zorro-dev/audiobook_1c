@@ -11,12 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.audiobook.R;
+import com.app.audiobook.audio.book.Category;
+import com.app.audiobook.interfaces.ClickListener;
 
 import java.util.ArrayList;
 
 public class CategoryAdapter extends RecyclerView.Adapter {
 
-    private ArrayList<String> categoryList = new ArrayList<>();
+    private ArrayList<Category> categoryList = new ArrayList<>();
+
+    private ClickListener clickListener;
 
     private int[] colors = new int[] {
         R.color.colorCategory1,
@@ -29,12 +33,20 @@ public class CategoryAdapter extends RecyclerView.Adapter {
         R.color.colorCategory8,
     };
 
-    public ArrayList<String> getCategory() {
+    public ArrayList<Category> getCategory() {
         return categoryList;
     }
 
-    public void setCategory(ArrayList<String> categoryList) {
+    public void setCategory(ArrayList<Category> categoryList) {
         this.categoryList = categoryList;
+    }
+
+    public ClickListener getClickListener() {
+        return clickListener;
+    }
+
+    public void setClickListener(ClickListener clickListener) {
+        this.clickListener = clickListener;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -47,6 +59,11 @@ public class CategoryAdapter extends RecyclerView.Adapter {
 
             title = v.findViewById(R.id.title);
             background = v.findViewById(R.id.background);
+
+            itemView.setOnClickListener(v1 -> {
+                if (clickListener != null)
+                    clickListener.onClick(v1, getAdapterPosition());
+            });
         }
     }
 
@@ -65,9 +82,9 @@ public class CategoryAdapter extends RecyclerView.Adapter {
 
         Resources res = h.itemView.getResources();
 
-        String item = categoryList.get(position);
+        Category item = categoryList.get(position);
 
-        h.title.setText(item);
+        h.title.setText(item.getName());
         h.background.setColorFilter(res.getColor(colors[position -  (position / colors.length) * colors.length ]));
     }
 
