@@ -1,29 +1,29 @@
 package com.app.audiobook.audio.catalog;
 
+import com.app.audiobook.audio.loader.CategoryListLoader;
 import com.app.audiobook.audio.book.AudioBook;
-import com.app.audiobook.audio.loader.UserCatalogLoader;
 import com.app.audiobook.database.Loader;
 
 import java.util.ArrayList;
 
-public class UserCatalog extends Catalog<AudioBook> {
+public class CategoryListCatalog extends Catalog<AudioBook>{
 
-    private String userId;
+    private String categoryId;
 
-    public UserCatalog(String userId) {
-        this.userId = userId;
+    public CategoryListCatalog(String categoryId) {
+        this.categoryId = categoryId;
     }
-
 
     @Override
     public void load() {
-        UserCatalogLoader loader = new UserCatalogLoader(userId);
+        CategoryListLoader loader = new CategoryListLoader(categoryId);
         loader.load(new Loader.OnLoadListener<ArrayList<AudioBook>>() {
             @Override
             public void onLoaded(ArrayList<AudioBook> audioBooks) {
                 deliverResult(audioBooks);
             }
         });
+
     }
 
     @Override

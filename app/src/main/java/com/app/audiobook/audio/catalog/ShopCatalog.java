@@ -2,7 +2,7 @@ package com.app.audiobook.audio.catalog;
 
 import android.util.Log;
 
-import com.app.audiobook.audio.service.book.AudioBook;
+import com.app.audiobook.audio.book.AudioBook;
 import com.app.audiobook.audio.loader.BookCatalogLoader;
 import com.app.audiobook.component.FilterParameter;
 import com.app.audiobook.database.Loader;

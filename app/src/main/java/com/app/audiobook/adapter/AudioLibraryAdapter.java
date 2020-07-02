@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.audiobook.R;
-import com.app.audiobook.audio.service.book.AudioBook;
+import com.app.audiobook.audio.book.AudioBook;
 import com.app.audiobook.interfaces.ClickListener;
 import com.bumptech.glide.Glide;
 

@@ -1,5 +1,6 @@
 package com.app.audiobook.ux;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -13,8 +14,10 @@ import com.app.audiobook.R;
 import com.app.audiobook.audio.AudioLibraryManager;
 import com.app.audiobook.audio.catalog.ShopCatalog;
 import com.app.audiobook.audio.catalog.UserCatalog;
-import com.app.audiobook.audio.service.book.AudioBook;
+import com.app.audiobook.audio.service.BackgroundSoundService;
+import com.app.audiobook.audio.book.AudioBook;
 import com.app.audiobook.audio.service.player.PlayerAdapter;
+import com.app.audiobook.audio.timer.StopPlayerTimer;
 import com.app.audiobook.component.JSONManager;
 import com.app.audiobook.fragment.PurchaseFragment;
 import com.app.audiobook.ui.main.SectionsPagerAdapter;
@@ -29,6 +32,8 @@ public class MainActivity extends BaseActivity {
     public UserCatalog userCatalog;
     public ShopCatalog shopCatalog;
     public PlayerAdapter playerAdapter;
+
+    public StopPlayerTimer stopPlayerTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,20 @@ public class MainActivity extends BaseActivity {
         playerAdapter = new PlayerAdapter(this);
         //playerAdapter.init();
         //playerAdapter.setAudio(URL);
+
+        stopPlayerTimer = new StopPlayerTimer();
+        stopPlayerTimer.setTimerCallbacks(new StopPlayerTimer.TimerCallbacks() {
+            @Override
+            public void onTimerStarted() {
+
+            }
+
+            @Override
+            public void onTimerFinished() {
+                stopService(new Intent(MainActivity.this, BackgroundSoundService.class));
+                sectionsPagerAdapter.getSettingFragment().onTimerFinished();
+            }
+        });
     }
 
     ViewPager viewPager;

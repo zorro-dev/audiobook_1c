@@ -41,6 +41,14 @@ public class TimerAdapter extends RecyclerView.Adapter {
         this.clickListener = clickListener;
     }
 
+    public int getSelectedTimerLabel() {
+        return selectedTimerLabel;
+    }
+
+    public void setSelectedTimerLabel(int selectedTimerLabel) {
+        this.selectedTimerLabel = selectedTimerLabel;
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView time;

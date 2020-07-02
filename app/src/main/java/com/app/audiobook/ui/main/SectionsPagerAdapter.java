@@ -36,6 +36,26 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private CategoryFragment categoryFragment;
     private SettingFragment settingFragment;
 
+    public ShopFragment getShopFragment() {
+        return shopFragment;
+    }
+
+    public AudioLibraryFragment getAudioLibraryFragment() {
+        return audioLibraryFragment;
+    }
+
+    public PlayerFragment getPlayerFragment() {
+        return playerFragment;
+    }
+
+    public CategoryFragment getCategoryFragment() {
+        return categoryFragment;
+    }
+
+    public SettingFragment getSettingFragment() {
+        return settingFragment;
+    }
+
     private Fragment fragments[] = new Fragment[]{
             shopFragment,
             audioLibraryFragment,

@@ -1,14 +1,11 @@
-package com.app.audiobook.audio.service.book;
+package com.app.audiobook.audio.book;
 
-public class Author {
+public class Category {
 
     private String id;
     private String name;
 
-    public Author() {
-    }
-
-    public Author(String id, String name) {
+    public Category(String id, String name) {
         this.id = id;
         this.name = name;
     }

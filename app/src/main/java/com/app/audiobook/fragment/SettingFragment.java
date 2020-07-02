@@ -2,7 +2,6 @@ package com.app.audiobook.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +18,12 @@ import com.app.audiobook.BaseFragment;
 import com.app.audiobook.R;
 import com.app.audiobook.adapter.TimerAdapter;
 import com.app.audiobook.component.TimerLabel;
-import com.app.audiobook.interfaces.ClickListener;
+import com.app.audiobook.ux.MainActivity;
 
 public class SettingFragment extends BaseFragment {
 
     View v;
     private int sec = 0;
-    private int lastSelectedPos = -1;
 
     @Nullable
     @Override
@@ -42,20 +40,38 @@ public class SettingFragment extends BaseFragment {
 
     private void initInterface() {
         initUserValues();
+        initTimerLayout();
+    }
+
+    private void initTimerLayout(){
         initRecyclerViewTimerLabels();
 
         ConstraintLayout start = v.findViewById(R.id.start);
         start_background = v.findViewById(R.id.start_background);
         start_text = v.findViewById(R.id.start_text);
 
+        if(getParent().stopPlayerTimer.isStarted()){
+            start_text.setText("Остановить таймер");
+            start_background.setColorFilter(getResources().getColor(R.color.colorGreen_2));
+        } else {
+            start_text.setText("Включить таймер");
+            start_background.setColorFilter(getResources().getColor(R.color.colorGray_1));
+        }
+
         start.setOnClickListener(v1 -> {
-            if(sec == 0){
-                Toast.makeText(getContext(), "Выберите время", Toast.LENGTH_SHORT).show();
+            if(getParent().stopPlayerTimer.isStarted()){
+                getParent().stopPlayerTimer.stopTimer();
+                onTimerFinished();
             } else {
-                startTimer();
-                start_text.setText("Таймер запущен");
-                start_background.setColorFilter(getResources().getColor(R.color.colorGreen_2));
+                if(sec == 0){
+                    Toast.makeText(getContext(), "Выберите время", Toast.LENGTH_SHORT).show();
+                } else {
+                    getParent().stopPlayerTimer.startTimer(sec);
+                    start_text.setText("Остановить таймер");
+                    start_background.setColorFilter(getResources().getColor(R.color.colorGreen_2));
+                }
             }
+
         });
     }
 
@@ -73,21 +89,21 @@ public class SettingFragment extends BaseFragment {
         RecyclerView recyclerView = v.findViewById(R.id.recyclerViewTimer);
         TimerAdapter adapter = new TimerAdapter();
 
-        TimerLabel timerLabel1 = new TimerLabel("", 10);
-        TimerLabel timerLabel2 = new TimerLabel("", 120);
-        TimerLabel timerLabel3 = new TimerLabel("", 360);
-        TimerLabel timerLabel4 = new TimerLabel("", 660);
-        TimerLabel timerLabel5 = new TimerLabel("", 1200);
-        TimerLabel timerLabel6 = new TimerLabel("", 4600);
+        TimerLabel timerLabel1 = new TimerLabel("", 600);
+        TimerLabel timerLabel2 = new TimerLabel("", 1200);
+        TimerLabel timerLabel3 = new TimerLabel("", 1800);
+        TimerLabel timerLabel4 = new TimerLabel("", 2400);
+        TimerLabel timerLabel5 = new TimerLabel("", 3000);
+        TimerLabel timerLabel6 = new TimerLabel("", 3600);
 
         adapter.setClickListener((v, pos) -> {
-            if(lastSelectedPos != pos){
-                sec = adapter.getTimerLabels().get(pos).getTime();
-                lastSelectedPos = pos;
-            } else {
-                lastSelectedPos = -1;
+            if(adapter.getSelectedTimerLabel() == -1){
                 sec = 0;
+            } else {
+                sec = adapter.getTimerLabels().get(pos).getTime();
             }
+
+            getParent().stopPlayerTimer.setSelectedTimeIndex(adapter.getSelectedTimerLabel());
         });
 
         adapter.getTimerLabels().add(timerLabel1);
@@ -97,19 +113,28 @@ public class SettingFragment extends BaseFragment {
         adapter.getTimerLabels().add(timerLabel5);
         adapter.getTimerLabels().add(timerLabel6);
 
+        adapter.setSelectedTimerLabel(getParent().stopPlayerTimer.getSelectedTimeIndex());
+
         recyclerView.setAdapter(adapter);
     }
 
-    private void startTimer(){
-        new Handler().postDelayed(() -> {
-            //TODO Закрытие ...
-            Toast.makeText(getContext(), "Таймер выкл", Toast.LENGTH_SHORT).show();
-            finishTimer();
-        }, sec * 1000);
+    public void onTimerFinished(){
+        if(v != null){
+            ImageView start_background = v.findViewById(R.id.start_background);
+            TextView start_text = v.findViewById(R.id.start_text);
+            start_text.setText("Включить таймер");
+            start_background.setColorFilter(getResources().getColor(R.color.colorGray_1));
+
+            RecyclerView recyclerView = v.findViewById(R.id.recyclerViewTimer);
+            TimerAdapter adapter = (TimerAdapter) recyclerView.getAdapter();
+            if(adapter != null){
+                adapter.setSelectedTimerLabel(getParent().stopPlayerTimer.getSelectedTimeIndex());
+                adapter.notifyDataSetChanged();
+            }
+        }
     }
 
-    private void finishTimer(){
-        start_text.setText("Включить таймер");
-        start_background.setColorFilter(getResources().getColor(R.color.colorGray_1));
+    private MainActivity getParent(){
+        return (MainActivity) getActivity();
     }
 }
