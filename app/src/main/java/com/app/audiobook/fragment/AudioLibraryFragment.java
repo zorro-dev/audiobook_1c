@@ -22,7 +22,9 @@ import com.app.audiobook.adapter.AudioLibraryAdapter;
 import com.app.audiobook.adapter.AudioLibraryFilterAdapter;
 import com.app.audiobook.audio.book.AudioBook;
 import com.app.audiobook.component.FilterParameter;
+import com.app.audiobook.component.JSONManager;
 import com.app.audiobook.ux.MainActivity;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -61,6 +63,10 @@ public class AudioLibraryFragment extends BaseFragment {
 
         adapter.setClickListener((v1, pos) -> {
             Intent intent = new Intent(getContext(), BookActivity.class);
+            
+            String gson = JSONManager.exportToJSON(adapter.getAudioBooks().get(pos));
+            
+            intent.putExtra("audioBook", gson);
             startActivity(intent);
         });
 

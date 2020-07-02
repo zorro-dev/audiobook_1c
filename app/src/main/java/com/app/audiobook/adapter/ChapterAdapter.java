@@ -15,6 +15,9 @@ import com.app.audiobook.audio.book.Chapter;
 
 import java.util.ArrayList;
 
+import static com.app.audiobook.audio.book.Chapter.STATE_NOT_READ;
+import static com.app.audiobook.audio.book.Chapter.STATE_READ;
+
 public class ChapterAdapter extends RecyclerView.Adapter {
 
     ArrayList<Chapter> chapters = new ArrayList<>();
@@ -62,7 +65,7 @@ public class ChapterAdapter extends RecyclerView.Adapter {
         Chapter item = chapters.get(position);
 
         h.title.setText(item.getName());
-        h.time.setText(item.getDurationInSeconds());
+        h.time.setText(getFormattedTime(item.getDurationInSeconds()));
 
         if(item.isCached()){
             h.icon_download.setColorFilter(res.getColor(R.color.colorGreen_2));
@@ -70,11 +73,31 @@ public class ChapterAdapter extends RecyclerView.Adapter {
             h.icon_download.setColorFilter(res.getColor(R.color.colorGray_5));
         }
 
-        if(item.getState().equals("STATE_READ")){
+
+        if(item.getState().equals(STATE_READ)){
             h.icon_state.setColorFilter(res.getColor(R.color.colorGreen_2));
-        } else if(item.getState().equals("STATE_NOT_READ")){
+        } else if(item.getState().equals(STATE_NOT_READ)){
             h.icon_state.setColorFilter(res.getColor(R.color.colorGray_5));
         }
+
+    }
+
+    public static String getFormattedTime(int time) {
+
+        int minutes = time / 60;
+
+        int seconds = time - (60 * minutes);
+
+        String minutesStr = String.valueOf(minutes);
+        String secondsStr;
+
+        if (seconds < 10) {
+            secondsStr = "0" + String.valueOf(seconds);
+        } else {
+            secondsStr = String.valueOf(seconds);
+        }
+
+        return minutesStr + ":" + secondsStr;
     }
 
     @Override

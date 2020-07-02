@@ -231,12 +231,12 @@ public class AudioLibraryManager {
         chapter3.setDurationInSeconds(140);
 
         Chapter chapter4 = new Chapter();
-        chapter3.setId("4");
-        chapter3.setName("Часть 4");
-        chapter3.setState(STATE_NOT_READ);
-        chapter3.setUrl("https://firebasestorage.googleapis.com/v0/b/bookaudio-66877.appspot.com/o/Сотник%20Юрий%20-%20На%20тебя%20вся%20надежда%2F1.4.mp3?alt=media&token=315741a8-5920-4a22-a5ba-b806a9aa6d13");
-        chapter3.setCached(false);
-        chapter3.setDurationInSeconds(146);
+        chapter4.setId("4");
+        chapter4.setName("Часть 4");
+        chapter4.setState(STATE_NOT_READ);
+        chapter4.setUrl("https://firebasestorage.googleapis.com/v0/b/bookaudio-66877.appspot.com/o/Сотник%20Юрий%20-%20На%20тебя%20вся%20надежда%2F1.4.mp3?alt=media&token=315741a8-5920-4a22-a5ba-b806a9aa6d13");
+        chapter4.setCached(false);
+        chapter4.setDurationInSeconds(146);
 
         ArrayList<Chapter> characters = new ArrayList<>();
         characters.add(chapter1);
