@@ -84,6 +84,7 @@
         tools:listitem="@layout/cell_book_audio_library" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:visibility="gone"
         android:id="@+id/recyclerViewFilter"
         android:layout_width="match_parent"
         android:layout_height="40dp"
