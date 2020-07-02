@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -54,6 +55,17 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
 
     private void initInterface() {
         initChapterRecyclerView();
+        initFragmentDescription();
+    }
+
+    private void initFragmentDescription(){
+        LinearLayout descriptions = v.findViewById(R.id.description);
+        descriptions.setOnClickListener(v1 -> {
+            //TODO Нажатие на кнопку описания
+            //TODO передай сюда книгу
+            //((MainActivity) getActivity()).initPurchaseFragment(audioBooks.get(pos));
+        });
+
     }
 
     private void initChapterRecyclerView() {

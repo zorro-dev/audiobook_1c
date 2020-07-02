@@ -19,6 +19,7 @@ import com.app.audiobook.audio.book.AudioBook;
 import com.app.audiobook.audio.service.player.PlayerAdapter;
 import com.app.audiobook.audio.timer.StopPlayerTimer;
 import com.app.audiobook.component.JSONManager;
+import com.app.audiobook.fragment.DescriptionFragment;
 import com.app.audiobook.fragment.PurchaseFragment;
 import com.app.audiobook.ui.main.SectionsPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
@@ -152,6 +153,14 @@ public class MainActivity extends BaseActivity {
         PurchaseFragment fragment = new PurchaseFragment(audioBook);
 
         fragmentTransaction.addToBackStack("PurchaseFragment");
+        fragmentTransaction.add(R.id.frame_layout, fragment).commit();
+    }
+
+    public void initDescriptionFragment(AudioBook audioBook){
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        DescriptionFragment fragment = new DescriptionFragment(audioBook);
+
+        fragmentTransaction.addToBackStack("DescriptionFragment");
         fragmentTransaction.add(R.id.frame_layout, fragment).commit();
     }
 
