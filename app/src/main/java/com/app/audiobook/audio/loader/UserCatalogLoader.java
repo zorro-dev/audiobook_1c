@@ -23,7 +23,7 @@ public class UserCatalogLoader extends Loader<ArrayList<AudioBook>> {
     @Override
     public void load() {
         FirebaseDatabase.getInstance().getReference("BookCatalog")
-                .child("UserBooks").child(userId)
+                .child("ByUsers").child(userId)
                 .addListenerForSingleValueEvent(
                         new ValueEventListener() {
                             @Override

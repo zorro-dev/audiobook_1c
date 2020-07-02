@@ -189,7 +189,7 @@ public class AudioLibraryManager {
         return audioBook3;
     }
 
-    private static AudioBook getAudioBook4(){
+    public static AudioBook getAudioBook4(){
         AudioBook audioBook4 = new AudioBook();
         audioBook4.setId("4");
         audioBook4.setTitle("На тебя вся надежда");

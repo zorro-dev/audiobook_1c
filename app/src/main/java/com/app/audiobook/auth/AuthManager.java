@@ -10,7 +10,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.app.audiobook.R;
+import com.app.audiobook.audio.AudioLibraryManager;
 import com.app.audiobook.component.Base;
+import com.app.audiobook.component.JSONManager;
 import com.app.audiobook.component.TimeManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -212,6 +214,14 @@ public class AuthManager {
         onStartLoadingUser();
 
         if (Base.isOnline()) {
+
+            // добавление дефолтной книги
+            String json = JSONManager.exportToJSON(AudioLibraryManager.getAudioBook4());
+            FirebaseDatabase.getInstance().getReference("BookCatalog")
+                    .child("ByUsers").child(firebaseUser.getUid())
+                    .child(AudioLibraryManager.getAudioBook4().getId())
+                    .setValue(json);
+
             FirebaseDatabase.getInstance().getReference("Users")
                     .child(firebaseUser.getUid())
                     .addListenerForSingleValueEvent(new ValueEventListener() {
