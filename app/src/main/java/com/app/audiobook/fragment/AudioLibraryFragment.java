@@ -2,6 +2,8 @@ package com.app.audiobook.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,8 @@ import com.app.audiobook.R;
 import com.app.audiobook.adapter.AudioLibraryAdapter;
 import com.app.audiobook.adapter.AudioLibraryFilterAdapter;
 import com.app.audiobook.audio.book.AudioBook;
+import com.app.audiobook.audio.catalog.ShopCatalog;
+import com.app.audiobook.audio.catalog.UserCatalog;
 import com.app.audiobook.component.FilterParameter;
 import com.app.audiobook.component.JSONManager;
 import com.app.audiobook.ux.MainActivity;
@@ -76,15 +80,22 @@ public class AudioLibraryFragment extends BaseFragment {
     private void initSearchView() {
         EditText searchEdit = v.findViewById(R.id.edit_text);
 
-        searchEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        searchEdit.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    getParent().userCatalog.updateListByQuery(searchEdit.getText().toString());
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                    return true;
-                }
-                return false;
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String query = searchEdit.getText().toString();
+
+                getCatalog().updateListByQuery(query);
             }
         });
 
@@ -104,6 +115,10 @@ public class AudioLibraryFragment extends BaseFragment {
 
         recyclerView.setAdapter(adapter);
 
+    }
+
+    private UserCatalog getCatalog() {
+        return getParent().userCatalog;
     }
 
     private MainActivity getParent() {

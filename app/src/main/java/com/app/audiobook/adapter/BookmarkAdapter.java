@@ -1,36 +1,32 @@
 package com.app.audiobook.adapter;
 
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.audiobook.R;
-import com.app.audiobook.audio.book.Chapter;
+import com.app.audiobook.audio.book.Bookmark;
 import com.app.audiobook.interfaces.ClickListener;
 
 import java.util.ArrayList;
 
-import static com.app.audiobook.audio.book.Chapter.STATE_NOT_READ;
-import static com.app.audiobook.audio.book.Chapter.STATE_READ;
+public class BookmarkAdapter extends RecyclerView.Adapter {
 
-public class ChapterAdapter extends RecyclerView.Adapter {
+    private ArrayList<Bookmark> bookmarks = new ArrayList<>();
 
-    ArrayList<Chapter> chapters = new ArrayList<>();
+    private ClickListener clickListener;
+    private ClickListener longClickListener;
 
-    ClickListener clickListener;
-
-    public ArrayList<Chapter> getChapters() {
-        return chapters;
+    public ArrayList<Bookmark> getBookmarks() {
+        return bookmarks;
     }
 
-    public void setChapters(ArrayList<Chapter> chapters) {
-        this.chapters = chapters;
+    public void setBookmarks(ArrayList<Bookmark> bookmarks) {
+        this.bookmarks = bookmarks;
     }
 
     public ClickListener getClickListener() {
@@ -41,28 +37,37 @@ public class ChapterAdapter extends RecyclerView.Adapter {
         this.clickListener = clickListener;
     }
 
+    public ClickListener getLongClickListener() {
+        return longClickListener;
+    }
+
+    public void setLongClickListener(ClickListener longClickListener) {
+        this.longClickListener = longClickListener;
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView title;
         TextView time;
-        ImageView icon_download;
-        ImageView icon_state;
 
         public ViewHolder(@NonNull View v) {
             super(v);
 
             title = v.findViewById(R.id.title);
             time = v.findViewById(R.id.time);
-            icon_download = v.findViewById(R.id.icon_download);
-            icon_state = v.findViewById(R.id.icon_state);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (clickListener != null) {
-                        clickListener.onClick(v, getAdapterPosition());
-                    }
+            itemView.setOnClickListener(v1 -> {
+                if (clickListener != null)
+                    clickListener.onClick(v1, getAdapterPosition());
+            });
+
+            itemView.setOnLongClickListener(v1 -> {
+
+                if (longClickListener != null) {
+                    longClickListener.onClick(v1, getAdapterPosition());
                 }
+
+                return false;
             });
         }
     }
@@ -71,7 +76,7 @@ public class ChapterAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.cell_chapter, parent, false);
+                .inflate(R.layout.cell_bookmark, parent, false);
 
         return new ViewHolder(v);
     }
@@ -80,26 +85,10 @@ public class ChapterAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewHolder h = (ViewHolder) holder;
 
-        Resources res = h.itemView.getResources();
+        Bookmark item = bookmarks.get(position);
 
-        Chapter item = chapters.get(position);
-
-        h.title.setText(item.getName());
+        h.title.setText(item.getTimeStamp());
         h.time.setText(getFormattedTime(item.getDurationInSeconds()));
-
-        if(item.isCached()){
-            h.icon_download.setColorFilter(res.getColor(R.color.colorGreen_2));
-        } else {
-            h.icon_download.setColorFilter(res.getColor(R.color.colorGray_5));
-        }
-
-
-        if(item.getState().equals(STATE_READ)){
-            h.icon_state.setColorFilter(res.getColor(R.color.colorGreen_2));
-        } else if(item.getState().equals(STATE_NOT_READ)){
-            h.icon_state.setColorFilter(res.getColor(R.color.colorGray_5));
-        }
-
     }
 
     public static String getFormattedTime(int time) {
@@ -122,6 +111,6 @@ public class ChapterAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return chapters.size();
+        return bookmarks.size();
     }
 }

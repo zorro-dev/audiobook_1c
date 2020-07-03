@@ -17,6 +17,8 @@ import com.app.audiobook.audio.service.notification.NotificationAndroid_PreO;
 import java.io.IOException;
 
 import static com.app.audiobook.audio.service.IntentBuilder.KEY_COMMAND;
+import static com.app.audiobook.audio.service.IntentBuilder.KEY_MESSAGE;
+import static com.app.audiobook.audio.service.IntentBuilder.KEY_MESSAGE2;
 
 public class BackgroundSoundService extends Service
         implements MediaPlayer.OnPreparedListener {
@@ -60,11 +62,17 @@ public class BackgroundSoundService extends Service
     }
 
     private boolean needToStart = false;
+    private int bookmarkPoint = 0;
 
     @Override
     public void onPrepared(MediaPlayer mp) {
         if (mSoundServiceCallbacks != null) {
             mSoundServiceCallbacks.onPrepared(mp);
+        }
+
+        if (bookmarkPoint != 0) {
+            mediaPlayer.seekTo(bookmarkPoint);
+            bookmarkPoint = 0;
         }
 
 //        startPlayer();
@@ -131,10 +139,12 @@ public class BackgroundSoundService extends Service
         } else if (command == IntentBuilder.Command.SET_AUDIO) {
             Log.i(TAG, "SET_AUDIO");
             String url = intent.getStringExtra(IntentBuilder.KEY_MESSAGE);
+            Log.v(TAG, "SET_AUDIO url : " + url);
             setAudio(url, false);
         } else if (command == IntentBuilder.Command.SET_AUDIO_AND_START) {
             Log.i(TAG, "SET_AUDIO");
             String url = intent.getStringExtra(IntentBuilder.KEY_MESSAGE);
+            Log.v(TAG, "SET_AUDIO url : " + url);
             setAudio(url, true);
         }else if (command == IntentBuilder.Command.CHANGE_PLAY_AND_PAUSE) {
             Log.i(TAG, "CHANGE");
@@ -161,6 +171,11 @@ public class BackgroundSoundService extends Service
         } else if (command == IntentBuilder.Command.STOP) {
             Log.i(TAG, "STOP");
             stopPlayer();
+        } else if (command == IntentBuilder.Command.START_FROM_BOOKMARK) {
+            Log.i(TAG, "STOP");
+            String url = intent.getStringExtra(KEY_MESSAGE);
+            int bookmarkPoint = Integer.parseInt(intent.getStringExtra(KEY_MESSAGE2));
+            setAudio(url, true, bookmarkPoint);
         }
 
 //        if(Preferences.getMediaPosition(getApplicationContext())>0){
@@ -202,7 +217,14 @@ public class BackgroundSoundService extends Service
     }
 
     private void setAudio(String url, boolean needToStart) {
+        setAudio(url, needToStart, 0);
+    }
+
+    private void setAudio(String url, boolean needToStart, int bookmarkPoint) {
+        mediaPlayer.reset();
+
         this.needToStart = needToStart;
+        this.bookmarkPoint = bookmarkPoint;
 
         try {
             mediaPlayer.setDataSource(url);

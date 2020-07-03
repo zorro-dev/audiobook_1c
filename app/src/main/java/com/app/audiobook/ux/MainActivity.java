@@ -8,10 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.MutableLiveData;
 import androidx.viewpager.widget.ViewPager;
 
 import com.app.audiobook.R;
 import com.app.audiobook.audio.AudioLibraryManager;
+import com.app.audiobook.audio.PreferenceUtil;
 import com.app.audiobook.audio.catalog.ShopCatalog;
 import com.app.audiobook.audio.catalog.UserCatalog;
 import com.app.audiobook.audio.service.BackgroundSoundService;
@@ -29,12 +31,13 @@ import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity {
 
-    public static final String URL = "https://firebasestorage.googleapis.com/v0/b/bookaudio-66877.appspot.com/o/Роулинг%20Джоан%20Кэтлин%20-%20Сказки%20барда%20Бидля%2FПредисловие.mp3?alt=media&token=e9778a39-a0d7-4e3d-820e-24744444c1f7";
     public UserCatalog userCatalog;
     public ShopCatalog shopCatalog;
     public PlayerAdapter playerAdapter;
 
     public StopPlayerTimer stopPlayerTimer;
+
+    public MutableLiveData<AudioBook> currentBook = new MutableLiveData<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,7 @@ public class MainActivity extends BaseActivity {
                 sectionsPagerAdapter.getSettingFragment().onTimerFinished();
             }
         });
+
     }
 
     ViewPager viewPager;
@@ -176,5 +180,19 @@ public class MainActivity extends BaseActivity {
                     .child("Book").child(audioBook.getId()).setValue(json);
         }
     }
+
+
+    public void initCurrentAudioBook() {
+        String currendBookId = PreferenceUtil.getCurrentAudioBookId(this);
+
+        for (int i = 0; i < userCatalog.getCatalogList().size(); i ++) {
+            String bookId = userCatalog.getCatalogList().get(i).getId();
+
+            if (bookId.equals(currendBookId)) {
+                currentBook.setValue(userCatalog.getCatalogList().get(i));
+            }
+        }
+    }
+
 
 }

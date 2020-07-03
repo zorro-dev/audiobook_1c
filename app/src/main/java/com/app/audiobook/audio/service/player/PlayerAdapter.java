@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
+import com.app.audiobook.audio.book.Bookmark;
+import com.app.audiobook.audio.book.Chapter;
 import com.app.audiobook.audio.service.IntentBuilder;
 
 public class PlayerAdapter {
@@ -35,6 +37,18 @@ public class PlayerAdapter {
         Intent intent = IntentBuilder.getInstance(context)
                 .setCommand(IntentBuilder.Command.SET_AUDIO_AND_START)
                 .setMessage(url)
+                .build();
+
+        startIntent(intent);
+    }
+
+    public void startFromBookmark(Bookmark bookmark){
+        Chapter chapter = bookmark.getChapter();
+
+        Intent intent = IntentBuilder.getInstance(context)
+                .setCommand(IntentBuilder.Command.START_FROM_BOOKMARK)
+                .setMessage(chapter.getUrl())
+                .setMessage2(String.valueOf(bookmark.getDurationInSeconds() * 1000))
                 .build();
 
         startIntent(intent);

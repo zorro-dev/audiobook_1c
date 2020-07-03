@@ -15,14 +15,17 @@ public class IntentBuilder {
         public static final int SET_AUDIO_AND_START = 1003;    // установить запись и начать проигрывание
         public static final int SEEK_TO = 104;     // перемотка плеера
         public static final int STOP = 105;     // отключение плеера
+        public static final int START_FROM_BOOKMARK = 106;     // начать с закладки
 
     }
 
     public static final String KEY_COMMAND = "KEY_COMMAND";
     public static final String KEY_MESSAGE = "KEY_MESSAGE";
+    public static final String KEY_MESSAGE2 = "KEY_MESSAGE2";
 
     private Context mContext;
     private String mMessage;
+    private String mMessage2;
     private int mCommandId;
 
     public static IntentBuilder getInstance(Context context) {
@@ -35,6 +38,11 @@ public class IntentBuilder {
 
     public IntentBuilder setMessage(String message) {
         this.mMessage = message;
+        return this;
+    }
+
+    public IntentBuilder setMessage2(String message) {
+        this.mMessage2 = message;
         return this;
     }
 
@@ -51,6 +59,9 @@ public class IntentBuilder {
         }
         if (mMessage != null) {
             intent.putExtra(KEY_MESSAGE, mMessage);
+        }
+        if (mMessage != null) {
+            intent.putExtra(KEY_MESSAGE2, mMessage2);
         }
         return intent;
     }
