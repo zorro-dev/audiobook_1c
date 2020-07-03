@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.app.audiobook.R;
+import com.app.audiobook.audio.book.AudioBook;
+import com.app.audiobook.audio.book.Chapter;
 import com.app.audiobook.audio.service.IntentBuilder;
 
 public class HandleNotifications {
@@ -37,15 +39,17 @@ public class HandleNotifications {
     }
 
     public static String getNotificationTitle(Context context) {
-        return "Title";
+        return "AudioBook";
     }
 
-    public static String getNotificationContent(Context context) {
-        return "Content";
+    public static String getNotificationContent(Context context, AudioBook audioBook, Chapter chapter) {
+        String title = audioBook != null ? audioBook.getTitle() : "Книга";
+        String chapterTitle = chapter != null ? chapter.getName() : "Глава";
+        return title + " - " + chapterTitle;
     }
 
     public static String getNotificationStopActionText(Context context) {
-        return "StopActionText";
+        return "Закрыть";
     }
 
     public static int getRandomNumber() {
