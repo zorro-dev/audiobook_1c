@@ -79,6 +79,7 @@
                 <ImageView
                     android:id="@+id/icon_download"
                     android:layout_width="30dp"
+                    android:visibility="invisible"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:padding="4dp"

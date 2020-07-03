@@ -231,6 +231,7 @@ public class MainActivity extends BaseActivity {
                 String json = data.getStringExtra("audiobook");
                 AudioBook audioBook = JSONManager.importFromJSON(json, AudioBook.class);
                 currentBook.setValue(audioBook);
+                PreferenceUtil.setCurrentAudioBookId(this, audioBook.getId());
 
                 viewPager.setCurrentItem(2);
             }

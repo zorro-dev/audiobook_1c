@@ -59,6 +59,7 @@ public class DownloadBookFragment extends BaseFragment {
     private void initInterface() {
         initRecyclerView();
         initDownloadButton();
+        initCloseButton();
     }
 
     private void initRecyclerView() {
@@ -73,6 +74,7 @@ public class DownloadBookFragment extends BaseFragment {
     private void initDownloadButton() {
         ConstraintLayout download = v.findViewById(R.id.buttonDownload);
         download.setOnClickListener(v1 -> {
+            showProgress();
             int permissionStatus1 = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
             int permissionStatus2 = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
 
@@ -100,7 +102,7 @@ public class DownloadBookFragment extends BaseFragment {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            downloadFile(chapter.getUrl(), finalI, audioBook.getChapters().size());
+                            downloadFile(chapter.getUrl(), finalI, chapters.size());
                         }
                     }).start();
 
@@ -165,6 +167,16 @@ public class DownloadBookFragment extends BaseFragment {
     private void hide() {
         FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
         transaction.remove(this).commit();
+    }
+
+    private void showProgress() {
+        ConstraintLayout progressLayout = v.findViewById(R.id.progress_layout);
+        progressLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgress() {
+        ConstraintLayout progressLayout = v.findViewById(R.id.progress_layout);
+        progressLayout.setVisibility(View.GONE);
     }
 
 }
