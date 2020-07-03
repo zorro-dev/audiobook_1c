@@ -84,10 +84,6 @@ public class CategoryListFragment extends BaseFragment {
         recyclerView.setAdapter(adapter);
     }
 
-    private void getIntentData(){
-        categoryId = getActivity().getIntent().getStringExtra("categoryId");
-    }
-
     private void initSearchView() {
         EditText searchEdit = v.findViewById(R.id.edit_text);
 
