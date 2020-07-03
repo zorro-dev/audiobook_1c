@@ -79,6 +79,10 @@ public abstract class Catalog<T> {
         getCatalogLiveData().setValue(catalogList);
     }
 
+    public void updateList() {
+        updateListByQuery(query);
+    }
+
     public void addToCatalog(T t) {
         catalogList.add(t);
 

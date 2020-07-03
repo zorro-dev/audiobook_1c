@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
+import com.app.audiobook.audio.book.AudioBook;
 import com.app.audiobook.audio.book.Bookmark;
 import com.app.audiobook.audio.book.Chapter;
 import com.app.audiobook.audio.service.IntentBuilder;
+import com.app.audiobook.component.JSONManager;
 
 public class PlayerAdapter {
 
@@ -24,31 +26,34 @@ public class PlayerAdapter {
         startIntent(intent);
     }
 
-    public void setAudio(String url) {
+    public void setAudio(AudioBook audio, Chapter chapter) {
         Intent intent = IntentBuilder.getInstance(context)
                 .setCommand(IntentBuilder.Command.SET_AUDIO)
-                .setMessage(url)
+                .setMessage(JSONManager.exportToJSON(audio))
+                .setMessage2(JSONManager.exportToJSON(chapter))
                 .build();
 
         startIntent(intent);
     }
 
-    public void setAudioAndStart(String url) {
+    public void setAudioAndStart(AudioBook audio, Chapter chapter) {
         Intent intent = IntentBuilder.getInstance(context)
                 .setCommand(IntentBuilder.Command.SET_AUDIO_AND_START)
-                .setMessage(url)
+                .setMessage(JSONManager.exportToJSON(audio))
+                .setMessage2(JSONManager.exportToJSON(chapter))
                 .build();
 
         startIntent(intent);
     }
 
-    public void startFromBookmark(Bookmark bookmark){
+    public void startFromBookmark(AudioBook audio, Bookmark bookmark){
         Chapter chapter = bookmark.getChapter();
 
         Intent intent = IntentBuilder.getInstance(context)
                 .setCommand(IntentBuilder.Command.START_FROM_BOOKMARK)
-                .setMessage(chapter.getUrl())
-                .setMessage2(String.valueOf(bookmark.getDurationInSeconds() * 1000))
+                .setMessage(JSONManager.exportToJSON(audio))
+                .setMessage2(JSONManager.exportToJSON(chapter))
+                .setMessage3(String.valueOf(bookmark.getDurationInSeconds() * 1000))
                 .build();
 
         startIntent(intent);

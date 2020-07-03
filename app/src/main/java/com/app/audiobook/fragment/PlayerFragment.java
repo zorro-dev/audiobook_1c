@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -83,7 +84,8 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
                 currentAudioBook = audioBook;
 
                 playerAdapter.init();
-                playerAdapter.setAudio(audioBook.getChapters().get(0).getUrl());
+                playerAdapter.setAudio(
+                        currentAudioBook, audioBook.getChapters().get(0));
 
                 initChapterRecyclerView();
                 initBookmarkList(audioBook);
@@ -99,6 +101,13 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
         initFragmentDescription();
         initSelector();
         initAddBookmarkButton();
+        initDownloadButton();
+    }
+
+    private void initDownloadButton() {
+        ConstraintLayout download = v.findViewById(R.id.donwload);
+
+        download.setOnClickListener(v -> getParent().initDownloadFragment(currentAudioBook));
     }
 
     private void initFragmentDescription() {
@@ -122,8 +131,8 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
             public void onClick(View v, int pos) {
                 currentChapter = pos;
 
-                playerAdapter.setAudioAndStart(
-                        currentAudioBook.getChapters().get(currentChapter).getUrl());
+                playerAdapter.setAudioAndStart(currentAudioBook,
+                        currentAudioBook.getChapters().get(currentChapter));
             }
         });
 
@@ -148,7 +157,7 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
                 }
             }
 
-            playerAdapter.startFromBookmark(bookmark);
+            playerAdapter.startFromBookmark(currentAudioBook, bookmark);
         });
 
         adapter.setLongClickListener((v, pos) -> {
@@ -221,7 +230,8 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
                     if (getMediaPlayer() == null) {
                         Log.v("lol", "media player == null");
                         playerAdapter.init();
-                        playerAdapter.setAudioAndStart(currentAudioBook.getChapters().get(currentChapter).getUrl());
+                        playerAdapter.setAudioAndStart(
+                                currentAudioBook, currentAudioBook.getChapters().get(currentChapter));
                     } else {
                         Log.v("lol", "media player != null");
                         playerAdapter.changePlayAndPause();
@@ -293,7 +303,8 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
         currentChapter++;
 
         if (currentChapter < currentAudioBook.getChapterSize()) {
-            playerAdapter.setAudioAndStart(currentAudioBook.getChapters().get(currentChapter).getUrl());
+            playerAdapter.setAudioAndStart(
+                    currentAudioBook, currentAudioBook.getChapters().get(currentChapter));
         }
 
     }

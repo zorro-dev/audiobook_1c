@@ -4,13 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,17 +15,15 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.audiobook.BaseFragment;
-import com.app.audiobook.BookActivity;
+import com.app.audiobook.ux.BookActivity;
 import com.app.audiobook.R;
 import com.app.audiobook.adapter.AudioLibraryAdapter;
 import com.app.audiobook.adapter.AudioLibraryFilterAdapter;
 import com.app.audiobook.audio.book.AudioBook;
-import com.app.audiobook.audio.catalog.ShopCatalog;
 import com.app.audiobook.audio.catalog.UserCatalog;
 import com.app.audiobook.component.FilterParameter;
 import com.app.audiobook.component.JSONManager;
 import com.app.audiobook.ux.MainActivity;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 

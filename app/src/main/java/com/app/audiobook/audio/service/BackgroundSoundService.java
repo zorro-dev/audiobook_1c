@@ -5,20 +5,26 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Build;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.app.audiobook.audio.book.AudioBook;
+import com.app.audiobook.audio.book.Chapter;
 import com.app.audiobook.audio.service.notification.NotificationAndroid_O;
 import com.app.audiobook.audio.service.notification.NotificationAndroid_PreO;
+import com.app.audiobook.component.JSONManager;
 
+import java.io.File;
 import java.io.IOException;
 
 import static com.app.audiobook.audio.service.IntentBuilder.KEY_COMMAND;
 import static com.app.audiobook.audio.service.IntentBuilder.KEY_MESSAGE;
 import static com.app.audiobook.audio.service.IntentBuilder.KEY_MESSAGE2;
+import static com.app.audiobook.audio.service.IntentBuilder.KEY_MESSAGE3;
 
 public class BackgroundSoundService extends Service
         implements MediaPlayer.OnPreparedListener {
@@ -55,7 +61,6 @@ public class BackgroundSoundService extends Service
         }
 
         Log.i(TAG, "onCreate()");
-
 
 
         Toast.makeText(this, "Service started...", Toast.LENGTH_SHORT).show();
@@ -138,15 +143,23 @@ public class BackgroundSoundService extends Service
             initPlayer();
         } else if (command == IntentBuilder.Command.SET_AUDIO) {
             Log.i(TAG, "SET_AUDIO");
-            String url = intent.getStringExtra(IntentBuilder.KEY_MESSAGE);
-            Log.v(TAG, "SET_AUDIO url : " + url);
-            setAudio(url, false);
+            String jsonAudioBook = intent.getStringExtra(KEY_MESSAGE);
+            String jsonChapter = intent.getStringExtra(KEY_MESSAGE2);
+
+            AudioBook audioBook = JSONManager.importFromJSON(jsonAudioBook, AudioBook.class);
+            Chapter chapter = JSONManager.importFromJSON(jsonChapter, Chapter.class);
+
+            setAudio(audioBook, chapter, false);
         } else if (command == IntentBuilder.Command.SET_AUDIO_AND_START) {
             Log.i(TAG, "SET_AUDIO");
-            String url = intent.getStringExtra(IntentBuilder.KEY_MESSAGE);
-            Log.v(TAG, "SET_AUDIO url : " + url);
-            setAudio(url, true);
-        }else if (command == IntentBuilder.Command.CHANGE_PLAY_AND_PAUSE) {
+            String jsonAudioBook = intent.getStringExtra(KEY_MESSAGE);
+            String jsonChapter = intent.getStringExtra(KEY_MESSAGE2);
+
+            AudioBook audioBook = JSONManager.importFromJSON(jsonAudioBook, AudioBook.class);
+            Chapter chapter = JSONManager.importFromJSON(jsonChapter, Chapter.class);
+
+            setAudio(audioBook, chapter, true);
+        } else if (command == IntentBuilder.Command.CHANGE_PLAY_AND_PAUSE) {
             Log.i(TAG, "CHANGE");
 
             if (mediaPlayer == null) {
@@ -165,17 +178,20 @@ public class BackgroundSoundService extends Service
             Log.i(TAG, "SEEK_TO");
             int durationPoint = Integer.parseInt(intent.getStringExtra(IntentBuilder.KEY_MESSAGE));
 
-            Log.i(TAG, "duration point : " + String.valueOf(durationPoint));
-
             mediaPlayer.seekTo(durationPoint);
         } else if (command == IntentBuilder.Command.STOP) {
             Log.i(TAG, "STOP");
             stopPlayer();
         } else if (command == IntentBuilder.Command.START_FROM_BOOKMARK) {
             Log.i(TAG, "STOP");
-            String url = intent.getStringExtra(KEY_MESSAGE);
-            int bookmarkPoint = Integer.parseInt(intent.getStringExtra(KEY_MESSAGE2));
-            setAudio(url, true, bookmarkPoint);
+            String jsonAudioBook = intent.getStringExtra(KEY_MESSAGE);
+            String jsonChapter = intent.getStringExtra(KEY_MESSAGE2);
+            int bookmarkPoint = Integer.parseInt(intent.getStringExtra(KEY_MESSAGE3));
+
+            AudioBook audioBook = JSONManager.importFromJSON(jsonAudioBook, AudioBook.class);
+            Chapter chapter = JSONManager.importFromJSON(jsonChapter, Chapter.class);
+
+            setAudio(audioBook, chapter, true, bookmarkPoint);
         }
 
 //        if(Preferences.getMediaPosition(getApplicationContext())>0){
@@ -216,18 +232,27 @@ public class BackgroundSoundService extends Service
         });
     }
 
-    private void setAudio(String url, boolean needToStart) {
-        setAudio(url, needToStart, 0);
+    private void setAudio(AudioBook audioBook, Chapter chapter, boolean needToStart) {
+        setAudio(audioBook, chapter, needToStart, 0);
     }
 
-    private void setAudio(String url, boolean needToStart, int bookmarkPoint) {
+    private void setAudio(AudioBook audioBook, Chapter chapter, boolean needToStart, int bookmarkPoint) {
         mediaPlayer.reset();
 
         this.needToStart = needToStart;
         this.bookmarkPoint = bookmarkPoint;
 
         try {
-            mediaPlayer.setDataSource(url);
+            String cacheFilePath = Environment.getExternalStorageDirectory() + "/AudioBook/cache/" + audioBook.getId() + "/" + chapter.getId() + ".lol";
+
+            File file = new File(cacheFilePath);
+
+            if (file.exists()) {
+                // считываем с памяти телефона
+                mediaPlayer.setDataSource(cacheFilePath);
+            } else {
+                mediaPlayer.setDataSource(chapter.getUrl());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

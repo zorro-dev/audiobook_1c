@@ -22,10 +22,12 @@ public class IntentBuilder {
     public static final String KEY_COMMAND = "KEY_COMMAND";
     public static final String KEY_MESSAGE = "KEY_MESSAGE";
     public static final String KEY_MESSAGE2 = "KEY_MESSAGE2";
+    public static final String KEY_MESSAGE3 = "KEY_MESSAGE3";
 
     private Context mContext;
     private String mMessage;
     private String mMessage2;
+    private String mMessage3;
     private int mCommandId;
 
     public static IntentBuilder getInstance(Context context) {
@@ -46,6 +48,11 @@ public class IntentBuilder {
         return this;
     }
 
+    public IntentBuilder setMessage3(String message) {
+        this.mMessage3 = message;
+        return this;
+    }
+
     public IntentBuilder setCommand(int command) {
         this.mCommandId = command;
         return this;
@@ -62,6 +69,9 @@ public class IntentBuilder {
         }
         if (mMessage != null) {
             intent.putExtra(KEY_MESSAGE2, mMessage2);
+        }
+        if (mMessage != null) {
+            intent.putExtra(KEY_MESSAGE3, mMessage3);
         }
         return intent;
     }

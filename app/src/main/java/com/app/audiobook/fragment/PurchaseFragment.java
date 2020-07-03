@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,7 +16,10 @@ import androidx.fragment.app.FragmentTransaction;
 import com.app.audiobook.BaseFragment;
 import com.app.audiobook.R;
 import com.app.audiobook.audio.book.AudioBook;
+import com.app.audiobook.audio.catalog.UserCatalog;
+import com.app.audiobook.component.JSONManager;
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.FirebaseDatabase;
 import com.joooonho.SelectableRoundedImageView;
 
 import static com.app.audiobook.audio.book.BookPrice.TYPE_DISCOUNT_PRICE;
@@ -26,9 +30,11 @@ public class PurchaseFragment extends BaseFragment {
 
     View v;
     AudioBook audioBook;
+    UserCatalog userCatalog;
 
-    public PurchaseFragment(AudioBook audioBook) {
+    public PurchaseFragment(AudioBook audioBook, UserCatalog userCatalog) {
         this.audioBook = audioBook;
+        this.userCatalog = userCatalog;
     }
 
     @Nullable
@@ -37,6 +43,8 @@ public class PurchaseFragment extends BaseFragment {
         v = inflater.inflate(R.layout.fragment_buy_book, container, false);
 
         initInterface();
+
+        initBuyButton();
 
         return v;
     }
@@ -63,7 +71,10 @@ public class PurchaseFragment extends BaseFragment {
                 .placeholder(R.drawable.ic_black_square)
                 .into(cover);
 
-        if (audioBook.getBookPrice().getType().equals(TYPE_FREE)) {
+        if (userCatalog.contains(audioBook)) {
+            colorButton.setColorFilter(getResources().getColor(R.color.colorGray_1));
+            textButton.setText("Уже в аудиотеке");
+        } else if (audioBook.getBookPrice().getType().equals(TYPE_FREE)) {
             price.setText("Бесплатно");
             colorButton.setColorFilter(getResources().getColor(R.color.colorFreePrice));
             textButton.setText("Забрать книгу");
@@ -100,5 +111,30 @@ public class PurchaseFragment extends BaseFragment {
         });
     }
 
+    private void initBuyButton() {
+        ConstraintLayout buy = v.findViewById(R.id.button);
+
+        buy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (userCatalog.contains(audioBook)) {
+                    Toast.makeText(getContext(), "Уже добавлено", Toast.LENGTH_SHORT).show();
+                } else if (audioBook.getBookPrice().getType().equals(TYPE_FREE)) {
+                    addToUserCatalog();
+                    initInterface();
+                } else {
+                    //TODO показать фрагмент покупки
+                }
+            }
+        });
+    }
+
+    private void addToUserCatalog() {
+        userCatalog.getCatalogList().add(audioBook);
+        userCatalog.updateList();
+        FirebaseDatabase.getInstance().getReference("BookCatalog")
+                .child("ByUsers").child(getAuthManager().getUser().getId())
+                .child(audioBook.getId()).setValue(JSONManager.exportToJSON(audioBook));
+    }
 
 }

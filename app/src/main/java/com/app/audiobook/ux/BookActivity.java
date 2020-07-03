@@ -1,4 +1,4 @@
-package com.app.audiobook;
+package com.app.audiobook.ux;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,14 +6,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.app.audiobook.R;
 import com.app.audiobook.adapter.ChapterAdapter;
 import com.app.audiobook.audio.book.AudioBook;
 import com.app.audiobook.component.JSONManager;
+import com.app.audiobook.fragment.DownloadBookFragment;
 import com.bumptech.glide.Glide;
 import com.joooonho.SelectableRoundedImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class BookActivity extends AppCompatActivity {
@@ -33,12 +36,23 @@ public class BookActivity extends AppCompatActivity {
     private void initInterface(){
         initRecyclerView();
         initBook();
+        initDownloadButton();
         initBottomButton();
         initButtonListen();
 
         ConstraintLayout back = findViewById(R.id.back);
         back.setOnClickListener(v1 -> {
             onBackPressed();
+        });
+    }
+
+    private void initDownloadButton() {
+        ConstraintLayout download = findViewById(R.id.download);
+        download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initDownloadFragment(audioBook);
+            }
         });
     }
 
@@ -103,6 +117,15 @@ public class BookActivity extends AppCompatActivity {
 
     private void initButtonListen(){
 
+    }
+
+    public void initDownloadFragment(AudioBook audioBook) {
+        DownloadBookFragment fragment = new DownloadBookFragment(audioBook);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.addToBackStack("DownloadBookFragment");
+
+        transaction.add(R.id.frame_layout, fragment).commit();
     }
 
     @Override

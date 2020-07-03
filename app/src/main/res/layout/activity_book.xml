@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorGray_7"
-    tools:context=".BookActivity">
+    tools:context=".ux.BookActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topPanel"
@@ -39,6 +39,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/download"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -476,5 +477,10 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

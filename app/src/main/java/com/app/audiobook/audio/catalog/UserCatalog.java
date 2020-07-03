@@ -34,4 +34,14 @@ public class UserCatalog extends Catalog<AudioBook> {
         return isNameValid || isAuthorValid;
     }
 
+    public boolean contains(AudioBook audioBook) {
+        for (int i = 0; i < getCatalogList().size(); i ++) {
+            if (getCatalogList().get(i).getId().equals(audioBook.getId())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }

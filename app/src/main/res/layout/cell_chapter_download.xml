@@ -36,6 +36,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    android:id="@+id/icon_background"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="5dp"
@@ -43,7 +44,6 @@
                     android:tint="@color/colorGray_1" />
 
                 <ImageView
-                    android:id="@+id/icon_state"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="18dp"
