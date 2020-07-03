@@ -1,5 +1,6 @@
 package com.app.audiobook.ux;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -116,7 +117,17 @@ public class BookActivity extends AppCompatActivity {
     }
 
     private void initButtonListen(){
+        ConstraintLayout listen = findViewById(R.id.listen);
+        listen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                String json = JSONManager.exportToJSON(audioBook);
+                intent.putExtra("audiobook", json);
 
+                setResult(RESULT_OK, intent);
+            }
+        });
     }
 
     public void initDownloadFragment(AudioBook audioBook) {

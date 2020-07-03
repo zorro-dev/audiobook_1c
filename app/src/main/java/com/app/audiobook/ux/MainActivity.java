@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.MutableLiveData;
 import androidx.viewpager.widget.ViewPager;
@@ -32,6 +33,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity {
+
+    public static final int BOOK_ACTIVITY_REQUEST = 1023;
 
     public UserCatalog userCatalog;
     public ShopCatalog shopCatalog;
@@ -214,4 +217,17 @@ public class MainActivity extends BaseActivity {
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == BOOK_ACTIVITY_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                String json = data.getStringExtra("audiobook");
+                AudioBook audioBook = JSONManager.importFromJSON(json, AudioBook.class);
+                currentBook.setValue(audioBook);
+            }
+        }
+
+    }
 }

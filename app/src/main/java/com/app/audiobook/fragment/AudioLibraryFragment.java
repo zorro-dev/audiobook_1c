@@ -27,6 +27,8 @@ import com.app.audiobook.ux.MainActivity;
 
 import java.util.ArrayList;
 
+import static com.app.audiobook.ux.MainActivity.BOOK_ACTIVITY_REQUEST;
+
 public class AudioLibraryFragment extends BaseFragment {
 
     View v;
@@ -66,7 +68,7 @@ public class AudioLibraryFragment extends BaseFragment {
             String gson = JSONManager.exportToJSON(adapter.getAudioBooks().get(pos));
             
             intent.putExtra("audioBook", gson);
-            startActivity(intent);
+            startActivityForResult(intent, BOOK_ACTIVITY_REQUEST);
         });
 
         recyclerView.setAdapter(adapter);
