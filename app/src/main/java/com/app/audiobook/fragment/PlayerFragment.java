@@ -33,6 +33,8 @@ import com.app.audiobook.audio.service.player.PlayerAdapter;
 import com.app.audiobook.interfaces.ClickListener;
 import com.app.audiobook.adapter.BookmarkAdapter;
 import com.app.audiobook.ux.MainActivity;
+import com.bumptech.glide.Glide;
+import com.joooonho.SelectableRoundedImageView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -87,6 +89,7 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
 
                 initChapterRecyclerView();
                 initBookmarkList(audioBook);
+                initBookData();
 
                 hideProgress();
             }
@@ -185,6 +188,9 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
         ConstraintLayout chapterLayout = v.findViewById(R.id.chapter);
         ConstraintLayout bookmarksLayout = v.findViewById(R.id.bookmark);
 
+        ConstraintLayout constraintChapter = v.findViewById(R.id.constraintChapter);
+        ConstraintLayout constraintBookmarks = v.findViewById(R.id.constraintBookmarks);
+
         RecyclerView chapterList = v.findViewById(R.id.recyclerViewChapter);
         RecyclerView bookmarkList = v.findViewById(R.id.recyclerViewBookmarks);
 
@@ -194,8 +200,8 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
                 indicatorChapter.setVisibility(View.VISIBLE);
                 indicatorBookmarks.setVisibility(View.INVISIBLE);
 
-                chapterList.setVisibility(View.VISIBLE);
-                bookmarkList.setVisibility(View.INVISIBLE);
+                constraintChapter.setVisibility(View.VISIBLE);
+                constraintBookmarks.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -205,8 +211,8 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
                 indicatorChapter.setVisibility(View.INVISIBLE);
                 indicatorBookmarks.setVisibility(View.VISIBLE);
 
-                chapterList.setVisibility(View.INVISIBLE);
-                bookmarkList.setVisibility(View.VISIBLE);
+                constraintChapter.setVisibility(View.INVISIBLE);
+                constraintBookmarks.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -249,6 +255,23 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
 
             }
         });
+    }
+
+    private void initBookData(){
+        SelectableRoundedImageView cover = v.findViewById(R.id.book_cover);
+        TextView title = v.findViewById(R.id.title);
+        TextView author = v.findViewById(R.id.author);
+        TextView count_parts = v.findViewById(R.id.count_parts);
+
+        title.setText(currentAudioBook.getTitle());
+        author.setText(currentAudioBook.getAuthor().getName());
+        count_parts.setText(currentAudioBook.getChapterSize() + " частей");
+
+        Glide.with(getContext())
+                .load(currentAudioBook.getCoverUrl())
+                .placeholder(R.drawable.ic_black_square)
+                .into(cover);
+
     }
 
     private void setSpeed(MediaPlayer mp, float speed) {
