@@ -21,6 +21,7 @@ import com.app.audiobook.audio.book.AudioBook;
 import com.app.audiobook.audio.service.player.PlayerAdapter;
 import com.app.audiobook.audio.timer.StopPlayerTimer;
 import com.app.audiobook.component.JSONManager;
+import com.app.audiobook.fragment.CategoryListFragment;
 import com.app.audiobook.fragment.DescriptionFragment;
 import com.app.audiobook.fragment.DownloadBookFragment;
 import com.app.audiobook.fragment.PurchaseFragment;
@@ -166,6 +167,14 @@ public class MainActivity extends BaseActivity {
         DescriptionFragment fragment = new DescriptionFragment(audioBook);
 
         fragmentTransaction.addToBackStack("DescriptionFragment");
+        fragmentTransaction.add(R.id.frame_layout, fragment).commit();
+    }
+
+    public void initCategoryListFragment(String categoryId){
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        CategoryListFragment fragment = new CategoryListFragment(categoryId);
+
+        fragmentTransaction.addToBackStack("CategoryListFragment");
         fragmentTransaction.add(R.id.frame_layout, fragment).commit();
     }
 

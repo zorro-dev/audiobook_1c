@@ -60,9 +60,10 @@ public class CategoryFragment extends BaseFragment {
             @Override
             public void onClick(View v, int pos) {
                 String categoryId = adapter.getCategory().get(pos).getId();
-                Intent intent = new Intent(getContext(), CategoryListActivity.class);
-                intent.putExtra("categoryId", categoryId);
-                startActivity(intent);
+                //Intent intent = new Intent(getContext(), CategoryListActivity.class);
+                //intent.putExtra("categoryId", categoryId);
+                //startActivity(intent);
+                ((MainActivity) getActivity()).initCategoryListFragment(categoryId);
             }
         });
 
