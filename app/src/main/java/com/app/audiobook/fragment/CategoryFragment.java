@@ -1,12 +1,9 @@
 package com.app.audiobook.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +14,6 @@ import com.app.audiobook.R;
 import com.app.audiobook.adapter.CategoryAdapter;
 import com.app.audiobook.audio.book.Category;
 import com.app.audiobook.interfaces.ClickListener;
-import com.app.audiobook.ux.CategoryListActivity;
 import com.app.audiobook.ux.MainActivity;
 
 public class CategoryFragment extends BaseFragment {

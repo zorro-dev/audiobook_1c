@@ -56,9 +56,8 @@ public class ShopFragment extends BaseFragment {
 
     private void initRecyclerViewBooks(ArrayList<AudioBook> audioBooks){
         RecyclerView recyclerView = v.findViewById(R.id.recyclerViewBook);
-        ShopAdapter adapter = new ShopAdapter();
+        ShopAdapter adapter = new ShopAdapter(getParent().userCatalog);
 
-        adapter.setUserCatalog(getParent().userCatalog);
         adapter.setAudioBooks(audioBooks);
 
         adapter.setClickListener((v1, pos) -> {

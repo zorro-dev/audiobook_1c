@@ -27,6 +27,10 @@ public class ShopAdapter extends RecyclerView.Adapter {
 
     UserCatalog userCatalog;
 
+    public ShopAdapter(UserCatalog userCatalog) {
+        this.userCatalog = userCatalog;
+    }
+
     public ArrayList<AudioBook> getAudioBooks() {
         return audioBooks;
     }
@@ -42,11 +46,6 @@ public class ShopAdapter extends RecyclerView.Adapter {
     public void setClickListener(ClickListener clickListener) {
         this.clickListener = clickListener;
     }
-
-    public void setUserCatalog(UserCatalog userCatalog) {
-        this.userCatalog = userCatalog;
-    }
-
 
     class ViewHolder extends RecyclerView.ViewHolder {
 

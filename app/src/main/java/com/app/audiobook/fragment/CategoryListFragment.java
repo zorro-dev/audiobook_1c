@@ -45,7 +45,7 @@ public class CategoryListFragment extends BaseFragment {
 
         categoryListCatalog = new CategoryListCatalog(categoryId);
         categoryListCatalog.load();
-        categoryListCatalog.getCatalogLiveData().observe(this, new Observer<ArrayList<AudioBook>>() {
+        categoryListCatalog.getCatalogLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<AudioBook>>() {
             @Override
             public void onChanged(ArrayList<AudioBook> audioBooks) {
                 initRecyclerView(audioBooks);
@@ -69,7 +69,7 @@ public class CategoryListFragment extends BaseFragment {
 
     private void initRecyclerView(ArrayList<AudioBook> audioBooks){
         RecyclerView recyclerView = v.findViewById(R.id.recyclerViewCategoryBook);
-        ShopAdapter adapter = new ShopAdapter();
+        ShopAdapter adapter = new ShopAdapter(getParent().userCatalog);
 
         adapter.setAudioBooks(audioBooks);
 
@@ -119,5 +119,9 @@ public class CategoryListFragment extends BaseFragment {
             }
         });*/
 
+    }
+
+    private MainActivity getParent() {
+        return (MainActivity) getActivity();
     }
 }
