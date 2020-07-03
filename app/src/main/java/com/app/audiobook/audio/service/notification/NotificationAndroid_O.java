@@ -10,6 +10,8 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.app.audiobook.audio.book.AudioBook;
+import com.app.audiobook.audio.book.Chapter;
 import com.app.audiobook.audio.service.BackgroundSoundService;
 
 import static com.app.audiobook.audio.service.BackgroundSoundService.*;
@@ -19,16 +21,16 @@ public class NotificationAndroid_O {
     public static final String CHANNEL_ID =
             String.valueOf(HandleNotifications.getRandomNumber());
 
-    public static void createNotification(Service context) {
+    public static void createNotification(Service context, AudioBook audioBook, Chapter chapter) {
         String channelId = createChannel(context);
         Notification notification =
-                buildNotification(context, channelId);
+                buildNotification(context, channelId, audioBook, chapter);
         context.startForeground(
                 HandleNotifications.ONGOING_NOTIFICATION_ID, notification);
     }
 
     private static Notification buildNotification(
-            Service context, String channelId) {
+            Service context, String channelId, AudioBook audioBook, Chapter chapter) {
         // Create Pending Intents.
         PendingIntent piLaunchMainActivity =
                 HandleNotifications.getLaunchActivityPI(context);
@@ -46,7 +48,7 @@ public class NotificationAndroid_O {
         // Create a notification.
         return new Notification.Builder(context, channelId)
                 .setContentTitle(HandleNotifications.getNotificationTitle(context))
-                .setContentText(HandleNotifications.getNotificationContent(context))
+                .setContentText(HandleNotifications.getNotificationContent(context, audioBook, chapter))
                 .setSmallIcon(HandleNotifications.SMALL_ICON)
                 .setContentIntent(piLaunchMainActivity)
                 .setActions(stopAction)

@@ -54,16 +54,20 @@ public class BackgroundSoundService extends Service
     @Override
     public void onCreate() {
         super.onCreate();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationAndroid_O.createNotification(this);
-        } else {
-            NotificationAndroid_PreO.createNotification(this);
-        }
+        createNotification(null, null);
 
         Log.i(TAG, "onCreate()");
 
 
         Toast.makeText(this, "Service started...", Toast.LENGTH_SHORT).show();
+    }
+
+    private void createNotification(AudioBook audioBook, Chapter chapter) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationAndroid_O.createNotification(this, audioBook, chapter);
+        } else {
+            NotificationAndroid_PreO.createNotification(this, audioBook, chapter);
+        }
     }
 
     private boolean needToStart = false;
@@ -238,6 +242,8 @@ public class BackgroundSoundService extends Service
 
     private void setAudio(AudioBook audioBook, Chapter chapter, boolean needToStart, int bookmarkPoint) {
         mediaPlayer.reset();
+
+        createNotification(audioBook, chapter);
 
         this.needToStart = needToStart;
         this.bookmarkPoint = bookmarkPoint;

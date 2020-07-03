@@ -1,6 +1,7 @@
 package com.app.audiobook.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,15 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.android.billingclient.api.BillingClient;
+import com.android.billingclient.api.BillingClientStateListener;
+import com.android.billingclient.api.BillingFlowParams;
+import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.PurchasesUpdatedListener;
+import com.android.billingclient.api.SkuDetails;
+import com.android.billingclient.api.SkuDetailsParams;
+import com.android.billingclient.api.SkuDetailsResponseListener;
 import com.app.audiobook.BaseFragment;
 import com.app.audiobook.R;
 import com.app.audiobook.audio.book.AudioBook;
@@ -22,6 +32,11 @@ import com.app.audiobook.component.JSONManager;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.FirebaseDatabase;
 import com.joooonho.SelectableRoundedImageView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static com.app.audiobook.audio.book.BookPrice.TYPE_DISCOUNT_PRICE;
 import static com.app.audiobook.audio.book.BookPrice.TYPE_FREE;
@@ -35,6 +50,10 @@ public class PurchaseFragment extends BaseFragment {
     ShopCatalog shopCatalog;
 
     public PurchaseFragment(AudioBook audioBook, UserCatalog userCatalog, ShopCatalog shopCatalog) {
+    private BillingClient mBillingClient;
+    private Map<String, SkuDetails> mSkuDetailsMap = new HashMap<>();
+
+    public PurchaseFragment(AudioBook audioBook, UserCatalog userCatalog) {
         this.audioBook = audioBook;
         this.userCatalog = userCatalog;
         this.shopCatalog = shopCatalog;
@@ -48,6 +67,8 @@ public class PurchaseFragment extends BaseFragment {
         initInterface();
 
         initBuyButton();
+
+        initBillingClient();
 
         return v;
     }
@@ -126,7 +147,13 @@ public class PurchaseFragment extends BaseFragment {
                     addToUserCatalog();
                     initInterface();
                 } else {
-                    //TODO показать фрагмент покупки
+                    //показать фрагмент покупки
+                    if (mSkuDetailsMap.containsKey(audioBook.getId())) {
+                        Log.v("lol", "contains");
+                        launchBilling(audioBook.getId());
+                    } else {
+                        Toast.makeText(getContext(), "Ошибка получения товара", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -135,13 +162,80 @@ public class PurchaseFragment extends BaseFragment {
     private void addToUserCatalog() {
         userCatalog.getCatalogList().add(audioBook);
         userCatalog.updateList();
-        
+
         shopCatalog.updateList();
 
         FirebaseDatabase.getInstance().getReference("BookCatalog")
                 .child("ByUsers").child(getAuthManager().getUser().getId())
                 .child(audioBook.getId()).setValue(JSONManager.exportToJSON(audioBook));
 
+    }
+
+    private void initBillingClient() {
+        mBillingClient = BillingClient.newBuilder(getContext())
+                .enablePendingPurchases()
+                .setListener(new PurchasesUpdatedListener() {
+                    @Override
+                    public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> purchases) {
+                        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && purchases != null) {
+                            //сюда мы попадем когда будет осуществлена покупка
+
+                            Purchase purchase = purchases.get(0);
+
+                            addToUserCatalog();
+                        }
+                    }
+                }).build();
+        mBillingClient.startConnection(new BillingClientStateListener() {
+            @Override
+            public void onBillingSetupFinished(BillingResult billingResult) {
+                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                    //здесь мы можем запросить информацию о товарах и покупках
+                    querySkuDetails();
+
+                    //hideProgress();
+                }
+            }
+
+            @Override
+            public void onBillingServiceDisconnected() {
+                //сюда мы попадем если что-то пойдет не так
+                Toast.makeText(getContext(), "Что-то пошло не так", Toast.LENGTH_SHORT).show();
+                //hideProgress();
+            }
+        });
+    }
+
+    private void querySkuDetails() {
+        SkuDetailsParams.Builder skuDetailsParamsBuilder = SkuDetailsParams.newBuilder();
+        List<String> skuList = new ArrayList<>();
+        skuList.add(audioBook.getId());
+        skuDetailsParamsBuilder.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
+        mBillingClient.querySkuDetailsAsync(skuDetailsParamsBuilder.build(), new SkuDetailsResponseListener() {
+
+            @Override
+            public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> skuDetailsList) {
+                if (billingResult.getResponseCode() == 0) {
+                    for (SkuDetails skuDetails : skuDetailsList) {
+
+                        Log.v("lol", "id : " + skuDetails.getSku());
+
+                        mSkuDetailsMap.put(skuDetails.getSku(), skuDetails);
+                    }
+                    //if (prepearedSkuId != null) {
+                    //    launchBilling(prepearedSkuId);
+                    //}
+                }
+            }
+
+        });
+    }
+
+    public void launchBilling(String skuId) {
+        BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+                .setSkuDetails(mSkuDetailsMap.get(skuId))
+                .build();
+        mBillingClient.launchBillingFlow(getActivity(), billingFlowParams);
     }
 
 }

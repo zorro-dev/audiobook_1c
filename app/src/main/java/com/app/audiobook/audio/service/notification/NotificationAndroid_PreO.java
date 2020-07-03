@@ -7,11 +7,14 @@ import android.app.Service;
 
 import androidx.core.app.NotificationCompat;
 
+import com.app.audiobook.audio.book.AudioBook;
+import com.app.audiobook.audio.book.Chapter;
+
 import static com.app.audiobook.audio.service.BackgroundSoundService.*;
 
 @TargetApi(25)
 public class NotificationAndroid_PreO {
-    public static void createNotification(Service context) {
+    public static void createNotification(Service context, AudioBook audioBook, Chapter chapter) {
         // Create Pending Intents.
         PendingIntent piLaunchMainActivity =
                 HandleNotifications.getLaunchActivityPI(context);
@@ -29,7 +32,7 @@ public class NotificationAndroid_PreO {
         Notification mNotification =
                 new NotificationCompat.Builder(context)
                         .setContentTitle(HandleNotifications.getNotificationTitle(context))
-                        .setContentText(HandleNotifications.getNotificationContent(context))
+                        .setContentText(HandleNotifications.getNotificationContent(context, audioBook, chapter))
                         .setSmallIcon(HandleNotifications.SMALL_ICON)
                         .setContentIntent(piLaunchMainActivity)
                         .addAction(stopAction)
