@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.app.audiobook.BaseFragment;
 import com.app.audiobook.R;
 import com.app.audiobook.audio.book.AudioBook;
+import com.app.audiobook.audio.catalog.ShopCatalog;
 import com.app.audiobook.audio.catalog.UserCatalog;
 import com.app.audiobook.component.JSONManager;
 import com.bumptech.glide.Glide;
@@ -31,10 +32,12 @@ public class PurchaseFragment extends BaseFragment {
     View v;
     AudioBook audioBook;
     UserCatalog userCatalog;
+    ShopCatalog shopCatalog;
 
-    public PurchaseFragment(AudioBook audioBook, UserCatalog userCatalog) {
+    public PurchaseFragment(AudioBook audioBook, UserCatalog userCatalog, ShopCatalog shopCatalog) {
         this.audioBook = audioBook;
         this.userCatalog = userCatalog;
+        this.shopCatalog = shopCatalog;
     }
 
     @Nullable
@@ -132,9 +135,13 @@ public class PurchaseFragment extends BaseFragment {
     private void addToUserCatalog() {
         userCatalog.getCatalogList().add(audioBook);
         userCatalog.updateList();
+        
+        shopCatalog.updateList();
+
         FirebaseDatabase.getInstance().getReference("BookCatalog")
                 .child("ByUsers").child(getAuthManager().getUser().getId())
                 .child(audioBook.getId()).setValue(JSONManager.exportToJSON(audioBook));
+
     }
 
 }

@@ -20,6 +20,7 @@ import com.app.audiobook.adapter.ShopAdapter;
 import com.app.audiobook.audio.book.AudioBook;
 import com.app.audiobook.audio.book.BookPrice;
 import com.app.audiobook.audio.catalog.ShopCatalog;
+import com.app.audiobook.audio.catalog.UserCatalog;
 import com.app.audiobook.component.FilterParameter;
 import com.app.audiobook.interfaces.ClickListener;
 import com.app.audiobook.ux.MainActivity;
@@ -57,6 +58,7 @@ public class ShopFragment extends BaseFragment {
         RecyclerView recyclerView = v.findViewById(R.id.recyclerViewBook);
         ShopAdapter adapter = new ShopAdapter();
 
+        adapter.setUserCatalog(getParent().userCatalog);
         adapter.setAudioBooks(audioBooks);
 
         adapter.setClickListener((v1, pos) -> {

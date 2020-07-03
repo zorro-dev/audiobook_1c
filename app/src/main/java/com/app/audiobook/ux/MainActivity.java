@@ -160,7 +160,7 @@ public class MainActivity extends BaseActivity {
 
     public void initPurchaseFragment(AudioBook audioBook){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        PurchaseFragment fragment = new PurchaseFragment(audioBook, userCatalog);
+        PurchaseFragment fragment = new PurchaseFragment(audioBook, userCatalog, shopCatalog);
 
         fragmentTransaction.addToBackStack("PurchaseFragment");
         fragmentTransaction.add(R.id.frame_layout, fragment).commit();

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.audiobook.R;
 import com.app.audiobook.audio.book.AudioBook;
+import com.app.audiobook.audio.catalog.UserCatalog;
 import com.app.audiobook.interfaces.ClickListener;
 import com.bumptech.glide.Glide;
 
@@ -23,6 +24,8 @@ public class ShopAdapter extends RecyclerView.Adapter {
     ArrayList<AudioBook> audioBooks = new ArrayList<>();
 
     ClickListener clickListener;
+
+    UserCatalog userCatalog;
 
     public ArrayList<AudioBook> getAudioBooks() {
         return audioBooks;
@@ -40,6 +43,11 @@ public class ShopAdapter extends RecyclerView.Adapter {
         this.clickListener = clickListener;
     }
 
+    public void setUserCatalog(UserCatalog userCatalog) {
+        this.userCatalog = userCatalog;
+    }
+
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView title;
@@ -48,6 +56,7 @@ public class ShopAdapter extends RecyclerView.Adapter {
         ImageView cover;
         TextView price;
         TextView discount;
+        ImageView price_img;
 
         ConstraintLayout discount_layout;
         ImageView layout_color;
@@ -61,6 +70,7 @@ public class ShopAdapter extends RecyclerView.Adapter {
             cover = v.findViewById(R.id.book_cover);
             price = v.findViewById(R.id.price);
             discount = v.findViewById(R.id.discount);
+            price_img = v.findViewById(R.id.price_img);
 
             discount_layout = v.findViewById(R.id.discount_layout);
             layout_color = v.findViewById(R.id.layout_color);
@@ -97,7 +107,15 @@ public class ShopAdapter extends RecyclerView.Adapter {
                 .placeholder(R.drawable.ic_black_square)
                 .into(h.cover);
 
-        if (item.getBookPrice() != null) {
+
+
+        if (userCatalog.contains(item)) {
+            h.price_img.setImageResource(R.drawable.ic_check);
+            h.price_img.setColorFilter(res.getColor(R.color.colorOrange));
+            h.layout_color.setColorFilter(res.getColor(R.color.colorGray_3));
+            h.price.setText("Уже в аудиотеке");
+            h.discount_layout.setVisibility(View.GONE);
+        } else if (item.getBookPrice() != null) {
             if (item.getBookPrice().getType().equals("TYPE_FREE")) {
                 h.price.setText("Бесплатно");
             } else {
@@ -120,6 +138,9 @@ public class ShopAdapter extends RecyclerView.Adapter {
             } else if (item.getBookPrice().getType().equals("TYPE_DISCOUNT_PRICE")) {
                 h.layout_color.setColorFilter(res.getColor(R.color.colorDiscountPrice));
             }
+
+            h.price_img.setImageResource(R.drawable.ic_shop_bag);
+            h.price_img.setColorFilter(android.R.color.transparent);
         }
     }
 
