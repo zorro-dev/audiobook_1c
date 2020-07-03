@@ -126,6 +126,8 @@ public class BookActivity extends AppCompatActivity {
                 intent.putExtra("audiobook", json);
 
                 setResult(RESULT_OK, intent);
+
+                finish();
             }
         });
     }

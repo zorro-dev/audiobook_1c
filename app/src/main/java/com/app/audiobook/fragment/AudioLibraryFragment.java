@@ -68,7 +68,7 @@ public class AudioLibraryFragment extends BaseFragment {
             String gson = JSONManager.exportToJSON(adapter.getAudioBooks().get(pos));
             
             intent.putExtra("audioBook", gson);
-            startActivityForResult(intent, BOOK_ACTIVITY_REQUEST);
+            getParent().startActivityForResult(intent, BOOK_ACTIVITY_REQUEST);
         });
 
         recyclerView.setAdapter(adapter);

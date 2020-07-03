@@ -3,6 +3,7 @@ package com.app.audiobook.ux;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -221,11 +222,17 @@ public class MainActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        Log.v("lol", "onActivityResult");
+
         if (requestCode == BOOK_ACTIVITY_REQUEST) {
+            Log.v("lol", "onActivityResult1");
             if (resultCode == RESULT_OK) {
+                Log.v("lol", "onActivityResult1");
                 String json = data.getStringExtra("audiobook");
                 AudioBook audioBook = JSONManager.importFromJSON(json, AudioBook.class);
                 currentBook.setValue(audioBook);
+
+                viewPager.setCurrentItem(2);
             }
         }
 
