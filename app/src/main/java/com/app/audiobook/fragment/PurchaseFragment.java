@@ -49,11 +49,11 @@ public class PurchaseFragment extends BaseFragment {
     UserCatalog userCatalog;
     ShopCatalog shopCatalog;
 
-    public PurchaseFragment(AudioBook audioBook, UserCatalog userCatalog, ShopCatalog shopCatalog) {
+
     private BillingClient mBillingClient;
     private Map<String, SkuDetails> mSkuDetailsMap = new HashMap<>();
 
-    public PurchaseFragment(AudioBook audioBook, UserCatalog userCatalog) {
+    public PurchaseFragment(AudioBook audioBook, UserCatalog userCatalog, ShopCatalog shopCatalog) {
         this.audioBook = audioBook;
         this.userCatalog = userCatalog;
         this.shopCatalog = shopCatalog;
