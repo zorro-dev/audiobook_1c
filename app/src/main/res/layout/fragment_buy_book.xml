@@ -22,7 +22,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/corner_radius_20dp"
-            android:tint="@color/colorGray_7"
+            android:tint="@color/newColorBackgroundWhite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:maxLines="2"
                     android:text="Похищенная картина"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorBlack"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
@@ -83,7 +83,7 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:src="@drawable/corner_radius_30dp"
-                        android:tint="@color/colorGray_3"
+                        android:tint="@color/newColorBackgroundGray2"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -117,7 +117,7 @@
                             android:paddingRight="10dp"
                             android:paddingBottom="2dp"
                             android:text="Эдгар Уоллес"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/colorBlack"
                             android:textSize="10dp" />
 
                     </LinearLayout>
@@ -137,7 +137,7 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:src="@drawable/corner_radius_30dp"
-                        android:tint="@color/colorGray_3"
+                        android:tint="@color/newColorBackgroundGray2"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -171,7 +171,7 @@
                             android:paddingRight="10dp"
                             android:paddingBottom="2dp"
                             android:text="3 частей"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/colorBlack"
                             android:textSize="10dp" />
 
                     </LinearLayout>
@@ -210,6 +210,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
+                        android:id="@+id/price_img"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginLeft="5dp"
@@ -309,7 +310,7 @@
                     android:paddingRight="20dp"
                     android:paddingBottom="2dp"
                     android:text="Описание"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorBlack"
                     android:textSize="15dp"
                     android:textStyle="bold" />
 
@@ -331,7 +332,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:text="«Главный следователь Скотленд-Ярда Питер Дауэс был для своей должности сравнительно молод. Еще ни разу не потерял он найденный след, хотя сам Питер не любил говорить о своих подвигах.Если его что-то и увлекало, так это преступления с какой-нибудь запутанной загадкой. Все необычное, странное и таинственное вызывало в нем живейший интерес, и больше всего на свете он сожалел, что ему не пришлось заниматься ни одним из множества дел Джейн Четыре Квадрата…»"
-                        android:textColor="@color/colorWhite" />
+                        android:textColor="@color/colorBlack" />
 
                 </LinearLayout>
 

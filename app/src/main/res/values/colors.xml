@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#222222</color>
-    <color name="colorPrimaryDark">#222222</color>
-    <color name="colorAccent">#FFFFFF</color>
+    <color name="colorPrimaryDark">#FF9800</color>
+    <color name="colorAccent">#373737</color>
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
@@ -26,27 +26,53 @@
     <color name="colorGreen_3">#4B8645</color>
     <color name="colorGreen_4">#4B8645</color>
     <color name="colorGreen_5">#30D530</color>
+    <color name="colorGreen_6">#61D861</color>
+    <color name="colorGreen_7">#52FA52</color>
 
-    <color name="colorUsualPrice">#4B8645</color>
-    <color name="colorFreePrice">#607D8B</color>
-    <color name="colorDiscountPrice">#464646</color>
+    <color name="colorUsualPrice">#44CD44</color>
+    <color name="colorFreePrice">#8FB3C5</color>
+    <color name="colorDiscountPrice">#BABABA</color>
     <color name="black_alpha">#80000000</color>
     <color name="black_alpha2">#33000000</color>
 
 
-    <color name="colorCategory1">#BBFFBB</color>
-    <color name="colorCategory2">#A9FFFF</color>
-    <color name="colorCategory3">#FFDCA7</color>
-    <color name="colorCategory4">#E2B8FF</color>
-    <color name="colorCategory5">#9999FF</color>
-    <color name="colorCategory6">#FFA2A2</color>
-    <color name="colorCategory7">#FF9CB8</color>
-    <color name="colorCategory8">#FFFF9F</color>
+    <color name="colorCategory1">#AAFFAA</color>
+    <color name="colorCategory2">#9EFBFB</color>
+    <color name="colorCategory3">#FFD89C</color>
+    <color name="colorCategory4">#DCA9FF</color>
+    <color name="colorCategory5">#8E8EFF</color>
+    <color name="colorCategory6">#FD9191</color>
+    <color name="colorCategory7">#FD88A9</color>
+    <color name="colorCategory8">#FFFF8C</color>
 
     <color name="colorOrange">#FF9800</color>
     <color name="colorOrangeText">#B3FF9800</color>
     <color name="colorOrangeBackground">#51FF9800</color>
 
     <color name="colorAuthText">#34CDCDCD</color>
+
+    <!-- Цвета для нового дизайна -->
+
+    <color name="newColorBackgroundWhite">#FFFFFF</color>
+
+    <color name="newColorBackgroundGray0">#FAF9F9</color>
+    <color name="newColorBackgroundGray1">#ECECEC</color>
+    <color name="newColorBackgroundGray2">#DDDDDD</color>
+    <color name="newColorBackgroundGray3">#BABABA</color>
+    <color name="newColorBackgroundGray4">#A3A3A3</color>
+    <color name="newColorBackgroundGray5">#919191</color>
+    <color name="newColorBackgroundGray6">#E6E6E6</color>
+
+    <color name="newColorOrange1">#FF9800</color>
+    <color name="newColorOrange2">#FFA41F</color>
+
+    <color name="colorStartTitle1">#7EFF7E</color>
+    <color name="colorStartTitle2">#7BFAFA</color>
+    <color name="colorStartTitle3">#FFCE82</color>
+    <color name="colorStartTitle4">#CF8FFB</color>
+    <color name="colorStartTitle5">#7373FA</color>
+    <color name="colorStartTitle6">#FA7373</color>
+    <color name="colorStartTitle7">#FA7399</color>
+    <color name="colorStartTitle8">#F4F464</color>
 
 </resources>

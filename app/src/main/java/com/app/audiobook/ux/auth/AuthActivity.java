@@ -22,14 +22,14 @@ import com.app.audiobook.ux.MainActivity;
 public class AuthActivity extends BaseActivity implements IAuthEvents {
 
     private int[] colors = new int[] {
-            R.color.colorCategory1,
-            R.color.colorCategory2,
-            R.color.colorCategory3,
-            R.color.colorCategory4,
-            R.color.colorCategory5,
-            R.color.colorCategory6,
-            R.color.colorCategory7,
-            R.color.colorCategory8,
+            R.color.colorStartTitle1,
+            R.color.colorStartTitle2,
+            R.color.colorStartTitle3,
+            R.color.colorStartTitle4,
+            R.color.colorStartTitle5,
+            R.color.colorStartTitle6,
+            R.color.colorStartTitle7,
+            R.color.colorStartTitle8,
     };
 
     @Override

@@ -88,16 +88,16 @@ public class ChapterAdapter extends RecyclerView.Adapter {
         h.time.setText(getFormattedTime(item.getDurationInSeconds()));
 
         if(item.isCached()){
-            h.icon_download.setColorFilter(res.getColor(R.color.colorGreen_2));
+            h.icon_download.setColorFilter(res.getColor(R.color.newColorOrange1));
         } else {
-            h.icon_download.setColorFilter(res.getColor(R.color.colorGray_5));
+            h.icon_download.setColorFilter(res.getColor(R.color.newColorBackgroundWhite));
         }
 
 
         if(item.getState().equals(STATE_READ)){
-            h.icon_state.setColorFilter(res.getColor(R.color.colorGreen_2));
+            h.icon_state.setColorFilter(res.getColor(R.color.newColorOrange1));
         } else if(item.getState().equals(STATE_NOT_READ)){
-            h.icon_state.setColorFilter(res.getColor(R.color.colorGray_5));
+            h.icon_state.setColorFilter(res.getColor(R.color.newColorBackgroundWhite));
         }
 
     }

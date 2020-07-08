@@ -101,11 +101,11 @@ public class TimerAdapter extends RecyclerView.Adapter {
         h.time.setText((item.getTime() / 60) + " мин");
 
         if (selectedTimerLabel == position) {
-            h.colorSelected.setColorFilter(res.getColor(R.color.colorGreen_4));
+            h.colorSelected.setColorFilter(res.getColor(R.color.newColorOrange1));
         }
 
         if (selectedTimerLabel != position) {
-            h.colorSelected.setColorFilter(res.getColor(R.color.colorGray_1));
+            h.colorSelected.setColorFilter(res.getColor(R.color.newColorBackgroundGray3));
         }
     }
 

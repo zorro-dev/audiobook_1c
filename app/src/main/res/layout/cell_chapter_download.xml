@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/corner_radius_30dp"
-            android:tint="@color/colorGray_3" />
+            android:tint="@color/newColorBackgroundGray2" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -41,7 +41,7 @@
                     android:layout_height="match_parent"
                     android:padding="5dp"
                     android:src="@drawable/ic_round"
-                    android:tint="@color/colorGray_1" />
+                    android:tint="@color/newColorBackgroundGray3" />
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -71,7 +71,7 @@
                     android:paddingLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:text="Название главы"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorBlack"
                     android:textSize="16dp"
                     android:textStyle="bold"
                     app:layout_constraintRight_toRightOf="parent"

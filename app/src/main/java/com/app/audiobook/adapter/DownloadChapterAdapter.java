@@ -98,9 +98,9 @@ public class DownloadChapterAdapter extends RecyclerView.Adapter {
         h.title.setText(item.getName());
 
         if (selection.contains(position)) {
-            h.backgroundIcon.setColorFilter(res.getColor(R.color.colorGreen_1));
+            h.backgroundIcon.setColorFilter(res.getColor(R.color.newColorOrange2));
         } else {
-            h.backgroundIcon.setColorFilter(res.getColor(R.color.colorGray_1));
+            h.backgroundIcon.setColorFilter(res.getColor(R.color.newColorBackgroundGray3));
         }
     }
 

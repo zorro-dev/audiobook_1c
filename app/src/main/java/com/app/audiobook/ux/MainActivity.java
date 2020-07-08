@@ -109,7 +109,7 @@ public class MainActivity extends BaseActivity {
                     float alpha = 1f;
 
                     if (i != position) {
-                        alpha = 0.3f;
+                        alpha = 0.8f;
                         text.setTypeface(Typeface.DEFAULT);
                     } else {
                         alpha = 1f;
@@ -237,5 +237,10 @@ public class MainActivity extends BaseActivity {
             }
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

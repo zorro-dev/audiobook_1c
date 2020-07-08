@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/corner_radius_30dp"
-            android:tint="@color/colorGray_3" />
+            android:tint="@color/newColorBackgroundGray2" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -38,7 +38,7 @@
                     android:layout_height="match_parent"
                     android:padding="5dp"
                     android:src="@drawable/ic_round"
-                    android:tint="@color/colorGray_1" />
+                    android:tint="@color/newColorBackgroundGray1" />
 
                 <ImageView
                     android:id="@+id/icon_state"
@@ -46,7 +46,7 @@
                     android:layout_height="match_parent"
                     android:padding="18dp"
                     android:src="@drawable/ic_check"
-                    android:tint="@color/colorWhite" />
+                    android:tint="@color/newColorBackgroundGray3" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -69,7 +69,7 @@
                     android:paddingLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:text="Название главы"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorBlack"
                     android:textSize="18dp"
                     android:textStyle="bold"
                     app:layout_constraintRight_toLeftOf="@id/icon_download"
@@ -97,7 +97,7 @@
                     android:gravity="center"
                     android:layout_marginRight="30dp"
                     android:text="144:15"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorBlack"
                     app:layout_constraintTop_toBottomOf="@id/icon_download"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent" />

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorGray_7"
+    android:background="@color/newColorBackgroundWhite"
     tools:context=".ux.BookActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,10 +20,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="50dp"
             android:padding="5dp"
+            android:layout_marginLeft="5dp"
             android:layout_height="50dp">
 
             <ImageView
-                android:tint="@color/colorGray_2"
+                android:tint="@color/newColorBackgroundGray2"
                 android:src="@drawable/ic_round"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
@@ -31,7 +32,7 @@
             <ImageView
                 android:layout_marginRight="3dp"
                 android:padding="10dp"
-                android:tint="@color/colorWhite"
+                android:tint="@color/newColorBackgroundWhite"
                 android:src="@drawable/ic_back"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
@@ -48,7 +49,7 @@
             android:layout_height="50dp">
 
             <ImageView
-                android:tint="@color/colorGray_2"
+                android:tint="@color/newColorBackgroundGray2"
                 android:src="@drawable/corner_radius_30dp"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -71,7 +72,7 @@
                     android:layout_marginRight="3dp"
                     android:padding="10dp"
                     android:layout_gravity="center"
-                    android:tint="@color/colorWhite"
+                    android:tint="@color/newColorBackgroundWhite"
                     android:src="@drawable/ic_download"
                     android:layout_width="40dp"
                     android:layout_height="40dp" />
@@ -79,9 +80,8 @@
                 <TextView
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:textStyle="bold"
                     android:textSize="14dp"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/newColorBackgroundWhite"
                     android:text="Скачать"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
@@ -96,7 +96,7 @@
         android:id="@+id/book_info_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorGray_2"
+        android:background="@color/newColorBackgroundGray1"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="10dp"
@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="2"
                 android:text="Похищенная картина"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -145,7 +145,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:src="@drawable/corner_radius_30dp"
-                    android:tint="@color/colorGray_3"
+                    android:tint="@color/newColorBackgroundGray2"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -179,7 +179,7 @@
                         android:paddingRight="10dp"
                         android:paddingBottom="2dp"
                         android:text="Эдгар Уоллес"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorBlack"
                         android:textSize="10dp" />
 
                 </LinearLayout>
@@ -199,7 +199,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:src="@drawable/corner_radius_30dp"
-                    android:tint="@color/colorGray_3"
+                    android:tint="@color/newColorBackgroundGray2"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -233,7 +233,7 @@
                         android:paddingRight="10dp"
                         android:paddingBottom="2dp"
                         android:text="3 частей"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorBlack"
                         android:textSize="10dp" />
 
                 </LinearLayout>
@@ -252,7 +252,7 @@
 
 
             <ImageView
-                android:tint="@color/colorGreen_1"
+                android:tint="@color/newColorOrange1"
                 android:src="@drawable/corner_radius_30dp"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -301,7 +301,7 @@
         app:layout_constraintBottom_toTopOf="@id/nav_layout"
         android:layout_marginBottom="5dp"
         android:layout_width="match_parent"
-        android:background="@color/colorGray_2"
+        android:background="@color/newColorBackgroundWhite"
         android:layout_height="0dp">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -328,7 +328,7 @@
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:textSize="16dp"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorBlack"
                     android:id="@+id/text_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -362,7 +362,7 @@
                 android:layout_weight="0.5"
                 android:padding="2.5dp"
                 android:src="@drawable/ic_round"
-                android:tint="@color/colorGreen_1"
+                android:tint="@color/newColorOrange1"
                 android:visibility="invisible" />
 
             <ImageView
@@ -372,7 +372,7 @@
                 android:layout_weight="0.5"
                 android:padding="2.5dp"
                 android:src="@drawable/ic_round"
-                android:tint="@color/colorGreen_1" />
+                android:tint="@color/newColorOrange1" />
 
         </LinearLayout>
 
@@ -393,7 +393,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:src="@drawable/corner_radius_30dp"
-                    android:tint="@color/colorGray_2"
+                    android:tint="@color/newColorBackgroundGray2"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -420,7 +420,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Описание"
-                        android:textColor="@android:color/white"
+                        android:textColor="@android:color/black"
                         android:textSize="17dp"
                         android:textStyle="bold" />
 
@@ -439,7 +439,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:src="@drawable/corner_radius_30dp"
-                    android:tint="@color/colorGray_2"
+                    android:tint="@color/newColorBackgroundGray2"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -467,7 +467,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Главы"
-                        android:textColor="@android:color/white"
+                        android:textColor="@android:color/black"
                         android:textSize="17dp"
                         android:textStyle="bold" />
 

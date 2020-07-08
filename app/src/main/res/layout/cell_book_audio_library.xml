@@ -16,7 +16,7 @@
         android:layout_marginBottom="3dp">
 
         <ImageView
-            android:tint="@color/colorGray_1"
+            android:tint="@color/newColorBackgroundGray1"
             android:src="@drawable/corner_radius_15dp"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:maxLines="2"
                     android:text="Сказки Барда Бидля"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorBlack"
                     android:textSize="19dp"
                     android:textStyle="bold" />
 
@@ -78,7 +78,7 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:src="@drawable/corner_radius_30dp"
-                        android:tint="@color/colorGray_3"
+                        android:tint="@color/newColorBackgroundGray2"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -112,7 +112,7 @@
                             android:paddingBottom="2dp"
                             android:layout_marginLeft="5dp"
                             android:text="Джоан К. Роулинг"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/colorBlack"
                             android:textSize="10dp" />
 
                     </LinearLayout>
@@ -131,7 +131,7 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:src="@drawable/corner_radius_30dp"
-                        android:tint="@color/colorGray_3"
+                        android:tint="@color/newColorBackgroundGray2"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -165,7 +165,7 @@
                             android:paddingBottom="2dp"
                             android:layout_marginLeft="5dp"
                             android:text="5 частей"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/colorBlack"
                             android:textSize="10dp" />
 
                     </LinearLayout>

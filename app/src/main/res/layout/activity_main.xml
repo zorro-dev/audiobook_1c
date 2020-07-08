@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorGray_2"
+    android:background="@color/newColorBackgroundWhite"
     tools:context=".ux.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@color/colorGray_3"
+            android:background="@color/newColorBackgroundGray1"
             android:layout_marginTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
@@ -28,10 +28,10 @@
             android:scrollbarSize="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:tabIndicator="@drawable/ic_navbar_bulge"
-            app:tabIndicatorColor="@color/colorGray_3"
+            app:tabIndicatorColor="@color/newColorBackgroundGray1"
             app:tabIndicatorGravity="top"
             app:tabIndicatorHeight="10dp"
-            app:tabTextColor="@color/colorWhite" />
+            app:tabTextColor="@color/newColorOrange1" />
 
         <LinearLayout
             android:layout_width="match_parent"

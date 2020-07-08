@@ -111,14 +111,16 @@ public class ShopAdapter extends RecyclerView.Adapter {
         if (userCatalog.contains(item)) {
             h.price_img.setImageResource(R.drawable.ic_check);
             h.price_img.setColorFilter(res.getColor(R.color.colorOrange));
-            h.layout_color.setColorFilter(res.getColor(R.color.colorGray_3));
+            h.layout_color.setColorFilter(res.getColor(R.color.newColorBackgroundGray0));
             h.price.setText("Уже в аудиотеке");
             h.discount_layout.setVisibility(View.GONE);
         } else if (item.getBookPrice() != null) {
             if (item.getBookPrice().getType().equals("TYPE_FREE")) {
                 h.price.setText("Бесплатно");
+                h.price.setTextColor(res.getColor(R.color.colorWhite));
             } else {
                 h.price.setText(item.getBookPrice().getPrice() + "$");
+                h.price.setTextColor(res.getColor(R.color.colorWhite));
             }
 
             if (item.getBookPrice().getDiscount() == 0) {
@@ -126,16 +128,16 @@ public class ShopAdapter extends RecyclerView.Adapter {
             } else {
                 h.discount_layout.setVisibility(View.VISIBLE);
                 h.price.setText(String.valueOf(Integer.parseInt(item.getBookPrice().getPrice()) * item.getBookPrice().getDiscount()) + "$");
-                h.price.setTextColor(res.getColor(R.color.colorGreen_5));
+                h.price.setTextColor(res.getColor(R.color.colorGreen_7));
                 h.discount.setText(item.getBookPrice().getPrice() + "$");
             }
 
             if (item.getBookPrice().getType().equals("TYPE_FREE")) {
                 h.layout_color.setColorFilter(res.getColor(R.color.colorFreePrice));
             } else if (item.getBookPrice().getType().equals("TYPE_USUAL_PRICE")) {
-                h.layout_color.setColorFilter(res.getColor(R.color.colorUsualPrice));
+                h.layout_color.setColorFilter(res.getColor(R.color.colorGreen_6));
             } else if (item.getBookPrice().getType().equals("TYPE_DISCOUNT_PRICE")) {
-                h.layout_color.setColorFilter(res.getColor(R.color.colorDiscountPrice));
+                h.layout_color.setColorFilter(res.getColor(R.color.newColorBackgroundGray3));
             }
 
             h.price_img.setImageResource(R.drawable.ic_shop_bag);

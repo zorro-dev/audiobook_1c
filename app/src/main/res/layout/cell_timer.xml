@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:src="@drawable/corner_radius_30dp"
-            android:tint="@color/colorGray_3"
+            android:tint="@color/newColorBackgroundGray2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -46,7 +46,7 @@
                     android:layout_height="match_parent"
                     android:padding="3dp"
                     android:src="@drawable/ic_round"
-                    android:tint="@color/colorGray_1"
+                    android:tint="@color/newColorBackgroundGray3"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -72,7 +72,7 @@
                 android:layout_marginLeft="5dp"
                 android:gravity="center"
                 android:text="15 минут"
-                android:textColor="@color/colorWhite" />
+                android:textColor="@color/colorBlack" />
 
         </LinearLayout>
 

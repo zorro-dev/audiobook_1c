@@ -29,6 +29,7 @@ import com.app.audiobook.audio.book.AudioBook;
 import com.app.audiobook.audio.catalog.ShopCatalog;
 import com.app.audiobook.audio.catalog.UserCatalog;
 import com.app.audiobook.component.JSONManager;
+import com.app.audiobook.ux.MainActivity;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.FirebaseDatabase;
 import com.joooonho.SelectableRoundedImageView;
@@ -79,6 +80,7 @@ public class PurchaseFragment extends BaseFragment {
         TextView count_parts = v.findViewById(R.id.count_parts);
         SelectableRoundedImageView cover = v.findViewById(R.id.book_cover);
         TextView price = v.findViewById(R.id.price);
+        ImageView price_img = v.findViewById(R.id.price_img);
         ImageView layout_color = v.findViewById(R.id.layout_color);
         ConstraintLayout discount_layout = v.findViewById(R.id.discount_layout);
         TextView discount= v.findViewById(R.id.discount);
@@ -96,7 +98,7 @@ public class PurchaseFragment extends BaseFragment {
                 .into(cover);
 
         if (userCatalog.contains(audioBook)) {
-            colorButton.setColorFilter(getResources().getColor(R.color.colorGray_1));
+            colorButton.setColorFilter(getResources().getColor(R.color.newColorBackgroundGray2));
             textButton.setText("Уже в аудиотеке");
         } else if (audioBook.getBookPrice().getType().equals(TYPE_FREE)) {
             price.setText("Бесплатно");
@@ -106,17 +108,25 @@ public class PurchaseFragment extends BaseFragment {
             price.setText(audioBook.getBookPrice().getPrice() + "$");
         }
 
-        if (audioBook.getBookPrice().getDiscount() == 0) {
+        if (userCatalog.contains(audioBook)) {
+            price_img.setImageResource(R.drawable.ic_check);
+            price_img.setColorFilter(getResources().getColor(R.color.colorOrange));
+            layout_color.setColorFilter(getResources().getColor(R.color.newColorBackgroundGray0));
+            price.setText("Уже в аудиотеке");
+            discount_layout.setVisibility(View.GONE);
+        } else if (audioBook.getBookPrice().getDiscount() == 0) {
             discount_layout.setVisibility(View.GONE);
         } else {
             discount_layout.setVisibility(View.VISIBLE);
             price.setText(String.valueOf(Integer.parseInt(audioBook.getBookPrice().getPrice()) * audioBook.getBookPrice().getDiscount()) + "$");
-            price.setTextColor(getResources().getColor(R.color.colorGreen_5));
+            price.setTextColor(getResources().getColor(R.color.colorGreen_7));
             discount.setVisibility(View.VISIBLE);
             discount.setText(audioBook.getBookPrice().getPrice() + "$");
         }
 
-        if (audioBook.getBookPrice().getType().equals(TYPE_FREE)) {
+        if(userCatalog.contains(audioBook)){
+            layout_color.setColorFilter(getResources().getColor(R.color.newColorBackgroundGray2));
+        } else if (audioBook.getBookPrice().getType().equals(TYPE_FREE)) {
             layout_color.setColorFilter(getResources().getColor(R.color.colorFreePrice));
         } else if (audioBook.getBookPrice().getType().equals(TYPE_USUAL_PRICE)) {
             layout_color.setColorFilter(getResources().getColor(R.color.colorUsualPrice));

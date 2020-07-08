@@ -114,9 +114,9 @@ public class AudioLibraryFilterAdapter extends RecyclerView.Adapter {
         h.title.setText(item.getTitle());
 
         if(selectedFilterParameters.contains(position)){
-            h.colorSelected.setColorFilter(res.getColor(R.color.colorGreen_4));
+            h.colorSelected.setColorFilter(res.getColor(R.color.newColorOrange1));
         } else {
-            h.colorSelected.setColorFilter(res.getColor(R.color.colorGray_1));
+            h.colorSelected.setColorFilter(res.getColor(R.color.newColorBackgroundGray3));
         }
     }
 

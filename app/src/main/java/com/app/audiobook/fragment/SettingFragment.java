@@ -52,10 +52,10 @@ public class SettingFragment extends BaseFragment {
 
         if(getParent().stopPlayerTimer.isStarted()){
             start_text.setText("Остановить таймер");
-            start_background.setColorFilter(getResources().getColor(R.color.colorGreen_2));
+            start_background.setColorFilter(getResources().getColor(R.color.newColorOrange1));
         } else {
             start_text.setText("Включить таймер");
-            start_background.setColorFilter(getResources().getColor(R.color.colorGray_1));
+            start_background.setColorFilter(getResources().getColor(R.color.newColorBackgroundGray2));
         }
 
         start.setOnClickListener(v1 -> {
@@ -68,7 +68,7 @@ public class SettingFragment extends BaseFragment {
                 } else {
                     getParent().stopPlayerTimer.startTimer(sec);
                     start_text.setText("Остановить таймер");
-                    start_background.setColorFilter(getResources().getColor(R.color.colorGreen_2));
+                    start_background.setColorFilter(getResources().getColor(R.color.newColorOrange1));
                 }
             }
 
@@ -123,7 +123,7 @@ public class SettingFragment extends BaseFragment {
             ImageView start_background = v.findViewById(R.id.start_background);
             TextView start_text = v.findViewById(R.id.start_text);
             start_text.setText("Включить таймер");
-            start_background.setColorFilter(getResources().getColor(R.color.colorGray_1));
+            start_background.setColorFilter(getResources().getColor(R.color.newColorBackgroundGray2));
 
             RecyclerView recyclerView = v.findViewById(R.id.recyclerViewTimer);
             TimerAdapter adapter = (TimerAdapter) recyclerView.getAdapter();
