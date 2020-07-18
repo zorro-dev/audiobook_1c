@@ -13,6 +13,8 @@ import com.app.audiobook.component.JSONManager;
 public class PlayerAdapter {
 
     private Context context;
+    private int currentChapter = 0;
+    private AudioBook currentAudioBook;
 
     public PlayerAdapter(Context context) {
         this.context = context;
@@ -26,7 +28,25 @@ public class PlayerAdapter {
         startIntent(intent);
     }
 
+    public int getCurrentChapter() {
+        return currentChapter;
+    }
+
+    public void setCurrentChapter(int currentChapter) {
+        this.currentChapter = currentChapter;
+    }
+
+    public void startNextChapter()  {
+        currentChapter++;
+
+        if (currentChapter < currentAudioBook.getChapterSize()) {
+            setAudioAndStart(
+                    currentAudioBook, currentAudioBook.getChapters().get(currentChapter));
+        }
+    }
+
     public void setAudio(AudioBook audio, Chapter chapter) {
+        currentAudioBook = audio;
         Intent intent = IntentBuilder.getInstance(context)
                 .setCommand(IntentBuilder.Command.SET_AUDIO)
                 .setMessage(JSONManager.exportToJSON(audio))
