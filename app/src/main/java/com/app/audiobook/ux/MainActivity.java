@@ -15,7 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.app.audiobook.R;
 import com.app.audiobook.audio.AudioLibraryManager;
-import com.app.audiobook.audio.PreferenceUtil;
+import com.app.audiobook.utils.PreferenceUtil;
 import com.app.audiobook.audio.catalog.ShopCatalog;
 import com.app.audiobook.audio.catalog.UserCatalog;
 import com.app.audiobook.audio.service.BackgroundSoundService;
@@ -154,7 +154,7 @@ public class MainActivity extends BaseActivity {
             });
         }
 
-        viewPager.setCurrentItem(2);
+        viewPager.setCurrentItem(PreferenceUtil.getStartPage(this));
 
     }
 

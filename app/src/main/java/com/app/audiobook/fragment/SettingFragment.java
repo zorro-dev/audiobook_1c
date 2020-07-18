@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.app.audiobook.BaseFragment;
 import com.app.audiobook.R;
 import com.app.audiobook.adapter.TimerAdapter;
 import com.app.audiobook.component.TimerLabel;
+import com.app.audiobook.utils.PreferenceUtil;
 import com.app.audiobook.ux.MainActivity;
 
 public class SettingFragment extends BaseFragment {
@@ -41,6 +43,45 @@ public class SettingFragment extends BaseFragment {
     private void initInterface() {
         initUserValues();
         initTimerLayout();
+        initStartPageLayout();
+    }
+
+    private void initStartPageLayout() {
+        int[] backgrounds = new int[] {
+                R.id.background_nav_1,
+                R.id.background_nav_2,
+                R.id.background_nav_3,
+                R.id.background_nav_4,
+                R.id.background_nav_5,
+        };
+
+        int[] layouts = new int[] {
+                R.id.start_page_1,
+                R.id.start_page_2,
+                R.id.start_page_3,
+                R.id.start_page_4,
+                R.id.start_page_5,
+        };
+
+        int startPage = PreferenceUtil.getStartPage(getContext());
+
+        for (int i = 0; i < backgrounds.length; i ++) {
+            ImageView background = v.findViewById(backgrounds[i]);
+            if (startPage == i) {
+                background.setColorFilter(getResources().getColor(R.color.newColorBackgroundGray5));
+            } else {
+                background.setColorFilter(getResources().getColor(android.R.color.transparent));
+            }
+
+            LinearLayout layout = v.findViewById(layouts[i]);
+            int finalI = i;
+            layout.setOnClickListener(v1 -> {
+                PreferenceUtil.setStartPage(getContext(), finalI);
+                initStartPageLayout();
+            });
+        }
+
+
     }
 
     private void initTimerLayout(){

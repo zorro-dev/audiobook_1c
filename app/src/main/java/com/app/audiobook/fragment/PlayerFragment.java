@@ -16,7 +16,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,7 +23,7 @@ import com.app.audiobook.BaseFragment;
 import com.app.audiobook.R;
 import com.app.audiobook.adapter.ChapterAdapter;
 import com.app.audiobook.audio.BookmarkManager;
-import com.app.audiobook.audio.PreferenceUtil;
+import com.app.audiobook.utils.PreferenceUtil;
 import com.app.audiobook.audio.book.AudioBook;
 import com.app.audiobook.audio.book.Bookmark;
 import com.app.audiobook.audio.book.Chapter;

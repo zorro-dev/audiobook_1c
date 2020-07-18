@@ -1,4 +1,4 @@
-package com.app.audiobook.audio;
+package com.app.audiobook.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -17,6 +17,18 @@ public class PreferenceUtil {
         SharedPreferences pref = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
 
         pref.edit().putString("current_audio_book", audioBookId).apply();
+    }
+
+    public static int getStartPage(Context context) {
+        SharedPreferences pref = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
+
+        return pref.getInt("start_page", 0);
+    }
+
+    public static void setStartPage(Context context, int startPage) {
+        SharedPreferences pref = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
+
+        pref.edit().putInt("start_page", startPage).apply();
     }
 
 }
