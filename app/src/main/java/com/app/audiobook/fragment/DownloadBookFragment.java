@@ -2,13 +2,15 @@ package com.app.audiobook.fragment;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,16 +28,19 @@ import com.app.audiobook.audio.BookManager;
 import com.app.audiobook.audio.book.AudioBook;
 import com.app.audiobook.audio.book.Chapter;
 
+import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
-public class DownloadBookFragment extends BaseFragment {
+public class DownloadBookFragment extends BaseFragment{
 
     private View v;
     private AudioBook audioBook;
@@ -74,41 +79,36 @@ public class DownloadBookFragment extends BaseFragment {
     private void initDownloadButton() {
         ConstraintLayout download = v.findViewById(R.id.buttonDownload);
         download.setOnClickListener(v1 -> {
-            showProgress();
+
             int permissionStatus1 = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
             int permissionStatus2 = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
 
             if (permissionStatus1 != PackageManager.PERMISSION_GRANTED || permissionStatus2 != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(getActivity(), new String[] {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                                 Manifest.permission.READ_EXTERNAL_STORAGE},
                         123);
             } else {
+                if (getSelectedChapterFromList().size() != 0) {
+                    showProgress();
+                    BookManager.addBook(getContext(), audioBook);
 
-                BookManager.addBook(getContext(), audioBook);
-
-                Toast.makeText(getContext(), "Загрузка начата", Toast.LENGTH_SHORT).show();
-
-                RecyclerView recyclerView = v.findViewById(R.id.recyclerView);
-
-                DownloadChapterAdapter adapter = (DownloadChapterAdapter) recyclerView.getAdapter();
-
-                ArrayList<Chapter> chapters = adapter.getSelectedChapter();
-
-                for (int i = 0; i < chapters.size(); i ++) {
-                    Chapter chapter = chapters.get(i);
-
-                    int finalI = i;
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            downloadFile(chapter.getUrl(), finalI, chapters.size());
-                        }
-                    }).start();
-
+                    new DownloadFileAsync(audioBook, downloadedPart).execute(getSelectedChapterFromList().get(0).getUrl());
+                } else {
+                    Toast.makeText(getContext(), "Выберите хотя бы одну главу", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    private ArrayList<Chapter> getSelectedChapterFromList() {
+        RecyclerView recyclerView = v.findViewById(R.id.recyclerView);
+
+        DownloadChapterAdapter adapter = (DownloadChapterAdapter) recyclerView.getAdapter();
+
+        ArrayList<Chapter> chapters = adapter.getSelectedChapter();
+
+        return chapters;
     }
 
     private void initCloseButton() {
@@ -121,52 +121,111 @@ public class DownloadBookFragment extends BaseFragment {
         });
     }
 
-    public void downloadFile(String url, int part, int total) {
-        try {
-            URL u = new URL(url);
-            InputStream is = u.openStream();
-            DataInputStream dis = new DataInputStream(is);
-            byte[] buffer = new byte[1024];
-            int length;
-
-            String cacheFilePath = Environment.getExternalStorageDirectory() + "/AudioBook/cache/" + audioBook.getId() + "/" + audioBook.getChapters().get(part).getId() + ".lol";
-
-            File cachedFile = new File(cacheFilePath);
-
-            if (!cachedFile.exists()) {
-                cachedFile.getParentFile().mkdirs();
-            }
-
-            FileOutputStream fos = new FileOutputStream(cachedFile);
-            while ((length = dis.read(buffer)) > 0) {
-                fos.write(buffer, 0, length);
-            }
-
-            Log.v("lol", "part loaded : " + String.valueOf(part));
-
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    downloadedPart ++;
-                    if (total == downloadedPart) {
-                        Toast.makeText(getContext(), "Загружено", Toast.LENGTH_SHORT).show();
-                        hide();
-                    }
-                }
-            });
-
-        } catch (MalformedURLException mue) {
-            Log.e("SYNC getUpdate", "malformed url error", mue);
-        } catch (IOException ioe) {
-            Log.e("SYNC getUpdate", "io error", ioe);
-        } catch (SecurityException se) {
-            Log.e("SYNC getUpdate", "security error", se);
-        }
-    }
-
     private void hide() {
         FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
         transaction.remove(this).commit();
+    }
+
+    class DownloadFileAsync extends AsyncTask<String, String, String> {
+
+        private AudioBook audioBook;
+        private int part;
+
+        public DownloadFileAsync(AudioBook audioBook, int part) {
+            this.audioBook = audioBook;
+            this.part = part;
+        }
+
+        /**
+         * Before starting background thread
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.v("lol", "Starting download");
+
+            int size = getSelectedChapterFromList().size();
+
+            setProgress(downloadedPart, size);
+        }
+
+        /**
+         * Downloading file in background thread
+         */
+        @Override
+        protected String doInBackground(String... fileUrl) {
+            int count;
+            try {
+
+                Log.v("lol", "Downloading");
+                URL url = new URL(fileUrl[0]);
+
+                URLConnection conection = url.openConnection();
+                conection.connect();
+                // getting file length
+                int lenghtOfFile = conection.getContentLength();
+
+                // input stream to read file - with 8k buffer
+                InputStream input = new BufferedInputStream(url.openStream(), 8192);
+
+                // Output stream to write file
+
+                String cacheFilePath = Environment.getExternalStorageDirectory() + "/AudioBook/cache/" + audioBook.getId() + "/" + audioBook.getChapters().get(part).getId() + ".lol";
+
+                OutputStream output = new FileOutputStream(cacheFilePath);
+                byte data[] = new byte[1024];
+
+                long total = 0;
+                while ((count = input.read(data)) != -1) {
+                    total += count;
+
+                    // writing data to file
+                    output.write(data, 0, count);
+                }
+
+                // flushing output
+                output.flush();
+                // closing streams
+                output.close();
+                input.close();
+
+            } catch (Exception e) {
+                Log.e("Error: ", e.getMessage());
+            }
+
+            return null;
+        }
+
+
+        /**
+         * After completing background task
+         **/
+        @Override
+        protected void onPostExecute(String file_url) {
+            Log.v("lol", "Downloaded");
+            downloadedPart ++;
+
+            int size = getSelectedChapterFromList().size();
+
+            setProgress(downloadedPart, size);
+
+            if (downloadedPart < size) {
+                new DownloadFileAsync(audioBook, downloadedPart).execute(getSelectedChapterFromList().get(downloadedPart).getUrl());
+            } else {
+                Toast.makeText(DownloadBookFragment.this.getContext(), "Успешно загружено", Toast.LENGTH_SHORT).show();
+                hide();
+            }
+        }
+
+    }
+
+    private void setProgress(int current, int max) {
+        ProgressBar progressBar = v.findViewById(R.id.progress_bar);
+        progressBar.setMax(max);
+        progressBar.setProgress(current);
+
+        TextView textView = v.findViewById(R.id.progress_text);
+        textView.setText(String.valueOf(current) + " из " + String.valueOf(max));
     }
 
     private void showProgress() {

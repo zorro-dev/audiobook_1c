@@ -50,7 +50,7 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
     private PlayerAdapter playerAdapter;
 
     private AudioBook currentAudioBook;
-    private int currentChapter = 0;
+
 
     @Nullable
     @Override
@@ -132,10 +132,10 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
         adapter.setClickListener(new ClickListener() {
             @Override
             public void onClick(View v, int pos) {
-                currentChapter = pos;
+                playerAdapter.setCurrentChapter(pos);
 
                 playerAdapter.setAudioAndStart(currentAudioBook,
-                        currentAudioBook.getChapters().get(currentChapter));
+                        currentAudioBook.getChapters().get(pos));
             }
         });
 
@@ -156,7 +156,7 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
 
             for (int i = 0; i < audioBook.getChapters().size(); i++) {
                 if (audioBook.getChapters().get(i).getId().equals(chapter.getId())) {
-                    currentChapter = i;
+                    playerAdapter.setCurrentChapter(i);
                 }
             }
 
@@ -178,11 +178,12 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
     private void initAddBookmarkButton() {
         ConstraintLayout addBookmark = v.findViewById(R.id.add_bookmark);
         addBookmark.setOnClickListener(v1 -> {
+            Chapter chapter = currentAudioBook.getChapters().get(playerAdapter.getCurrentChapter());
             Bookmark bookmark = new Bookmark(
                     String.valueOf(System.currentTimeMillis()),
                     getMediaPlayer().getCurrentPosition() / 1000,
                     getStampTime(),
-                    currentAudioBook.getChapters().get(currentChapter));
+                    chapter);
 
             BookmarkManager.addBookmark(getContext(), currentAudioBook.getId(), bookmark);
             initBookmarkList(currentAudioBook);
@@ -228,6 +229,9 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
 
     private void initPlayerControls() {
         ConstraintLayout play = v.findViewById(R.id.play);
+        ConstraintLayout prevSeek = v.findViewById(R.id.prev_20);
+        ConstraintLayout nextSeek = v.findViewById(R.id.next_20);
+        ConstraintLayout nextChapter = v.findViewById(R.id.next);
 
         play.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -236,14 +240,34 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
                     if (getMediaPlayer() == null) {
                         Log.v("lol", "media player == null");
                         playerAdapter.init();
+                        Chapter currentChapter = currentAudioBook.getChapters().get(playerAdapter.getCurrentChapter());
                         playerAdapter.setAudioAndStart(
-                                currentAudioBook, currentAudioBook.getChapters().get(currentChapter));
+                                currentAudioBook, currentChapter);
                     } else {
                         Log.v("lol", "media player != null");
                         playerAdapter.changePlayAndPause();
                     }
                 }
             }
+        });
+
+        prevSeek.setOnClickListener(v1 -> {
+            int currentPosition = getMediaPlayer().getCurrentPosition();
+            int seekIntervalInSecond = 20;
+            int seekTo = currentPosition - seekIntervalInSecond * 1000;
+            playerAdapter.seekTo(Math.max(seekTo, 0));
+        });
+
+        nextSeek.setOnClickListener(v1 -> {
+            int currentPosition = getMediaPlayer().getCurrentPosition();
+            int seekIntervalInSecond = 20;
+            int seekTo = currentPosition + seekIntervalInSecond * 1000;
+            int maxDuration = getMediaPlayer().getDuration();
+            playerAdapter.seekTo(Math.min(seekTo, maxDuration));
+        });
+
+        nextChapter.setOnClickListener(v1 -> {
+            playerAdapter.startNextChapter();
         });
 
         SeekBar seekBar = v.findViewById(R.id.seek_bar);
@@ -316,20 +340,14 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
 
         if (currentAudioBook != null) {
             TextView chapterTitle = v.findViewById(R.id.chapter_name);
-            chapterTitle.setText(currentAudioBook.getChapters().get(currentChapter).getName());
+            chapterTitle.setText(currentAudioBook.getChapters().get(playerAdapter.getCurrentChapter()).getName());
         }
     }
 
     @Override
     public void onCompleted(MediaPlayer mp) {
         Log.v("lol", "onCompleted");
-        currentChapter++;
-
-        if (currentChapter < currentAudioBook.getChapterSize()) {
-            playerAdapter.setAudioAndStart(
-                    currentAudioBook, currentAudioBook.getChapters().get(currentChapter));
-        }
-
+        playerAdapter.startNextChapter();
     }
 
     @Override
