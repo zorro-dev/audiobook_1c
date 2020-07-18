@@ -28,6 +28,7 @@ import com.app.audiobook.fragment.DescriptionFragment;
 import com.app.audiobook.fragment.DownloadBookFragment;
 import com.app.audiobook.fragment.PurchaseFragment;
 import com.app.audiobook.ui.main.SectionsPagerAdapter;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -49,6 +50,8 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Fresco.initialize(this);
 
         initViewPager();
         initTabs();

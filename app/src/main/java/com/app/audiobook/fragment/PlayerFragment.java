@@ -35,6 +35,7 @@ import com.app.audiobook.adapter.BookmarkAdapter;
 import com.app.audiobook.ux.MainActivity;
 import com.bumptech.glide.Glide;
 import com.joooonho.SelectableRoundedImageView;
+import com.stfalcon.frescoimageviewer.ImageViewer;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -304,6 +305,16 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
                 .load(currentAudioBook.getCoverUrl())
                 .placeholder(R.drawable.ic_black_square)
                 .into(cover);
+
+        cover.setOnClickListener(v1 -> {
+            String[] coverList = new String[] {
+                currentAudioBook.getCoverUrl()
+            };
+
+            new ImageViewer.Builder(getContext(), coverList)
+                    .setStartPosition(0)
+                    .show();
+        });
 
     }
 
