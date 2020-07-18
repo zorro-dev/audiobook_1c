@@ -65,6 +65,46 @@
             app:sriv_right_bottom_corner_radius="@dimen/book_image_corner"
             app:sriv_right_top_corner_radius="@dimen/book_image_corner" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cover_count_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/book_cover"
+            app:layout_constraintRight_toRightOf="@id/book_cover"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:tint="@color/black_alpha"
+                android:alpha="0.5"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:src="@drawable/corner_radius_30dp"/>
+
+            <TextView
+                android:id="@+id/cover_count_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:textColor="@android:color/white"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:textSize="10dp"
+                android:text="Еще 10"/>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"

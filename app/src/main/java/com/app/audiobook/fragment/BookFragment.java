@@ -28,15 +28,16 @@ import com.android.billingclient.api.SkuDetailsResponseListener;
 import com.app.audiobook.BaseFragment;
 import com.app.audiobook.R;
 import com.app.audiobook.adapter.ChapterAdapter;
-import com.app.audiobook.audio.PreferenceUtil;
 import com.app.audiobook.audio.book.AudioBook;
 import com.app.audiobook.audio.catalog.ShopCatalog;
 import com.app.audiobook.audio.catalog.UserCatalog;
 import com.app.audiobook.component.JSONManager;
+import com.app.audiobook.utils.PreferenceUtil;
 import com.app.audiobook.ux.MainActivity;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.FirebaseDatabase;
 import com.joooonho.SelectableRoundedImageView;
+import com.stfalcon.frescoimageviewer.ImageViewer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -97,6 +98,29 @@ public class BookFragment extends BaseFragment {
         ConstraintLayout isAdd = v.findViewById(R.id.isAdd);
         ImageView imageIsAdd = v.findViewById(R.id.imageIsAdd);
         TextView textIsAdd = v.findViewById(R.id.textIsAdd);
+
+        ConstraintLayout coverCountLayout = v.findViewById(R.id.cover_count_layout);
+        TextView coverCountText = v.findViewById(R.id.cover_count_text);
+
+        final String[] coverList = new String[] {
+                audioBook.getCoverUrl(),
+                audioBook.getCoverUrl(),
+                audioBook.getCoverUrl(),
+        };
+
+        cover.setOnClickListener(v1 -> {
+
+
+            new ImageViewer.Builder(getContext(), coverList)
+                    .setStartPosition(0)
+                    .show();
+        });
+
+        if (coverList.length == 1) {
+            coverCountLayout.setVisibility(View.GONE);
+        } else {
+            coverCountText.setText("Еще " + String.valueOf(coverList.length - 1));
+        }
 
         title.setText(audioBook.getTitle());
         author.setText(audioBook.getAuthor().getName());
