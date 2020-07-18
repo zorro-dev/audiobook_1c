@@ -4,40 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/newColorBackgroundWhite"
     android:clickable="true"
     android:focusable="true"
-    android:background="@color/newColorBackgroundWhite"
     tools:context=".ux.BookActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topPanel"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/back"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="50dp"
-            android:padding="5dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="5dp"
-            android:layout_height="50dp">
+            android:padding="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:tint="@color/newColorBackgroundGray2"
-                android:src="@drawable/ic_round"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_round"
+                android:tint="@color/newColorBackgroundGray2" />
 
             <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginRight="3dp"
                 android:padding="10dp"
-                android:tint="@color/newColorBackgroundWhite"
                 android:src="@drawable/ic_back"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:tint="@color/newColorBackgroundWhite" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -48,9 +48,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/newColorBackgroundGray1"
+        android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:paddingLeft="10dp"
         app:layout_constraintTop_toBottomOf="@id/topPanel">
 
         <com.joooonho.SelectableRoundedImageView
@@ -64,6 +64,46 @@
             app:sriv_left_top_corner_radius="@dimen/book_image_corner"
             app:sriv_right_bottom_corner_radius="@dimen/book_image_corner"
             app:sriv_right_top_corner_radius="@dimen/book_image_corner" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cover_count_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/book_cover"
+            app:layout_constraintRight_toRightOf="@id/book_cover"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:tint="@color/black_alpha"
+                android:alpha="0.5"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:src="@drawable/corner_radius_30dp"/>
+
+            <TextView
+                android:id="@+id/cover_count_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:textColor="@android:color/white"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:textSize="10dp"
+                android:text="Еще 10"/>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -192,18 +232,18 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:visibility="gone"
                 android:id="@+id/isAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:visibility="gone"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    android:id="@+id/backgroundIsAdd"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:id="@+id/backgroundIsAdd"
                     android:src="@drawable/corner_radius_30dp"
                     android:tint="@color/newColorBackgroundGray2"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -260,33 +300,33 @@
 
             <ImageView
                 android:id="@+id/background_button"
-                android:tint="@color/newColorOrange1"
-                android:src="@drawable/corner_radius_30dp"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
-
-            <LinearLayout
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="5dp"
-                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/corner_radius_30dp"
+                android:tint="@color/newColorOrange1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/discount_layout"
                     android:layout_width="wrap_content"
-                    android:layout_gravity="center"
-                    android:visibility="gone"
-                    android:gravity="center"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp">
+                    android:layout_gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/discount"
@@ -342,42 +382,104 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_marginTop="5dp"
-        app:layout_constraintTop_toBottomOf="@id/book_info_layout"
-        app:layout_constraintBottom_toTopOf="@id/nav_layout"
-        android:layout_marginBottom="5dp"
+        android:id="@+id/control_layout"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/newColorBackgroundGray1"
+        app:layout_constraintTop_toBottomOf="@id/book_info_layout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/playTestAudioFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/corner_radius_30dp"
+                android:tint="@color/colorFreePrice"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
+                android:gravity="center"
+                android:text="Прослушать фрагмент \n ознакомления"
+                android:textColor="@android:color/white"
+                android:textSize="13dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/play_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/play_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_play"
+                android:tint="@color/colorWhite"
+                app:layout_constraintLeft_toRightOf="@id/text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:background="@color/newColorBackgroundWhite"
-        android:layout_height="0dp">
+        app:layout_constraintBottom_toTopOf="@id/nav_layout"
+        app:layout_constraintTop_toBottomOf="@id/control_layout">
 
         <androidx.recyclerview.widget.RecyclerView
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:id="@+id/recyclerViewBookActivity"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:layout_height="match_parent" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <LinearLayout
-            android:visibility="invisible"
             android:id="@+id/layout_description"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="invisible">
 
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:paddingTop="15dp"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:textSize="16dp"
-                    android:textColor="@color/colorBlack"
                     android:id="@+id/text_description"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="15dp"
+                    android:paddingRight="20dp"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16dp" />
 
             </ScrollView>
 
@@ -396,8 +498,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent">
 
