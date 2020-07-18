@@ -18,7 +18,7 @@ import com.app.audiobook.interfaces.ClickListener;
 
 import java.util.ArrayList;
 
-public class AudioLibraryFilterAdapter extends RecyclerView.Adapter {
+public class FilterAdapter extends RecyclerView.Adapter {
 
     private ArrayList<FilterParameter> filterParameters = new ArrayList<>();
 
