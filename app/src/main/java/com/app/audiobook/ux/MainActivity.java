@@ -26,7 +26,7 @@ import com.app.audiobook.component.JSONManager;
 import com.app.audiobook.fragment.CategoryListFragment;
 import com.app.audiobook.fragment.DescriptionFragment;
 import com.app.audiobook.fragment.DownloadBookFragment;
-import com.app.audiobook.fragment.PurchaseFragment;
+import com.app.audiobook.fragment.BookFragment;
 import com.app.audiobook.ui.main.SectionsPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.FirebaseDatabase;
@@ -81,7 +81,7 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    ViewPager viewPager;
+    public ViewPager viewPager;
     SectionsPagerAdapter sectionsPagerAdapter;
 
     private void initViewPager(){
@@ -160,7 +160,7 @@ public class MainActivity extends BaseActivity {
 
     public void initPurchaseFragment(AudioBook audioBook){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        PurchaseFragment fragment = new PurchaseFragment(audioBook, userCatalog, shopCatalog);
+        BookFragment fragment = new BookFragment(audioBook, userCatalog, shopCatalog);
 
         fragmentTransaction.addToBackStack("PurchaseFragment");
         fragmentTransaction.add(R.id.frame_layout, fragment).commit();

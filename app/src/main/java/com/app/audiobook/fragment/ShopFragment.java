@@ -1,5 +1,6 @@
 package com.app.audiobook.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,10 +23,14 @@ import com.app.audiobook.audio.book.BookPrice;
 import com.app.audiobook.audio.catalog.ShopCatalog;
 import com.app.audiobook.audio.catalog.UserCatalog;
 import com.app.audiobook.component.FilterParameter;
+import com.app.audiobook.component.JSONManager;
 import com.app.audiobook.interfaces.ClickListener;
+import com.app.audiobook.ux.BookActivity;
 import com.app.audiobook.ux.MainActivity;
 
 import java.util.ArrayList;
+
+import static com.app.audiobook.ux.MainActivity.BOOK_ACTIVITY_REQUEST;
 
 public class ShopFragment extends BaseFragment {
 

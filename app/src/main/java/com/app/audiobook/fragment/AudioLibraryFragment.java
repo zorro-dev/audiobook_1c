@@ -63,12 +63,15 @@ public class AudioLibraryFragment extends BaseFragment {
         adapter.setAudioBooks(audioBooks);
 
         adapter.setClickListener((v1, pos) -> {
-            Intent intent = new Intent(getContext(), BookActivity.class);
-            
-            String gson = JSONManager.exportToJSON(adapter.getAudioBooks().get(pos));
-            
-            intent.putExtra("audioBook", gson);
-            getParent().startActivityForResult(intent, BOOK_ACTIVITY_REQUEST);
+            ((MainActivity) getActivity()).initPurchaseFragment(audioBooks.get(pos));
+            //Intent intent = new Intent(getContext(), BookActivity.class);
+            //
+            //String gson = JSONManager.exportToJSON(adapter.getAudioBooks().get(pos));
+            //
+            //intent.putExtra("audioBook", gson);
+            //intent.putExtra("path", "AudioLibraryFragment");
+            //intent.putExtra("checkUserBook", false);
+            //getParent().startActivityForResult(intent, BOOK_ACTIVITY_REQUEST);
         });
 
         recyclerView.setAdapter(adapter);
