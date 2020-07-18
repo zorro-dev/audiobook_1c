@@ -1,7 +1,9 @@
 package com.app.audiobook.ux;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -41,9 +43,17 @@ public class InformationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
+        boolean isFirstEntry = sharedPreferences.getBoolean("isFirstEntry", false);
 
-        initViewPager();
-        initTabs();
+        if(!isFirstEntry){
+            initViewPager();
+            initTabs();
+        } else {
+            Intent intent = new Intent(getBaseContext(), AuthActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
     }
 
@@ -96,6 +106,7 @@ public class InformationActivity extends AppCompatActivity {
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         public void run() {
+                            saveFirstEntry();
                             Intent intent = new Intent(getBaseContext(), AuthActivity.class);
                             startActivity(intent);
                             finish();
@@ -110,6 +121,12 @@ public class InformationActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void saveFirstEntry(){
+        SharedPreferences sharedPreferences = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("isFirstEntry", true).apply();
     }
 
     int progress = 0;

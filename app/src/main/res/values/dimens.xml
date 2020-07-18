@@ -6,7 +6,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
 
-    <dimen name="chapter_image_corner">47dp</dimen>
-    <dimen name="book_image_corner">20dp</dimen>
-    <dimen name="cell_book_image_corner">10dp</dimen>
+    <dimen name="chapter_image_corner">0dp</dimen>
+    <dimen name="book_image_corner">0dp</dimen>
+    <dimen name="cell_book_image_corner">0dp</dimen>
 </resources>
