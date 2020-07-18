@@ -16,7 +16,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,7 +23,7 @@ import com.app.audiobook.BaseFragment;
 import com.app.audiobook.R;
 import com.app.audiobook.adapter.ChapterAdapter;
 import com.app.audiobook.audio.BookmarkManager;
-import com.app.audiobook.audio.PreferenceUtil;
+import com.app.audiobook.utils.PreferenceUtil;
 import com.app.audiobook.audio.book.AudioBook;
 import com.app.audiobook.audio.book.Bookmark;
 import com.app.audiobook.audio.book.Chapter;
@@ -36,6 +35,7 @@ import com.app.audiobook.adapter.BookmarkAdapter;
 import com.app.audiobook.ux.MainActivity;
 import com.bumptech.glide.Glide;
 import com.joooonho.SelectableRoundedImageView;
+import com.stfalcon.frescoimageviewer.ImageViewer;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -293,6 +293,10 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
 
     private void initBookData(){
         SelectableRoundedImageView cover = v.findViewById(R.id.book_cover);
+
+        ConstraintLayout coverCountLayout = v.findViewById(R.id.cover_count_layout);
+        TextView coverCountText = v.findViewById(R.id.cover_count_text);
+
         TextView title = v.findViewById(R.id.title);
         TextView author = v.findViewById(R.id.author);
         TextView count_parts = v.findViewById(R.id.count_parts);
@@ -305,6 +309,26 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
                 .load(currentAudioBook.getCoverUrl())
                 .placeholder(R.drawable.ic_black_square)
                 .into(cover);
+
+        final String[] coverList = new String[] {
+                currentAudioBook.getCoverUrl(),
+                currentAudioBook.getCoverUrl(),
+                currentAudioBook.getCoverUrl(),
+        };
+
+        cover.setOnClickListener(v1 -> {
+
+
+            new ImageViewer.Builder(getContext(), coverList)
+                    .setStartPosition(0)
+                    .show();
+        });
+
+        if (coverList.length == 1) {
+            coverCountLayout.setVisibility(View.GONE);
+        } else {
+            coverCountText.setText("Еще " + String.valueOf(coverList.length - 1));
+        }
 
     }
 
