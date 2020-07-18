@@ -293,6 +293,10 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
 
     private void initBookData(){
         SelectableRoundedImageView cover = v.findViewById(R.id.book_cover);
+
+        ConstraintLayout coverCountLayout = v.findViewById(R.id.cover_count_layout);
+        TextView coverCountText = v.findViewById(R.id.cover_count_text);
+
         TextView title = v.findViewById(R.id.title);
         TextView author = v.findViewById(R.id.author);
         TextView count_parts = v.findViewById(R.id.count_parts);
@@ -306,15 +310,25 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
                 .placeholder(R.drawable.ic_black_square)
                 .into(cover);
 
+        final String[] coverList = new String[] {
+                currentAudioBook.getCoverUrl(),
+                currentAudioBook.getCoverUrl(),
+                currentAudioBook.getCoverUrl(),
+        };
+
         cover.setOnClickListener(v1 -> {
-            String[] coverList = new String[] {
-                currentAudioBook.getCoverUrl()
-            };
+
 
             new ImageViewer.Builder(getContext(), coverList)
                     .setStartPosition(0)
                     .show();
         });
+
+        if (coverList.length == 1) {
+            coverCountLayout.setVisibility(View.GONE);
+        } else {
+            coverCountText.setText("Еще " + String.valueOf(coverList.length - 1));
+        }
 
     }
 
