@@ -75,6 +75,8 @@ public class BookFragment extends BaseFragment {
         initRecyclerView();
         initBottomButton();
 
+        initTestAudioFragment();
+
         initBillingClient();
 
         return v;
@@ -283,6 +285,15 @@ public class BookFragment extends BaseFragment {
         adapter.setChapters(audioBook.getChapters());
 
         recyclerView.setAdapter(adapter);
+    }
+
+    private void initTestAudioFragment(){
+        ConstraintLayout buttonPlay = v.findViewById(R.id.playTestAudioFragment);
+
+        buttonPlay.setOnClickListener(v1 -> {
+
+        });
+
     }
 
     private void hide() {
