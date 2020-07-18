@@ -1,6 +1,5 @@
 package com.app.audiobook.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,21 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.audiobook.BaseFragment;
 import com.app.audiobook.R;
-import com.app.audiobook.adapter.AudioLibraryFilterAdapter;
+import com.app.audiobook.adapter.FilterAdapter;
 import com.app.audiobook.adapter.ShopAdapter;
 import com.app.audiobook.audio.book.AudioBook;
 import com.app.audiobook.audio.book.BookPrice;
 import com.app.audiobook.audio.catalog.ShopCatalog;
-import com.app.audiobook.audio.catalog.UserCatalog;
 import com.app.audiobook.component.FilterParameter;
-import com.app.audiobook.component.JSONManager;
 import com.app.audiobook.interfaces.ClickListener;
-import com.app.audiobook.ux.BookActivity;
 import com.app.audiobook.ux.MainActivity;
 
 import java.util.ArrayList;
-
-import static com.app.audiobook.ux.MainActivity.BOOK_ACTIVITY_REQUEST;
 
 public class ShopFragment extends BaseFragment {
 
@@ -74,7 +68,7 @@ public class ShopFragment extends BaseFragment {
 
     private void initRecyclerViewFilterParameters(){
         RecyclerView recyclerView = v.findViewById(R.id.recyclerViewFilter);
-        AudioLibraryFilterAdapter adapter = new AudioLibraryFilterAdapter();
+        FilterAdapter adapter = new FilterAdapter();
 
         FilterParameter filterParameter1 = new FilterParameter(BookPrice.TYPE_FREE, "Бесплатные");
         FilterParameter filterParameter2 = new FilterParameter(BookPrice.TYPE_USUAL_PRICE, "Платные");

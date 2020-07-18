@@ -2,6 +2,7 @@ package com.app.audiobook.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +18,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.audiobook.BaseFragment;
 import com.app.audiobook.R;
+import com.app.audiobook.adapter.FilterAdapter;
 import com.app.audiobook.adapter.TimerAdapter;
+import com.app.audiobook.component.FilterParameter;
 import com.app.audiobook.component.TimerLabel;
+import com.app.audiobook.interfaces.ClickListener;
 import com.app.audiobook.utils.PreferenceUtil;
 import com.app.audiobook.ux.MainActivity;
+import com.beloo.widget.chipslayoutmanager.ChipsLayoutManager;
+import com.beloo.widget.chipslayoutmanager.gravity.IChildGravityResolver;
+
+import java.util.ArrayList;
 
 public class SettingFragment extends BaseFragment {
 
@@ -44,10 +52,75 @@ public class SettingFragment extends BaseFragment {
         initUserValues();
         initTimerLayout();
         initStartPageLayout();
+        initPreferencesList();
+    }
+
+    private void initPreferencesList() {
+        RecyclerView recyclerView = v.findViewById(R.id.preferences_list);
+
+        FilterAdapter filterAdapter = new FilterAdapter();
+        filterAdapter.setFilterParameters(getPreferenceList());
+        filterAdapter.selectAll();
+
+        filterAdapter.setClickListener(new ClickListener() {
+            @Override
+            public void onClick(View v, int pos) {
+                //TODO отправлять запрос на сохранение предпочтения на сервер
+            }
+        });
+
+        recyclerView.setAdapter(filterAdapter);
+
+        ChipsLayoutManager chipsLayoutManager = ChipsLayoutManager.newBuilder(getContext())
+                //set vertical gravity for all items in a row. Default = Gravity.CENTER_VERTICAL
+                .setChildGravity(Gravity.TOP)
+                .setScrollingEnabled(true)
+                //set maximum views count in a particular row
+                .setMaxViewsInRow(3)
+                //set gravity resolver where you can determine gravity for item in position.
+                //This method have priority over previous one
+                .setGravityResolver(new IChildGravityResolver() {
+                    @Override
+                    public int getItemGravity(int position) {
+                        return Gravity.CENTER;
+                    }
+                })
+                //you are able to break row due to your conditions. Row breaker should return true for that views
+                //a layoutOrientation of layout manager, could be VERTICAL OR HORIZONTAL. HORIZONTAL by default
+                .setOrientation(ChipsLayoutManager.HORIZONTAL)
+                // row strategy for views in completed row, could be STRATEGY_DEFAULT, STRATEGY_FILL_VIEW,
+                //STRATEGY_FILL_SPACE or STRATEGY_CENTER
+                .setRowStrategy(ChipsLayoutManager.STRATEGY_DEFAULT)
+                // whether strategy is applied to last row. FALSE by default
+                .withLastRow(true)
+                .build();
+        recyclerView.setLayoutManager(chipsLayoutManager);
+    }
+
+    private ArrayList<FilterParameter> getPreferenceList() {
+        ArrayList<FilterParameter> list = new ArrayList<>();
+
+        list.add(new FilterParameter("1", "Фантастика"));
+        list.add(new FilterParameter("2", "Детское"));
+        list.add(new FilterParameter("3", "Путешествия"));
+        list.add(new FilterParameter("4", "Аппокалипсис"));
+        list.add(new FilterParameter("5", "Утопия"));
+        list.add(new FilterParameter("6", "Фантастика"));
+        list.add(new FilterParameter("7", "Детское"));
+        list.add(new FilterParameter("8", "Путешествия"));
+        list.add(new FilterParameter("9", "Аппокалипсис"));
+        list.add(new FilterParameter("10", "Утопия"));
+        list.add(new FilterParameter("11", "Фантастика"));
+        list.add(new FilterParameter("12", "Детское"));
+        list.add(new FilterParameter("13", "Путешествия"));
+        list.add(new FilterParameter("14", "Аппокалипсис"));
+        list.add(new FilterParameter("15", "Утопия"));
+
+        return list;
     }
 
     private void initStartPageLayout() {
-        int[] backgrounds = new int[] {
+        int[] backgrounds = new int[]{
                 R.id.background_nav_1,
                 R.id.background_nav_2,
                 R.id.background_nav_3,
@@ -55,7 +128,7 @@ public class SettingFragment extends BaseFragment {
                 R.id.background_nav_5,
         };
 
-        int[] layouts = new int[] {
+        int[] layouts = new int[]{
                 R.id.start_page_1,
                 R.id.start_page_2,
                 R.id.start_page_3,
@@ -65,7 +138,7 @@ public class SettingFragment extends BaseFragment {
 
         int startPage = PreferenceUtil.getStartPage(getContext());
 
-        for (int i = 0; i < backgrounds.length; i ++) {
+        for (int i = 0; i < backgrounds.length; i++) {
             ImageView background = v.findViewById(backgrounds[i]);
             if (startPage == i) {
                 background.setColorFilter(getResources().getColor(R.color.newColorBackgroundGray5));
@@ -84,14 +157,14 @@ public class SettingFragment extends BaseFragment {
 
     }
 
-    private void initTimerLayout(){
+    private void initTimerLayout() {
         initRecyclerViewTimerLabels();
 
         ConstraintLayout start = v.findViewById(R.id.start);
         start_background = v.findViewById(R.id.start_background);
         start_text = v.findViewById(R.id.start_text);
 
-        if(getParent().stopPlayerTimer.isStarted()){
+        if (getParent().stopPlayerTimer.isStarted()) {
             start_text.setText("Остановить таймер");
             start_background.setColorFilter(getResources().getColor(R.color.newColorOrange1));
         } else {
@@ -100,11 +173,11 @@ public class SettingFragment extends BaseFragment {
         }
 
         start.setOnClickListener(v1 -> {
-            if(getParent().stopPlayerTimer.isStarted()){
+            if (getParent().stopPlayerTimer.isStarted()) {
                 getParent().stopPlayerTimer.stopTimer();
                 onTimerFinished();
             } else {
-                if(sec == 0){
+                if (sec == 0) {
                     Toast.makeText(getContext(), "Выберите время", Toast.LENGTH_SHORT).show();
                 } else {
                     getParent().stopPlayerTimer.startTimer(sec);
@@ -138,7 +211,7 @@ public class SettingFragment extends BaseFragment {
         TimerLabel timerLabel6 = new TimerLabel("", 3600);
 
         adapter.setClickListener((v, pos) -> {
-            if(adapter.getSelectedTimerLabel() == -1){
+            if (adapter.getSelectedTimerLabel() == -1) {
                 sec = 0;
             } else {
                 sec = adapter.getTimerLabels().get(pos).getTime();
@@ -159,8 +232,8 @@ public class SettingFragment extends BaseFragment {
         recyclerView.setAdapter(adapter);
     }
 
-    public void onTimerFinished(){
-        if(v != null){
+    public void onTimerFinished() {
+        if (v != null) {
             ImageView start_background = v.findViewById(R.id.start_background);
             TextView start_text = v.findViewById(R.id.start_text);
             start_text.setText("Включить таймер");
@@ -168,14 +241,14 @@ public class SettingFragment extends BaseFragment {
 
             RecyclerView recyclerView = v.findViewById(R.id.recyclerViewTimer);
             TimerAdapter adapter = (TimerAdapter) recyclerView.getAdapter();
-            if(adapter != null){
+            if (adapter != null) {
                 adapter.setSelectedTimerLabel(getParent().stopPlayerTimer.getSelectedTimeIndex());
                 adapter.notifyDataSetChanged();
             }
         }
     }
 
-    private MainActivity getParent(){
+    private MainActivity getParent() {
         return (MainActivity) getActivity();
     }
 }
