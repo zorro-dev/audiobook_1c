@@ -51,6 +51,9 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
 
     private AudioBook currentAudioBook;
 
+    //Проигрывается ли ознакомительный фрагмент
+    private boolean isIntroductoryFragmentPlayed = false;
+
 
     @Nullable
     @Override
@@ -71,12 +74,15 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
         getParent().userCatalog.getCatalogLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<AudioBook>>() {
             @Override
             public void onChanged(ArrayList<AudioBook> audioBooks) {
-                if (PreferenceUtil.getCurrentAudioBookId(getContext()) == null) {
-                    // устанавливаем на прослушивание подаренную книгу
-                    PreferenceUtil.setCurrentAudioBookId(getContext(), audioBooks.get(0).getId());
-                }
 
-                getParent().initCurrentAudioBook();
+                if(!isIntroductoryFragmentPlayed){
+                    if (PreferenceUtil.getCurrentAudioBookId(getContext()) == null) {
+                        // устанавливаем на прослушивание подаренную книгу
+                        PreferenceUtil.setCurrentAudioBookId(getContext(), audioBooks.get(0).getId());
+                    }
+
+                    getParent().initCurrentAudioBook();
+                }
             }
         });
 
@@ -86,9 +92,28 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
                 currentAudioBook = audioBook;
 
                 playerAdapter.init();
-                playerAdapter.setAudio(
-                        currentAudioBook, audioBook.getChapters().get(0));
 
+                Log.v("lol", "lolInt " + isIntroductoryFragmentPlayed);
+                Log.v("lol", "lolName " + currentAudioBook.getTitle());
+
+                if(isIntroductoryFragmentPlayed){
+                    Chapter chapter = new Chapter();
+                    chapter.setId("IntroductoryFragment");
+                    chapter.setName("Ознакомительный фрагмент");
+                    chapter.setUrl(audioBook.getIntroductoryFragment());
+                    chapter.setDurationInSeconds(100);
+
+                    playerAdapter.setAudio(
+                            currentAudioBook, chapter);
+
+                    playerAdapter.setCurrentChapter(-1);
+                } else {
+                    playerAdapter.setAudio(
+                            currentAudioBook, audioBook.getChapters().get(0));
+                }
+
+                setTitleChapter();
+                checkIntroductoryMode();
                 initChapterRecyclerView();
                 initBookmarkList(audioBook);
                 initBookData();
@@ -100,6 +125,22 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
         return v;
     }
 
+    private void checkIntroductoryMode(){
+        ConstraintLayout introductoryLayout = v.findViewById(R.id.introductoryLayout);
+        ConstraintLayout buttonDownload = v.findViewById(R.id.buttonDownload);
+        ConstraintLayout addBookMark = v.findViewById(R.id.add_bookmark);
+
+        if(isIntroductoryFragmentPlayed){
+            introductoryLayout.setVisibility(View.VISIBLE);
+            buttonDownload.setVisibility(View.INVISIBLE);
+            addBookMark.setVisibility(View.INVISIBLE);
+        } else {
+            introductoryLayout.setVisibility(View.GONE);
+            buttonDownload.setVisibility(View.VISIBLE);
+            addBookMark.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void initInterface() {
         initFragmentDescription();
         initSelector();
@@ -108,9 +149,9 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
     }
 
     private void initDownloadButton() {
-        ConstraintLayout download = v.findViewById(R.id.donwload);
+        ConstraintLayout buttonDownload = v.findViewById(R.id.buttonDownload);
 
-        download.setOnClickListener(v -> getParent().initDownloadFragment(currentAudioBook));
+        buttonDownload.setOnClickListener(v -> getParent().initDownloadFragment(currentAudioBook));
     }
 
     private void initFragmentDescription() {
@@ -332,6 +373,18 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
 
     }
 
+    private void setTitleChapter(){
+        TextView chapterTitle = v.findViewById(R.id.chapter_name);
+
+        if (currentAudioBook != null) {
+            if(playerAdapter.getCurrentChapter() == -1){
+                chapterTitle.setText("Озн. фрагмент");
+            } else {
+                chapterTitle.setText(currentAudioBook.getChapters().get(playerAdapter.getCurrentChapter()).getName());
+            }
+        }
+    }
+
     private void setSpeed(MediaPlayer mp, float speed) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             mp.setPlaybackParams(mp.getPlaybackParams().setSpeed(speed));
@@ -362,16 +415,18 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
     public void onPrepared(MediaPlayer mp) {
         Log.v("lol", "onPrepared");
 
-        if (currentAudioBook != null) {
-            TextView chapterTitle = v.findViewById(R.id.chapter_name);
-            chapterTitle.setText(currentAudioBook.getChapters().get(playerAdapter.getCurrentChapter()).getName());
-        }
+        setTitleChapter();
     }
 
     @Override
     public void onCompleted(MediaPlayer mp) {
         Log.v("lol", "onCompleted");
-        playerAdapter.startNextChapter();
+        if(isIntroductoryFragmentPlayed){
+            Toast.makeText(getContext(), "Ознакомительный фрагмент прослушан", Toast.LENGTH_SHORT).show();
+        } else {
+            playerAdapter.startNextChapter();
+        }
+
     }
 
     @Override
@@ -454,4 +509,11 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
         return dateText + " " + timeText;
     }
 
+    public boolean isIntroductoryFragmentPlayed() {
+        return isIntroductoryFragmentPlayed;
+    }
+
+    public void setIntroductoryFragmentPlayed(boolean introductoryFragmentPlayed) {
+        isIntroductoryFragmentPlayed = introductoryFragmentPlayed;
+    }
 }

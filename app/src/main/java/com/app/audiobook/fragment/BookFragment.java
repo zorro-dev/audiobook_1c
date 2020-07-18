@@ -181,6 +181,7 @@ public class BookFragment extends BaseFragment {
 
         button.setOnClickListener(v1 -> {
             if (userCatalog.contains(audioBook)) {
+                getParent().sectionsPagerAdapter.getPlayerFragment().setIntroductoryFragmentPlayed(false);
                 getParent().currentBook.setValue(audioBook);
                 PreferenceUtil.setCurrentAudioBookId(getActivity(), audioBook.getId());
 
@@ -315,9 +316,18 @@ public class BookFragment extends BaseFragment {
         ConstraintLayout buttonPlay = v.findViewById(R.id.playTestAudioFragment);
 
         buttonPlay.setOnClickListener(v1 -> {
+            PlayerFragment playerFragment = getParent().sectionsPagerAdapter.getPlayerFragment();
 
+            Log.v("lol", "lolURL " + audioBook.getIntroductoryFragment());
+            Log.v("lol", "lolTITLE " + audioBook.getTitle());
+
+            playerFragment.setIntroductoryFragmentPlayed(true);
+
+            getParent().currentBook.setValue(audioBook);
+            getParent().viewPager.setCurrentItem(2);
+
+            hide();
         });
-
     }
 
     private void hide() {
@@ -336,4 +346,5 @@ public class BookFragment extends BaseFragment {
     private MainActivity getParent() {
         return (MainActivity) getActivity();
     }
+
 }

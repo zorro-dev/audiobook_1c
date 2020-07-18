@@ -272,6 +272,7 @@ public class BackgroundSoundService extends Service
                     mediaPlayer.setDataSource(chapter.getUrl());
                 }
             } else {
+                Log.v("lolURL", "lol " + chapter.getUrl());
                 mediaPlayer.setDataSource(chapter.getUrl());
             }
         } catch (IOException e) {

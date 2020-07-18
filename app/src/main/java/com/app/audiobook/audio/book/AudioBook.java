@@ -11,6 +11,7 @@ public class AudioBook {
     private BookPrice bookPrice;
     private String coverUrl;
     private ArrayList<Chapter> chapters = new ArrayList<>();
+    private String introductoryFragment;
 
     public AudioBook() {
     }
@@ -84,5 +85,13 @@ public class AudioBook {
 
     public void setBookPrice(BookPrice bookPrice) {
         this.bookPrice = bookPrice;
+    }
+
+    public String getIntroductoryFragment() {
+        return introductoryFragment;
+    }
+
+    public void setIntroductoryFragment(String introductoryFragment) {
+        this.introductoryFragment = introductoryFragment;
     }
 }

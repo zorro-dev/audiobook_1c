@@ -85,7 +85,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public ViewPager viewPager;
-    SectionsPagerAdapter sectionsPagerAdapter;
+    public SectionsPagerAdapter sectionsPagerAdapter;
 
     private void initViewPager(){
         sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
@@ -217,6 +217,8 @@ public class MainActivity extends BaseActivity {
             if (bookId.equals(currendBookId)) {
                 currentBook.setValue(userCatalog.getCatalogList().get(i));
             }
+
+            Log.v("lol", "initCurrentAudioBook " + currentBook.getValue().getTitle());
         }
     }
 
@@ -237,6 +239,8 @@ public class MainActivity extends BaseActivity {
                 PreferenceUtil.setCurrentAudioBookId(this, audioBook.getId());
 
                 viewPager.setCurrentItem(2);
+
+                Log.v("lol", "onActivityResult " + currentBook.getValue().getTitle());
             }
         }
 
