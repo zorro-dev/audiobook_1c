@@ -34,6 +34,8 @@ public class AudioLibraryManager {
                 "Если его что-то и увлекало, так это преступления с какой-нибудь запутанной загадкой. Все необычное, странное и таинственное вызывало в нем живейший интерес, и больше всего на свете он сожалел, что ему не пришлось заниматься ни одним из множества дел Джейн Четыре Квадрата…»");
         audioBook1.setCoverUrl("https://firebasestorage.googleapis.com/v0/b/bookaudio-66877.appspot.com/o/Похищенная%20картина%2Fic_audio_book_2.jpg?alt=media&token=e031e56e-b5f6-4ae5-aff8-fce944330b9b");
 
+        audioBook1.setIntroductoryFragment("https://firebasestorage.googleapis.com/v0/b/bookaudio-66877.appspot.com/o/Сотник%20Юрий%20-%20На%20тебя%20вся%20надежда%2F1.4.mp3?alt=media&token=315741a8-5920-4a22-a5ba-b806a9aa6d13");
+
         BookPrice bookPrice1 = new BookPrice();
         bookPrice1.setType(BookPrice.TYPE_FREE);
 
@@ -89,6 +91,8 @@ public class AudioLibraryManager {
                 "\n" +
                 "В 2008 году книга была издана в бумажном виде, с благотворительными целями. В нашей стране она вышла в конце 2008 года.");
         audioBook2.setCoverUrl("https://firebasestorage.googleapis.com/v0/b/bookaudio-66877.appspot.com/o/Роулинг%20Джоан%20Кэтлин%20-%20Сказки%20барда%20Бидля%2Fic_audio_book_1.jpg?alt=media&token=a19a472b-2e17-44f7-bb05-964e3d5c785f");
+
+        audioBook2.setIntroductoryFragment("https://firebasestorage.googleapis.com/v0/b/bookaudio-66877.appspot.com/o/Роулинг%20Джоан%20Кэтлин%20-%20Сказки%20барда%20Бидля%2FПредисловие.mp3?alt=media&token=e9778a39-a0d7-4e3d-820e-24744444c1f7");
 
         BookPrice bookPrice2 = new BookPrice();
         bookPrice2.setType(BookPrice.TYPE_USUAL_PRICE);
@@ -150,6 +154,8 @@ public class AudioLibraryManager {
 
         audioBook3.setBookPrice(bookPrice3);
 
+        audioBook3.setIntroductoryFragment("https://firebasestorage.googleapis.com/v0/b/bookaudio-66877.appspot.com/o/Рядовой%20Велиев%20-%20Виталий%20Сергеев%2Fчасть%201.mp3?alt=media&token=f4a0a3a9-86ef-46fb-a457-cc630e87e119");
+
         Author authorAudioBook3 = new Author();
         authorAudioBook3.setId("3");
         authorAudioBook3.setName("Виталий Сергеев");
@@ -200,6 +206,8 @@ public class AudioLibraryManager {
         bookPrice4.setType(BookPrice.TYPE_FREE);
 
         audioBook4.setBookPrice(bookPrice4);
+
+        audioBook4.setIntroductoryFragment("https://firebasestorage.googleapis.com/v0/b/bookaudio-66877.appspot.com/o/Сотник%20Юрий%20-%20На%20тебя%20вся%20надежда%2F1.1.mp3?alt=media&token=325b7c45-95f0-4a59-8c2e-daf6da28b126");
 
         Author authorAudioBook4 = new Author();
         authorAudioBook4.setId("4");
