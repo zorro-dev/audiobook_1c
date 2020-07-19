@@ -274,6 +274,7 @@ public class PlayerFragment extends BaseFragment implements SoundServiceCallback
         ConstraintLayout nextSeek = v.findViewById(R.id.next_20);
         ConstraintLayout nextChapter = v.findViewById(R.id.next);
 
+
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
